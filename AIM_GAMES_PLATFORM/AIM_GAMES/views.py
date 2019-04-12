@@ -15,6 +15,7 @@ from django.contrib import sessions
 from django.contrib.auth.models import Group
 from django.http import Http404,HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -30,7 +31,7 @@ def index(request):
 
 def setlanguage(request, language):
     request.session['language'] = language
-    return redirect('/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def pagarPaypal(request):
     host = request.get_host()
@@ -357,7 +358,22 @@ def curriculumList(request):
         return handler500(request)
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
-        q=Curriculum.objects.filter(freelancer__profile__name__icontains=search)
+        lista= set()
+        pe=ProfessionalExperience.objects.filter( Q(center__icontains=search)
+        |Q(formation__icontains=search)).select_related('curriculum')
+        fo=Formation.objects.filter( Q(center__icontains=search)
+        |Q(formation__icontains=search)).select_related('curriculum')
+        ap=Aptitude.objects.filter(aptitude__icontains=search).select_related('curriculum')
+        gee=GraphicEngineExperience.objects.filter(graphicEngine__title__icontains=search).select_related('curriculum')
+        for p in pe:
+            lista.add(p.curriculum)
+        for f in fo:
+            lista.add(f.curriculum)
+        for a in ap:
+            lista.add(a.curriculum)
+        for g in gee:
+            lista.add(g.curriculum) 
+        q=lista      
     else:
         q=Curriculum.objects.all()
     curriculums= q
@@ -374,6 +390,7 @@ def curriculumList(request):
 def checkUser(request):
     freelancer = None
     business = None
+    manager = None
     if request.user.is_authenticated:
         user = request.user
         try:
@@ -444,10 +461,10 @@ def linkCreate(request):
                 print('link saved')
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
-                return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add link'})
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add link')})
         else:
             form = LinkForm()
-            return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add link'})
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add link')})
     else:
         return handler500(request)
 
@@ -463,10 +480,10 @@ def aptitudeCreate(request):
                 print('Aptitude saved')
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
-                return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add aptitude'})
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add aptitude')})
         else:
             form = AptitudeForm()
-            return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add aptitude'})
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add aptitude')})
     else:
         return handler500(request)
 
@@ -482,10 +499,10 @@ def graphicEngineExperienceCreate(request):
                 print('Graphic engine experience saved')
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
-                return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add graphic engine experience'})
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add graphic engine experience')})
         else:
             form = GraphicEngineExperienceForm()
-            return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add graphic engine experience'})
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add graphic engine experience')})
     else:
         return handler500(request)
 
@@ -501,10 +518,10 @@ def professionalExperienceCreate(request):
                 print('Professional Experience saved')
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
-                return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add professional experience'})
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add professional experience')})
         else:
             form = ProfessionalExperienceForm()
-            return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add professional experience'})
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add professional experience')})
     else:
         return handler500(request)
 
@@ -520,10 +537,10 @@ def formationCreate(request):
                 print('formation saved')
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
-                return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add formation'})
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add formation')})
         else:
             form = FormationForm()
-            return render(request,'freelancer/standardForm.html',{'form':form,'title':'Add formation'})
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add formation')})
     else:
         return handler500(request)
 
@@ -539,10 +556,10 @@ def jobOfferCreate(request):
                 print('job offer saved')
                 return redirect('/joboffer/user/list/')
             else:
-                return render(request,'business/standardForm.html',{'form':form,'title':'Add Job Offer'})
+                return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
         else:
             form = JobOfferForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':'Add Job Offer'})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
     else:
         return handler500(request)
 
@@ -559,7 +576,7 @@ def jobOfferEdit(request,id):
             obj.save()
             return redirect('/jobOffer/detail/'+ str(id))
         else:
-            return render(request,'business/standardForm.html',{'form':form,'title':'Edit Job Offer'})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer')})
     else:
         return handler500(request)
 
@@ -589,7 +606,7 @@ def html5Edit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit HTML5Showcase'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit HTML5Showcase')})
 
 def formationEdit(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -606,7 +623,7 @@ def formationEdit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit Formation'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Formation')})
 
 def professionalExperienceEdit(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -623,7 +640,7 @@ def professionalExperienceEdit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit ProfessionalExperience'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit ProfessionalExperience')})
 
 def aptitudeEdit(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -640,7 +657,7 @@ def aptitudeEdit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit Aptitude'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Aptitude')})
 
 def graphicEngineExperienceEdit(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -657,7 +674,7 @@ def graphicEngineExperienceEdit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit Graphic Engine Experience'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Graphic Engine Experience')})
 
 def linkEdit(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -674,7 +691,7 @@ def linkEdit(request, id):
         obj.curriculum = freelancer.curriculum
         obj.save()
         return redirect('/freelancer/detail/'+str(freelancer.id))
-    return render(request,'freelancer/standardForm.html',{'form':form,'title':'Edit Link'})
+    return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Link')})
 
 def html5Delete(request, id): 
     if checkUser(request)!='freelancer' and checkUser(request)!='manager':
@@ -763,10 +780,10 @@ def challengeCreate(request):
                 print('Challenge saved')
                 return redirect('/challenge/list/')
             else:
-                return render(request,'business/standardForm.html',{'form':form,'title':'Add Challenge'})
+                return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
         else:
             form = ChallengeForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':'Add Challenge'})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
     else:
         return render(request, 'index.html')
 
@@ -982,10 +999,30 @@ def message_create(request):
             print('Message saved')
             return redirect('/message/list/')
         else:
-            return render(request,'message/create.html',{'form':form,'title':'Create Message'})
+            return render(request,'message/create.html',{'form':form,'title':_('Create Message')})
     else:
         form = MessageForm()
-        return render(request,'message/create.html',{'form':form,'title':'Create Message'})
+        return render(request,'message/create.html',{'form':form,'title':_('Create Message')})
+
+def message_reply(request, msgid):
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            message = get_object_or_404(Message, id=msgid)
+            obj = form.save(commit=False)
+            obj.sender = request.user
+            recipient = message.sender
+            subject = message.subject
+            obj.recipient = recipient
+            obj.subject = "RE: " + subject
+            obj.save()
+            print('Message saved')
+            return redirect('/message/list/')
+        else:
+            return render(request,'message/create.html',{'form':form,'title':'Response Message'})
+    else:
+        form = ReplyForm()
+        return render(request,'message/create.html',{'form':form,'title':'Response Message'})
 
 def threadDelete(request, id): 
     if checkUser(request)!='business':
