@@ -390,6 +390,7 @@ def curriculumList(request):
 def checkUser(request):
     freelancer = None
     business = None
+    manager = None
     if request.user.is_authenticated:
         user = request.user
         try:
