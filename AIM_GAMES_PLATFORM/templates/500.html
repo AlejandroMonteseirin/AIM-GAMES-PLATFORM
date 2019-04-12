@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% load staticfiles %}
 {% block content %} 
+{% load i18n %}
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -14,7 +15,7 @@
 <body>
 
 
-<h4 class="center">Error en el servidor, por favor relajese con estos gatos e inténtelo de nuevo</h2>
+<h4 class="center">{% trans "error500" %}</h2>
 <div class="carousel">
 
     <!-- <a class="carousel-item"><img src="http://loremflickr.com/640/360/cat?random=1"></a>
