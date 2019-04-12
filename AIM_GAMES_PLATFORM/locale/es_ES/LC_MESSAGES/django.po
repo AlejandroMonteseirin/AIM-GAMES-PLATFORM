@@ -918,6 +918,12 @@ msgstr "Nueva respuesta"
 msgid "New thread"
 msgstr "Nuevo hilo"
 
+msgid "error500"
+msgstr "Error en el servidor, por favor relajese con estos gatos e inténtelo de nuevo"
+
+msgid "error404"
+msgstr "La pagina que busca no existe, por favor relajese con estos gatos antes de intentarlo de nuevo"
+
 #~ msgid "AIM Games"
 #~ msgstr "AIM Games"
 
@@ -959,5 +965,5 @@ msgstr "Nuevo hilo"
 #~ msgid "contactus"
 #~ msgstr "Contáctanos"
 
-#~ msgid "Edit Job Offer"
-#~ msgstr "Editar oferta de trabajo"
+
+
