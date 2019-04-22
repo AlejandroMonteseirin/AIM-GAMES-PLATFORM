@@ -58,6 +58,9 @@ button{
     min-width: 3em;
 
 }
+.overflowhidden{
+    overflow: hidden !important;
+}
 main {
     flex: 1 0 auto;
 }

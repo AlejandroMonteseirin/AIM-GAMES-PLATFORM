@@ -52,11 +52,11 @@
           {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer'%}
             {% if not joining %}
               <div class="right">
-                <a href="/event/join/{{event.id}}" class="btn waves-effect waves-red">{% trans "Join" %}</a>
+                <a href="/event/join/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "Join" %}</a>
               </div>
             {% else %}
               <div class="right">
-                <a href="/event/disjoin/{{event.id}}" class="btn waves-effect waves-red">{% trans "Disjoin" %}</a>
+                <a href="/event/disjoin/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "Disjoin" %}</a>
               </div>
             {% endif %}
           {% endif %}
@@ -64,8 +64,8 @@
           <div class="row">
             <div class="col s12">
               <div class="left">
-                <a href="/event/edit/{{event.id}}" class="btn waves-effect waves-red">{% trans "Edit" %}</a>
-                <a href="/event/delete/{{event.id}}" class="btn waves-effect waves-red">{% trans "Delete" %}</a>
+                <a href="/event/edit/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "Edit" %}</a>
+                <a href="/event/delete/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "Delete" %}</a>
               </div>
             </div>
           </div>

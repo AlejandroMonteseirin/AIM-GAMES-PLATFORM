@@ -22,13 +22,13 @@
     <h3>{% trans "freelancerDetails" %}</h3>    
     <h5>{{ freelancer.profile.name }}</h5> 
     <div class="row">
-      <div class="col s12 m12 l8 offset-l2">
+      <div class="col s12 m12 l8 offset-l2 color1b">
 
 
         
         <div class="col s12 m10 l10 offset-l1 offset-m1">
           {% if request.session.currentUser == 'manager' and freelancer.curriculum.verified == False%}
-            <a href="/freelancer/curriculum/verify/{{freelancer.curriculum.id}}" class="btn waves-effect waves-red">{% trans "verify" %}</a>
+            <a href="/freelancer/curriculum/verify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "verify" %}</a>
           {% endif %}
           {% if freelancer.curriculum.verified == True %}
             {% trans "Verified curriculum" %}
@@ -53,7 +53,7 @@
           {% endfor %}
           </ul>
         {% if request.session.currentUser == 'freelancer' %}
-          <a href="/freelancer/link/create" class="btn waves-effect waves-red">{% trans "Add link" %}</a>
+          <a href="/freelancer/link/create" class="btn color1 waves-effect waves-red">{% trans "Add link" %}</a>
         {% endif %}
         </div>
 
@@ -89,7 +89,7 @@
 
         {% if request.session.currentUser == 'freelancer' %}
           <div class="col s12 m12 l12 offset-m1">
-              <a href="/freelancer/formation/create" class="btn waves-effect waves-red">{% trans "addFormation" %}</a>
+              <a href="/freelancer/formation/create" class="btn color1 waves-effect waves-red">{% trans "addFormation" %}</a>
           </div>
         {% endif %}
         
@@ -126,7 +126,7 @@
 
         {% if request.session.currentUser == 'freelancer' %}
           <div class="col s12 m12 l12 offset-m1">
-              <a href="/freelancer/professionalExperience/create" class="btn waves-effect waves-red">{% trans "addProfessionalExperience" %}</a>
+              <a href="/freelancer/professionalExperience/create" class="btn color1 waves-effect waves-red">{% trans "addProfessionalExperience" %}</a>
           </div>
         {% endif %}
 
@@ -150,7 +150,7 @@
           {% endfor %}
           </ul>
         {% if request.session.currentUser == 'freelancer' %}
-          <a href="/freelancer/aptitude/create" class="btn waves-effect waves-red">{% trans "addAptitude" %}</a>
+          <a href="/freelancer/aptitude/create" class="btn color1 waves-effect waves-red">{% trans "addAptitude" %}</a>
         {% endif %}
         </div>
 
@@ -179,7 +179,7 @@
         
         {% if request.session.currentUser == 'freelancer' %}
           
-              <a href="/freelancer/graphicEngineExperience/create" class="btn waves-effect waves-red">{% trans "addGraphicEngineExperience" %}</a>
+              <a href="/freelancer/graphicEngineExperience/create" class="btn color1 waves-effect waves-red">{% trans "addGraphicEngineExperience" %}</a>
           
         {% endif %}
 
@@ -191,7 +191,7 @@
         </div>
 
         <div class="col s12 m12 l12">
-          <a href="#!" onclick="toggle_showcase();" class="btn waves-effect waves-red">
+          <a href="#!" onclick="toggle_showcase();" class="btn color1 waves-effect waves-red">
             {% trans "mostrar" %}</a>
           <blockquote id="bq" style="display:none">
             <div class="hide-on-med-and-down">
@@ -203,8 +203,8 @@
         </div>
         {% if request.session.currentUser == 'freelancer' %}
         <div class="col s12 m12 l12">
-              <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn waves-effect waves-red">{% trans "editHTML5Showcase" %}</a>
-              <a href="/freelancer/html5showcase/delete/{{HTML5Showcase.id}}" class="btn waves-effect waves-red">{% trans "Delete" %}</a>
+              <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "editHTML5Showcase" %}</a>
+              <a href="/freelancer/html5showcase/delete/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "Delete" %}</a>
           </div>
         {% endif %} 
 
