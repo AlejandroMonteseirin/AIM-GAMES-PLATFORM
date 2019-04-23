@@ -19,11 +19,11 @@
         <div class="col s12">
             <div class="collection">
                 {% for thread in threads %}
-                    <a href="/thread/detail/{{thread.id}}" class="collection-item">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
+                    <a href="/thread/detail/{{thread.id}}" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
                 {% endfor %}
             </div>
             <div class="right">
-                <a href="/thread/create/" class="btn waves-effect waves-red">{% trans "New thread" %}</a>
+                <a href="/thread/create/" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
             </div>
         </div>
     </div>

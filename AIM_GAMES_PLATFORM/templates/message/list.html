@@ -28,12 +28,12 @@
             <td bgcolor="#FFFF33">{{message.timestamp}}</td>
             <td bgcolor="#FFFF33">{{message.subject}}</td>
             <td bgcolor="#FFFF33">{{message.sender}}</td>
-            <td bgcolor="#FFFF33"><a href="/message/show/{{message.id}}" class="btn waves-effect waves-red">{% trans "view" %}</a></td>
+            <td bgcolor="#FFFF33"><a href="/message/show/{{message.id}}" class="btn color1 waves-effect waves-red">{% trans "view" %}</a></td>
         </tr>
         {% endif %}
          
         {% endfor %}
       </table>
-    <td><a href="/message/create/" class="btn waves-effect waves-red">{% trans "newmessage" %}</a></td>
+    <td><a href="/message/create/" class="btn waves-effect color1 waves-red">{% trans "newmessage" %}</a></td>
 </body>
 {% endblock %}
