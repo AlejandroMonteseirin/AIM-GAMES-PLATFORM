@@ -30,8 +30,14 @@
           {% if request.session.currentUser == 'manager' and freelancer.curriculum.verified == False%}
             <a href="/freelancer/curriculum/verify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "verify" %}</a>
           {% endif %}
+          {% if request.session.currentUser == 'manager' and freelancer.curriculum.verified == True%}
+            <a href="/freelancer/curriculum/unverify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "unverify" %}</a>
+          {% endif %}
           {% if freelancer.curriculum.verified == True %}
             {% trans "Verified curriculum" %}
+          {% endif %}
+          {% if freelancer.curriculum.verified == False %}
+            {% trans "Unverified curriculum" %}
           {% endif %}
           <ul class="collapsible with-header">
             <div class="collapsible-header"><h5>{% trans "links" %}</h5></div>

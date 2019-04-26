@@ -819,6 +819,16 @@ def curriculumVerify(request, id):
     curriculum.save()
     return redirect('/freelancer/detail/' + str(curriculum.freelancer.id))
 
+def curriculumUnverify(request, id):
+    userString = checkUser(request)
+    if userString!='manager':
+        return handler500(request)
+    curriculum = get_object_or_404(Curriculum, pk=id)
+    curriculum.verified = False
+    curriculum.save()
+    return redirect('/freelancer/detail/' + str(curriculum.freelancer.id))
+
+
 def curriculumListManager(request):
     if checkUser(request)!='manager':
         return handler500(request)
