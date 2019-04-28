@@ -277,6 +277,8 @@ class ThreadCreate(CreateView):
         prof = Profile.objects.filter(user__pk=self.request.user.id)
         buss = Business.objects.filter(profile__pk=prof[0].id)
         thread = form.save(buss)
+        buss.coins = buss.coins - 2
+        buss.save()
 
         return threadDetail(self.request, thread.id)
 
@@ -285,6 +287,7 @@ class ThreadCreate(CreateView):
         # It should return the context
 
         context = super(ThreadCreate, self).get_context_data(**kwargs)
+        context['buss'] = findByPrincipal(self.request)
 
         return context
 
@@ -629,12 +632,14 @@ def jobOfferCreate(request):
                 obj.business = business
                 obj.save()
                 print('job offer saved')
+                business.coins = business.coins - 2
+                business.save()
                 return redirect('/joboffer/user/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
         else:
             form = JobOfferForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer'), 'buss': business})
     else:
         return handler500(request)
 
@@ -857,12 +862,14 @@ def challengeCreate(request):
                 obj.business = business
                 obj.save()
                 print('Challenge saved')
+                business.coins = business.coins - 2
+                business.save()
                 return redirect('/challenge/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
         else:
             form = ChallengeForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business})
     else:
         return render(request, 'index.html')
 
