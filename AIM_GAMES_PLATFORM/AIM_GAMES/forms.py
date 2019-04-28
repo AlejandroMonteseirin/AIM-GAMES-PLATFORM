@@ -12,7 +12,7 @@ import re
 class BusinessForm(ModelForm):
     class Meta:
         model = Business
-        exclude = ('lastPayment',)
+        exclude = ('lastPayment', 'subscriptionModel', 'coins')
 
     def __init__(self, *args, **kwargs):
         super(BusinessForm, self).__init__(*args, **kwargs)
@@ -138,7 +138,6 @@ class ProfileForm(ModelForm):
         print('clean: ProfileForm')
         if not self.user_form.is_valid():
             raise forms.ValidationError(_("User not valid"))
-        return super(ProfileForm, self).clean()
 
     def save(self, commit=False):
         print('save: ProfileForm')

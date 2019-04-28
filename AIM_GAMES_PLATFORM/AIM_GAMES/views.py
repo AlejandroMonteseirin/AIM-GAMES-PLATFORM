@@ -73,7 +73,7 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
     # https://overiq.com/django-paypal-subscriptions-with-django-paypal/
     print(businessId)
     # local notify url
-    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId)
+    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId),
     subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
     paypal_dict = {
         'cmd': '_xclick-subscriptions',
@@ -86,7 +86,7 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
         'item_name': str(subs.name),
         'currency_code': 'EUR',
         # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
-        'notify_url': 'http://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
+        'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
     }
