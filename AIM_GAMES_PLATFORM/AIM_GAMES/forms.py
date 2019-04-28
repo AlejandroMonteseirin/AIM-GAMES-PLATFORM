@@ -138,6 +138,7 @@ class ProfileForm(ModelForm):
         print('clean: ProfileForm')
         if not self.user_form.is_valid():
             raise forms.ValidationError(_("User not valid"))
+        return super(ProfileForm, self).clean()
 
     def save(self, commit=False):
         print('save: ProfileForm')
