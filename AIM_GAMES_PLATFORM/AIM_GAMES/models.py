@@ -61,6 +61,16 @@ class Profile(models.Model):
         return self.name
 
 
+class SubscriptionModel(models.Model):
+    name = models.CharField(max_length=30, verbose_name=_("Name"), blank=False, unique=True)
+    description = models.CharField(max_length=60, verbose_name=_("Description"))
+    maxCoins = models.IntegerField(verbose_name=_("Max Coin"), null=False)
+    coinsGain = models.IntegerField(verbose_name=_("Coin Coin"), null=False)
+    price = models.FloatField(verbose_name=_("Price"), null=False)
+
+    def _str_(self):
+        return self.name + " - " + self.description
+
 # Types of users
 
 
@@ -83,6 +93,8 @@ class Freelancer(models.Model):
 class Business(models.Model):
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, verbose_name=_("profile"))
+    subscriptionModel = models.ForeignKey(SubscriptionModel, on_delete=models.CASCADE, null=True)
+    coins = models.IntegerField(verbose_name=_("Coins"), null=False, default=0)
     lastPayment = models.DateTimeField(
         verbose_name=_("lastPayment"), null=True)
 

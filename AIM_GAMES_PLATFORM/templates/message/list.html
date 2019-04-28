@@ -34,6 +34,12 @@
          
         {% endfor %}
       </table>
-    <td><a href="/message/create/" class="btn waves-effect color1 waves-red">{% trans "newmessage" %}</a></td>
+    <td>
+        {% if sub %}
+        <a href="/message/create/" class="btn waves-effect color1 waves-red">{% trans "newmessage" %}</a></td>
+        {% else %}
+        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect color1 waves-red">{% trans "newmessage" %}</a></td>
+        {% endif %}
+
 </body>
 {% endblock %}

@@ -6,7 +6,7 @@ from django.shortcuts import render, get_list_or_404
 from paypal.standard.forms import PayPalPaymentsForm,PayPalSharedSecretEncryptedPaymentsForm
 from django.shortcuts import redirect
 from django.views.generic import FormView, CreateView, UpdateView
-from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude
+from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude, SubscriptionModel
 from .forms import *
 from django.db.models import Q
 from datetime import datetime, timezone
@@ -29,9 +29,24 @@ def index(request):
 
     return render(request, 'index.html')
 
+
 def setlanguage(request, language):
     request.session['language'] = language
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def subscriptionChoose(request):
+    user = request.user.id
+    subscriptionModels = SubscriptionModel.objects.all()
+    return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels})
+
+
+def manage_subscription(request):
+    if checkUser(request) != 'business':
+        return handler500(request)
+    business = findByPrincipal(request)
+    return render(request, 'subscription/Manage_subscription.html', {'business': business})
+
 
 def pagarPaypal(request):
     host = request.get_host()
@@ -52,12 +67,71 @@ def pagarPaypal(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'pagarPaypal.html', {'form':form})
 
+
+def pagar_paypal_subscripcion(request, subscriptionId, businessId):
+    host = request.get_host()
+    # https://overiq.com/django-paypal-subscriptions-with-django-paypal/
+    print(businessId)
+    # local notify url
+    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId)
+    subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
+    paypal_dict = {
+        'cmd': '_xclick-subscriptions',
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'a3': str(subs.price),               # monthly price
+        'p3': 1,                             # duration of each unit (depends on unit)
+        't3': 'M',                           # duration unit ("M for Month")
+        'src': '1',  # make payments recur
+        'sra': '1',  # reattempt payment on payment error
+        'item_name': str(subs.name),
+        'currency_code': 'EUR',
+        # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
+        'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/' + str(businessId),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pagarPaypal.html', {'form': form})
+
 @csrf_exempt
 def paypal_ipn(request,businessId):
     print("ipn recieved")
     print(request.POST)
     updatedNumber = Business.objects.filter(id=businessId).update(lastPayment=datetime.now())
     print(updatedNumber)
+    return JsonResponse({'ok': 'hoooh!'})
+
+@csrf_exempt
+def paypal_subscription_ipn(request, businessId):
+    print("ipn recieved")
+    print(request.POST)
+    print('Searching User '+str(businessId))
+    prof = Profile.objects.filter(user__pk=businessId)
+    business = Business.objects.filter(profile__pk=prof[0].id)[0]
+    print('Found Business ' + str(business))
+    print(str(request.POST.get('txn_type')))
+    if request.POST.get('txn_type') == 'subscr_payment':
+        print("Subcription Payment")
+        if request.POST.get('payment_status') == 'Completed':
+            print("Completed")
+            subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
+            if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
+                business.subscriptionModel = subscription
+            business.coins = business.coins + subscription.coinsGain
+            if business.coins > subscription.maxCoins:
+                business.coins = subscription.maxCoins
+            business.save()
+
+    elif request.POST.get('txn_type') == 'subscr_cancel':
+        print("Canceled")
+        business.subscriptionModel = None
+        business.save()
+    elif request.POST.get('txn_type') == 'subscr_signup':
+        print("Confirmed")
+    elif request.POST.get('subscr_failed ') == 'subscr_failed':
+        print("Failed")
+
+
     return JsonResponse({'ok': 'hoooh!'})
 
 def payment_done(request):
@@ -74,22 +148,7 @@ def login_redir(request):
     if request.user.is_superuser:
         res = redirect('admin/')
     else:
-        prof = Profile.objects.filter(user__pk=request.user.id)
-        buss = Business.objects.filter(profile__pk=prof[0].id)
-        if buss:
-            if not buss[0].lastPayment is None:
-                if (buss[0].lastPayment- datetime.now(timezone.utc)).total_seconds() > 31556952:
-                    auth.logout(request)
-                    request.session['buss'] = buss[0].id
-                    res = pagarPaypal(request)
-                else:
-                    res = redirect('index')
-            else:
-                auth.logout(request)
-                request.session['buss'] = buss[0].id
-                res = pagarPaypal(request)
-        else:
-            res = redirect('index')
+        res = redirect('index')
 
     try:
         request.session['currentUser'] = checkUser(request)
@@ -152,7 +211,7 @@ class BusinessCreate(CreateView):
         print(buss)
 
         self.request.session['buss'] = buss.id
-        return pagarPaypal(self.request)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         # This method is called before the view es generate and add the context
@@ -246,7 +305,10 @@ def threadDetail(request, thread_id):
         business = findByPrincipal(request)
         if business.id == thread.business.id:
             return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics,'owner':True})
+        if business.subscriptionModel == None:
+            return handler500(request)
     return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics})
+
 
 def jobOfferDetail(request, id):
         jobOffer = get_object_or_404(JobOffer, pk=id)
@@ -257,8 +319,11 @@ def jobOfferDetail(request, id):
         if checkUser(request)=='business':
             business = findByPrincipal(request)
             if business.id == jobOffer.business.id:
-                return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':True})        
+                return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':True})
+            if business.subscriptionModel is None:
+                return handler500(request)
         return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics})
+
 
 def findByPrincipal(request):
     freelancer = None
@@ -316,6 +381,9 @@ def freelancerDetail(request, id):
     except:
         HTML5Showcase = None
 
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
+
     return render(request, 'freelancer/detail.html', {'freelancer': freelancer,'links':links,'formations':formation,'professionalExperiences':professionalExperience,'HTML5Showcase':HTML5Showcase,'graphicEngineExperiences':graphicEngineExperience,'aptitudes':aptitude})
 
 def threadList(request):
@@ -351,7 +419,11 @@ def jobOfferList(request):
     else:
         q=JobOffer.objects.all()
     jobOffers= q
-    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers, 'sub': sub})
 
 def curriculumList(request):
     if checkUser(request)!='business':
@@ -382,10 +454,13 @@ def curriculumList(request):
         aptitudesList=Aptitude.objects.filter(curriculum=c.id)
         aptitudes[c.id]=list(aptitudesList)
     try:
-        businessThread = get_object_or_404(Business,profile=request.user.profile)
+        if get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+            sub = False
+        else:
+            sub = True
     except AttributeError:
         return handler500(request)
-    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes})
+    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes, 'sub': sub})
 
 def checkUser(request):
     freelancer = None
@@ -766,7 +841,11 @@ def challengeList(request):
     else:
         q=Challenge.objects.all()
     challenges= q
-    return render(request, 'challenge/challengeList.html',{'challenges':challenges})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub})
 
 def challengeCreate(request):
     if checkUser(request)=='business':
@@ -808,6 +887,8 @@ def challengeResponse_create(request, challengeId):
 def challengeDetail(request, challenge_id):
         challenge = get_object_or_404(Challenge, pk=challenge_id)
         responsesChallenge = challenge.challengeresponse_set.all()
+        if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+            return handler500(request)
         return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge})
 
 def curriculumVerify(request, id):
@@ -869,7 +950,12 @@ def eventList(request):
     else:
         q=Event.objects.all()
     events= q
-    return render(request, 'event/eventList.html',{'events':events})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+
+    return render(request, 'event/eventList.html', {'events':events, 'sub': sub})
 
 def eventCreate(request):
     if checkUser(request)=='manager':
@@ -903,6 +989,8 @@ def eventDetail(request, event_id):
             joining=False
     else:
         joining=False
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     return render(request, 'event/eventDetail.html', {'event': event,'freelancers':freelancers,'companies':companies, 'joining':joining})
 
 def eventEdit(request, event_id): 
@@ -983,7 +1071,11 @@ def message_list(request):
         return handler500(request)
     user = request.user
     messages = Message.objects.filter(recipient=user).order_by('readed', '-timestamp')
-    return render(request, 'message/list.html', {'messages': messages})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'message/list.html', {'messages': messages, 'sub': sub})
 
 def message_show(request, id):
     message = get_object_or_404(Message, id=id)
@@ -1000,6 +1092,8 @@ def message_show(request, id):
     return render(request, 'message/show.html', {'message': message})
 
 def message_create(request):
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -1015,6 +1109,8 @@ def message_create(request):
         return render(request,'message/create.html',{'form':form,'title':_('Create Message')})
 
 def message_reply(request, msgid):
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     if request.method == 'POST':
         form = ReplyForm(request.POST)
         if form.is_valid():
