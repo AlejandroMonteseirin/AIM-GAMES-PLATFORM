@@ -59,9 +59,6 @@
                         {% if request.user.is_staff %}
                         	<li><a href="/admin">{% trans "Admin Panel" %}</a></li>
                         {% endif %}
-                        {% if request.session.currentUser == 'business' %}
-                            <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
-                        {% endif %}
 
                         {% if request.user.is_authenticated %}
                             <li><a href="/event/list/">{% trans "Events" %}</a></li>
@@ -70,6 +67,9 @@
                             ({{request.session.message_count}})
                             {% endif %}
                             </a></li>
+                            {% if request.session.currentUser == 'business' %}
+                                <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                            {% endif %}
                             <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         {% else %}
                         <li><a href="/accounts/login/" target="_self" class="collection-item">{% trans "Log In" %}</a></li>
@@ -103,6 +103,9 @@
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                     <li><a href="/event/list/">{% trans "Events" %}</a></li>
+                {% if request.session.currentUser == 'business' %}
+                    <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                {% endif %}
                 {% else %}
                 <li><a href="/accounts/login/" target="_self" class="collection-item">{% trans "Log In" %}</a></li>
                 {% endif %}
