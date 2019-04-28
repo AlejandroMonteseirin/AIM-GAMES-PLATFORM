@@ -152,6 +152,13 @@ class Command(BaseCommand):
         jobOffer3, created = JobOffer.objects.get_or_create(business=business3, position='Art Designer',experienceRequired='Knows how to use Unity art software library',
         schedule = '8am-3pm', salary=20000, ubication='Seville', description='Create new art', images='http://www.funcage.com/blog/wp-content/uploads/2013/11/Random-Photoshopped-Pictures-006.jpg')
 
+        subscriptionModel = SubscriptionModel.objects.get_or_create(name="Standard Subscription",
+                                                                    description="Gain 10 coins per month", maxCoins=50,
+                                                                    coinsGain=10, price=15)
+        subscriptionModel2 = SubscriptionModel.objects.get_or_create(name="Premium Subscription",
+                                                                    description="Gain 50 coins per month", maxCoins=300,
+                                                                    coinsGain=50, price=30)
+
         t=(tag,)
         p=(url1,url2)
         at=(url3,)

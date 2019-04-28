@@ -6,7 +6,7 @@ from django.shortcuts import render, get_list_or_404
 from paypal.standard.forms import PayPalPaymentsForm,PayPalSharedSecretEncryptedPaymentsForm
 from django.shortcuts import redirect
 from django.views.generic import FormView, CreateView, UpdateView
-from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude
+from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude, SubscriptionModel
 from .forms import *
 from django.db.models import Q
 from datetime import datetime, timezone
@@ -33,6 +33,10 @@ def setlanguage(request, language):
     request.session['language'] = language
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def subscriptionChoose(request):
+    user = request.user.id
+    subscriptionModels = SubscriptionModel.objects.all()
+    return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels})
 def pagarPaypal(request):
     host = request.get_host()
     businessId = request.session['buss']
@@ -52,12 +56,62 @@ def pagarPaypal(request):
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'pagarPaypal.html', {'form':form})
 
+
+def pagar_paypal_subscripcion(request, subscriptionId, businessId):
+    host = request.get_host()
+    # businessId = request.session['buss']
+    # subscriptionId = request.session['subscriptionId']
+    print(businessId)
+    # local notify url
+    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId),
+    # subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
+    subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
+    paypal_dict = {
+        'cmd': '_xclick-subscriptions',
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'a3': str(subs.price),               # monthly price
+        'p3': 1,                             # duration of each unit (depends on unit)
+        't3': 'M',                           # duration unit ("M for Month")
+        'src': '1',  # make payments recur
+        'sra': '1',  # reattempt payment on payment error
+        'item_name': str(subs.name),
+        'currency_code': 'EUR',
+        # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
+        'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/' + str(businessId),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pagarPaypal.html', {'form': form})
+
 @csrf_exempt
 def paypal_ipn(request,businessId):
     print("ipn recieved")
     print(request.POST)
     updatedNumber = Business.objects.filter(id=businessId).update(lastPayment=datetime.now())
     print(updatedNumber)
+    return JsonResponse({'ok': 'hoooh!'})
+
+@csrf_exempt
+def paypal_subscription_ipn(request,businessId):
+    print("ipn recieved")
+    print(request.POST)
+    if request.POST.get('txn_type') == ['subscr_payment']:
+        print("Subcription Payment")
+        if request.POST.get('payment_status') == ['Completed']:
+            print("Completed")
+            if request.POST.get('item_name') == ['Standard Subscription']:
+                print("Standar Subscription")
+            if request.POST.get('item_name') == ['Premium Subscription']:
+                print("Premium Subscription")
+    elif request.POST.get('txn_type') == ['subscr_cancel']:
+        print("Canceled")
+    elif request.POST.get('txn_type') == ['subscr_signup']:
+        print("Confirmed")
+    elif request.POST.get('subscr_failed ') == ['subscr_failed']:
+        print("Failed")
+
+
     return JsonResponse({'ok': 'hoooh!'})
 
 def payment_done(request):
