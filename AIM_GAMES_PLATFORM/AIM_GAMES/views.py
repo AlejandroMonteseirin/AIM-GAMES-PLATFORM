@@ -59,12 +59,10 @@ def pagarPaypal(request):
 
 def pagar_paypal_subscripcion(request, subscriptionId, businessId):
     host = request.get_host()
-    # businessId = request.session['buss']
-    # subscriptionId = request.session['subscriptionId']
+    # https://overiq.com/django-paypal-subscriptions-with-django-paypal/
     print(businessId)
     # local notify url
-    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId),
-    # subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
+    # 'notify_url': 'http://86e53f2e.ngrok.io/paypal_subscription_ipn/'+str(businessId)
     subs = SubscriptionModel.objects.filter(id=subscriptionId)[0]
     paypal_dict = {
         'cmd': '_xclick-subscriptions',
@@ -93,22 +91,33 @@ def paypal_ipn(request,businessId):
     return JsonResponse({'ok': 'hoooh!'})
 
 @csrf_exempt
-def paypal_subscription_ipn(request,businessId):
+def paypal_subscription_ipn(request, businessId):
     print("ipn recieved")
     print(request.POST)
-    if request.POST.get('txn_type') == ['subscr_payment']:
+    print('Searching User '+str(businessId))
+    prof = Profile.objects.filter(user__pk=businessId)
+    business = Business.objects.filter(profile__pk=prof[0].id)[0]
+    print('Found Business ' + str(business))
+    print(str(request.POST.get('txn_type')))
+    if request.POST.get('txn_type') == 'subscr_payment':
         print("Subcription Payment")
-        if request.POST.get('payment_status') == ['Completed']:
+        if request.POST.get('payment_status') == 'Completed':
             print("Completed")
-            if request.POST.get('item_name') == ['Standard Subscription']:
-                print("Standar Subscription")
-            if request.POST.get('item_name') == ['Premium Subscription']:
-                print("Premium Subscription")
-    elif request.POST.get('txn_type') == ['subscr_cancel']:
+            subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
+            if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
+                business.subscriptionModel = subscription
+            business.coins = business.coins + subscription.coinsGain
+            if business.coins > subscription.maxCoins:
+                business.coins = subscription.maxCoins
+            business.save()
+
+    elif request.POST.get('txn_type') == 'subscr_cancel':
         print("Canceled")
-    elif request.POST.get('txn_type') == ['subscr_signup']:
+        business.subscriptionModel = None
+        business.save()
+    elif request.POST.get('txn_type') == 'subscr_signup':
         print("Confirmed")
-    elif request.POST.get('subscr_failed ') == ['subscr_failed']:
+    elif request.POST.get('subscr_failed ') == 'subscr_failed':
         print("Failed")
 
 
