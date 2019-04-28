@@ -29,14 +29,25 @@ def index(request):
 
     return render(request, 'index.html')
 
+
 def setlanguage(request, language):
     request.session['language'] = language
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 def subscriptionChoose(request):
     user = request.user.id
     subscriptionModels = SubscriptionModel.objects.all()
     return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels})
+
+
+def manage_subscription(request):
+    if checkUser(request) != 'business':
+        return handler500(request)
+    business = findByPrincipal(request)
+    return render(request, 'subscription/Manage_subscription.html', {'business': business})
+
+
 def pagarPaypal(request):
     host = request.get_host()
     businessId = request.session['buss']
@@ -137,22 +148,7 @@ def login_redir(request):
     if request.user.is_superuser:
         res = redirect('admin/')
     else:
-        prof = Profile.objects.filter(user__pk=request.user.id)
-        buss = Business.objects.filter(profile__pk=prof[0].id)
-        if buss:
-            if not buss[0].lastPayment is None:
-                if (buss[0].lastPayment- datetime.now(timezone.utc)).total_seconds() > 31556952:
-                    auth.logout(request)
-                    request.session['buss'] = buss[0].id
-                    res = pagarPaypal(request)
-                else:
-                    res = redirect('index')
-            else:
-                auth.logout(request)
-                request.session['buss'] = buss[0].id
-                res = pagarPaypal(request)
-        else:
-            res = redirect('index')
+        res = redirect('index')
 
     try:
         request.session['currentUser'] = checkUser(request)
@@ -215,7 +211,7 @@ class BusinessCreate(CreateView):
         print(buss)
 
         self.request.session['buss'] = buss.id
-        return pagarPaypal(self.request)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         # This method is called before the view es generate and add the context

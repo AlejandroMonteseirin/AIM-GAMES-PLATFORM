@@ -27,6 +27,7 @@ urlpatterns = [
     path('pagar_paypal', pagarPaypal, name='pagarPaypal' ),
     path('pagar_paypal_subscripcion/<int:subscriptionId>/<int:businessId>', pagar_paypal_subscripcion, name='pagar_paypal_subscripcion' ),
     path('subscription', subscriptionChoose, name='subscriptionChoose'),
+    path('manage_subscription', manage_subscription, name='manage_subscription'),
     path('payment_done', payment_done, name='payment_done'),
     path('payment_canceled', payment_canceled, name='payment_canceled'),
     path('paypal_ipn/<int:businessId>', paypal_ipn,name='paypal_ipn'),

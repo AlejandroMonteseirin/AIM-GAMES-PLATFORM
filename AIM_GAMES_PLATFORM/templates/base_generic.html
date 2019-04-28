@@ -59,6 +59,10 @@
                         {% if request.user.is_staff %}
                         	<li><a href="/admin">{% trans "Admin Panel" %}</a></li>
                         {% endif %}
+                        {% if request.session.currentUser == 'business' %}
+                            <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                        {% endif %}
+
                         {% if request.user.is_authenticated %}
                             <li><a href="/event/list/">{% trans "Events" %}</a></li>
                             <li><a href="/message/list/">{% trans "Messages" %}
