@@ -27,16 +27,23 @@
                         <div class="col s3 center">{{ jobOffer.salary}}</div>
                         <div class="col s3 center">{{ jobOffer.schedule}}</div>
                         <div class="col s3 center">
+                            {% if sub %}
                             <a href="/jobOffer/detail/{{jobOffer.id}}" class="btn waves-effect waves-red right color1">{% trans "view" %}</a>
+                            {% else %}
+                            <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red right color1">{% trans "view" %}</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-            <!--Este botón sólo debe salir al estar logueado como business, añadir cuando se vea cómo hacerlo-->
-            {% if request.session.currentUser == 'business' %}
+            {% if request.session.currentUser == 'business' and sub%}
                 <div class="right">
                     <a href="/business/joboffer/create" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
+                </div>
+            {% else %}
+                <div class="right">
+                    <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
                 </div>
             {% endif %}
         </div>

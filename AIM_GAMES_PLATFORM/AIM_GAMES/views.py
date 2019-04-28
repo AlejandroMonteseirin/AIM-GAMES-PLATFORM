@@ -305,7 +305,10 @@ def threadDetail(request, thread_id):
         business = findByPrincipal(request)
         if business.id == thread.business.id:
             return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics,'owner':True})
+        if business.subscriptionModel == None:
+            return handler500(request)
     return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics})
+
 
 def jobOfferDetail(request, id):
         jobOffer = get_object_or_404(JobOffer, pk=id)
@@ -316,8 +319,11 @@ def jobOfferDetail(request, id):
         if checkUser(request)=='business':
             business = findByPrincipal(request)
             if business.id == jobOffer.business.id:
-                return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':True})        
+                return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':True})
+            if business.subscriptionModel is None:
+                return handler500(request)
         return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics})
+
 
 def findByPrincipal(request):
     freelancer = None
@@ -375,6 +381,9 @@ def freelancerDetail(request, id):
     except:
         HTML5Showcase = None
 
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
+
     return render(request, 'freelancer/detail.html', {'freelancer': freelancer,'links':links,'formations':formation,'professionalExperiences':professionalExperience,'HTML5Showcase':HTML5Showcase,'graphicEngineExperiences':graphicEngineExperience,'aptitudes':aptitude})
 
 def threadList(request):
@@ -410,7 +419,11 @@ def jobOfferList(request):
     else:
         q=JobOffer.objects.all()
     jobOffers= q
-    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers, 'sub': sub})
 
 def curriculumList(request):
     if checkUser(request)!='business':
@@ -441,10 +454,13 @@ def curriculumList(request):
         aptitudesList=Aptitude.objects.filter(curriculum=c.id)
         aptitudes[c.id]=list(aptitudesList)
     try:
-        businessThread = get_object_or_404(Business,profile=request.user.profile)
+        if get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+            sub = False
+        else:
+            sub = True
     except AttributeError:
         return handler500(request)
-    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes})
+    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes, 'sub': sub})
 
 def checkUser(request):
     freelancer = None
@@ -825,7 +841,11 @@ def challengeList(request):
     else:
         q=Challenge.objects.all()
     challenges= q
-    return render(request, 'challenge/challengeList.html',{'challenges':challenges})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub})
 
 def challengeCreate(request):
     if checkUser(request)=='business':
@@ -867,6 +887,8 @@ def challengeResponse_create(request, challengeId):
 def challengeDetail(request, challenge_id):
         challenge = get_object_or_404(Challenge, pk=challenge_id)
         responsesChallenge = challenge.challengeresponse_set.all()
+        if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+            return handler500(request)
         return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge})
 
 def curriculumVerify(request, id):
@@ -918,7 +940,12 @@ def eventList(request):
     else:
         q=Event.objects.all()
     events= q
-    return render(request, 'event/eventList.html',{'events':events})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+
+    return render(request, 'event/eventList.html', {'events':events, 'sub': sub})
 
 def eventCreate(request):
     if checkUser(request)=='manager':
@@ -952,6 +979,8 @@ def eventDetail(request, event_id):
             joining=False
     else:
         joining=False
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     return render(request, 'event/eventDetail.html', {'event': event,'freelancers':freelancers,'companies':companies, 'joining':joining})
 
 def eventEdit(request, event_id): 
@@ -1032,7 +1061,11 @@ def message_list(request):
         return handler500(request)
     user = request.user
     messages = Message.objects.filter(recipient=user).order_by('readed', '-timestamp')
-    return render(request, 'message/list.html', {'messages': messages})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'message/list.html', {'messages': messages, 'sub': sub})
 
 def message_show(request, id):
     message = get_object_or_404(Message, id=id)
@@ -1049,6 +1082,8 @@ def message_show(request, id):
     return render(request, 'message/show.html', {'message': message})
 
 def message_create(request):
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -1064,6 +1099,8 @@ def message_create(request):
         return render(request,'message/create.html',{'form':form,'title':_('Create Message')})
 
 def message_reply(request, msgid):
+    if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+        return handler500(request)
     if request.method == 'POST':
         form = ReplyForm(request.POST)
         if form.is_valid():
