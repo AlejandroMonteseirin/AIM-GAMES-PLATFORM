@@ -86,7 +86,7 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
         'item_name': str(subs.name),
         'currency_code': 'EUR',
         # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
-        'notify_url': 'http://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
+        'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
     }
