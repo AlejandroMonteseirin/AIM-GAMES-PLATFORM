@@ -1089,7 +1089,11 @@ def message_show(request, id):
             request.session["message_count"] = count
         message.readed = True
         message.save()
-    return render(request, 'message/show.html', {'message': message})
+    if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
+        sub = False
+    else:
+        sub = True
+    return render(request, 'message/show.html', {'message': message, 'sub': sub})
 
 def message_create(request):
     if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
