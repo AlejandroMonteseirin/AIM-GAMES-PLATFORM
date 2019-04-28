@@ -93,7 +93,7 @@ class Freelancer(models.Model):
 class Business(models.Model):
     profile = models.OneToOneField(
         Profile, on_delete=models.CASCADE, verbose_name=_("profile"))
-    subscriptionModel = models.ForeignKey(SubscriptionModel, on_delete=models.CASCADE, null=True)
+    subscriptionModel = models.ForeignKey(SubscriptionModel, on_delete=models.SET_NULL, null=True)
     coins = models.IntegerField(verbose_name=_("Coins"), null=False, default=0)
     lastPayment = models.DateTimeField(
         verbose_name=_("lastPayment"), null=True)
