@@ -106,9 +106,9 @@ class Command(BaseCommand):
         manager2, created = Manager.objects.get_or_create(profile=profile8)
         manager3, created = Manager.objects.get_or_create(profile=profile9)
 
-        curriculum1,created = Curriculum.objects.get_or_create(freelancer= freelancer1,verified=False)
-        curriculum2,created = Curriculum.objects.get_or_create(freelancer= freelancer2,verified=False)
-        curriculum3,created = Curriculum.objects.get_or_create(freelancer= freelancer3,verified=True)
+        curriculum1,created = Curriculum.objects.get_or_create(freelancer= freelancer1,verified=False, featured=False)
+        curriculum2,created = Curriculum.objects.get_or_create(freelancer= freelancer2,verified=False, featured=False)
+        curriculum3,created = Curriculum.objects.get_or_create(freelancer= freelancer3,verified=True, featured=False)
 
         professionalExperience1,created = ProfessionalExperience.objects.get_or_create(curriculum=curriculum1, center='Nintendo', 
             formation='Co-Writer of Zelda', startDate='2014-12-12 00:00',endDate='2015-12-12 00:00',miniature=url1)

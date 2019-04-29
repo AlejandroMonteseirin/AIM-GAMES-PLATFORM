@@ -116,7 +116,7 @@ class Curriculum(models.Model):
     freelancer = models.OneToOneField(
         Freelancer, on_delete=models.CASCADE, verbose_name=_("freelancer"))
     verified = models.BooleanField(verbose_name=_("verified"), default=False)
-
+    featured = models.BooleanField(verbose_name=_("featured"), default=False)
 
 class ProfessionalExperience(models.Model):
     curriculum = models.ForeignKey(
