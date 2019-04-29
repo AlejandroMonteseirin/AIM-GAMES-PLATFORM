@@ -10,6 +10,8 @@ import re
 
 
 class BusinessForm(ModelForm):
+    terms = BooleanField(required = True,label = 'terms')
+    
     class Meta:
         model = Business
         exclude = ('lastPayment', 'subscriptionModel', 'coins')
