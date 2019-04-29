@@ -196,7 +196,7 @@
 
         </div>
 
-        <div class="col s12 m12 l12">
+        <div class="col s12  m4 l4">
           <a href="#!" onclick="toggle_showcase();" class="btn color1 waves-effect waves-red">
             {% trans "mostrar" %}</a>
           <blockquote id="bq" style="display:none">
@@ -208,8 +208,10 @@
           </blockquote>
         </div>
         {% if request.session.currentUser == 'freelancer' %}
-        <div class="col s12 m12 l12">
-              <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "editHTML5Showcase" %}</a>
+        <div class="col s12 m4 l4">
+                      <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "editHTML5Showcase" %}</a>
+        </div>
+        <div class="col s12  m4 l4">
               <a href="/freelancer/html5showcase/delete/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "Delete" %}</a>
           </div>
         {% endif %} 
