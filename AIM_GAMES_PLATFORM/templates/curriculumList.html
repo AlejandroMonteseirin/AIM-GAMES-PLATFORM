@@ -34,10 +34,12 @@
                                 {% endif %}
                             {% endfor %}
                         </div><div class="col s4 ">
-                        {% if sub %}
+                        {% if sub and request.session.currentUser == 'business' %}
                         <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% else %}
+                        {% elif request.session.currentUser == 'business' %}
                         <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
+                        {% else %}
+                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
                         {% endif %}
                         </div>
                         {% endif %}
