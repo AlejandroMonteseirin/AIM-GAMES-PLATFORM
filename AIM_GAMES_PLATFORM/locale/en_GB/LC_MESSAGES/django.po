@@ -326,7 +326,7 @@ msgstr "Score"
 #, fuzzy
 #| msgid "threads"
 msgid "thread"
-msgstr "Threads"
+msgstr "Forum"
 
 #: .\AIM_GAMES\models.py:279
 msgid "objectives"
