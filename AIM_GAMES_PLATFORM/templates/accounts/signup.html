@@ -66,11 +66,14 @@
                              {% endif %}
                             <label for="{{ field.id_for_label }}">{{ field.label_tag }}:</label>
                             {% endif %}
+
+
                         </div>
                          {% endfor %}
 
 
-                         {% if type != "business" %}
+
+                         
                          {% for field in form.visible_fields %}
                          <span class="red-text">{{ field.errors }}</span>
                         <div class="input-field col s12">
@@ -97,7 +100,7 @@
 
                         </div>
                          {% endfor %}
-                         {%endif%}
+
                          <input class="btn color1" type="submit" value="{% trans 'Submit' %}">
                     </div>
                 </div>
