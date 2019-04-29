@@ -105,5 +105,5 @@ class AIM_GAMES_TestCase(TestCase):
         userSender = User.objects.create_user(username='userSenderTest', password='userSenderPass')
         userRecipient = User.objects.create_user(username='userRecipientTest', password='userRecipientPass')
         message= Message.objects.create(id= 1254, sender=userSender,recipient=userRecipient, subject="Asunto",
-        text="Texto correo",timestamp=timezone.now,readed=False)
+        text="Texto correo",timestamp='2018-12-12 00:00',readed=False)
         self.assertEqual(message.id, 1254)
