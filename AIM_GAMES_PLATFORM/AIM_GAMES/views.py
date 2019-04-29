@@ -93,6 +93,26 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, 'pagarPaypal.html', {'form': form})
 
+def pagarPaypal_Curriculum(request):
+    host = request.get_host()
+    freelancer = findByPrincipal(request)
+    curriculum = freelancer.curriculum
+    #local notify url
+    #'notify_url': 'https://dbda170f.ngrok.io/paypal_ipn/'+str(businessId),
+    
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '10',
+        'item_name': 'Curriculum destacado en AIM-GAMES',
+        'currency_code': 'EUR',
+        'notify_url': 'https://aim-games-3.herokuapp.com/paypal_curriculum_ipn/'+str(curriculum.id),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
+        }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pagarPaypal.html', {'form':form})
+
+
 @csrf_exempt
 def paypal_ipn(request,businessId):
     print("ipn recieved")
@@ -133,6 +153,15 @@ def paypal_subscription_ipn(request, businessId):
 
 
     return JsonResponse({'ok': 'hoooh!'})
+
+@csrf_exempt
+def paypal_curriculum_ipn(request,curriculumId):
+    print("ipn recieved")
+    print(request.POST)
+    updatedCurriculum = Curriculum.objects.filter(id=curriculumId).update(featured=True)
+    print(updatedCurriculum)
+    return JsonResponse({'ok': 'hoooh!'})
+
 
 def payment_done(request):
     # esto es como el controlador/servicios
