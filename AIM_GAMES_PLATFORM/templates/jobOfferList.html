@@ -41,9 +41,13 @@
                 <div class="right">
                     <a href="/business/joboffer/create" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
                 </div>
-            {% else %}
+            {% elif request.session.currentUser == 'business' %}
                 <div class="right">
                     <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
+                </div>
+            {% else %}
+                <div class="right">
+                    <a href="/business/joboffer/create" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
                 </div>
             {% endif %}
         </div>
