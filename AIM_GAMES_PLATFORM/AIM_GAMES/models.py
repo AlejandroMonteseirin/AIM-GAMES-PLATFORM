@@ -55,7 +55,7 @@ class Profile(models.Model):
         verbose_name=_("Date of birth"), null=False)
     phoneNumber = models.TextField(verbose_name=_(
         "Phone number"), max_length=20, blank=False)
-    photo = models.URLField(verbose_name=_("Photo"))
+    photo = models.URLField(verbose_name=_("Photo"), blank=True)
 
     def __str__(self):
         return self.name
@@ -116,7 +116,7 @@ class Curriculum(models.Model):
     freelancer = models.OneToOneField(
         Freelancer, on_delete=models.CASCADE, verbose_name=_("freelancer"))
     verified = models.BooleanField(verbose_name=_("verified"), default=False)
-
+    featured = models.BooleanField(verbose_name=_("featured"), default=False)
 
 class ProfessionalExperience(models.Model):
     curriculum = models.ForeignKey(
