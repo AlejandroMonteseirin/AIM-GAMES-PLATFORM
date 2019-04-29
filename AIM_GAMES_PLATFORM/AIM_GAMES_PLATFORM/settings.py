@@ -152,7 +152,8 @@ STATICFILES_DIRS = [
 ]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-django_heroku.settings(locals())
+if 'HEROKU' in os.environ:
+    django_heroku.settings(locals())
 
 #GRAPH MODELS
 
