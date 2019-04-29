@@ -39,7 +39,7 @@
           {% if freelancer.curriculum.verified == False %}
             {% trans "Unverified curriculum" %}
           {% endif %}
-          {% if freelancer.curriculum.featured == False %}
+          {% if freelancer.curriculum.featured == False and request.session.currentUser == 'freelancer' %}
             <a href="/pagar_paypal_curriculum/" class="btn color1 waves-effect waves-red">{% trans "featured" %}</a>
           {% endif %}
           <ul class="collapsible with-header">
