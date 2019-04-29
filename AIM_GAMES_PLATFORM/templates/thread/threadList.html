@@ -19,11 +19,19 @@
         <div class="col s12">
             <div class="collection">
                 {% for thread in threads %}
-                    <a href="/thread/detail/{{thread.id}}" class="collection-item">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
+                    {% if businessThread.subscriptionModel != None %}
+                    <a href="/thread/detail/{{thread.id}}" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
+                    {% else %}
+                    <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
+                    {% endif %}
                 {% endfor %}
             </div>
             <div class="right">
-                <a href="/thread/create/" class="btn waves-effect waves-red">{% trans "New thread" %}</a>
+                {% if businessThread.subscriptionModel != None %}
+                <a href="/thread/create/" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
+                {% endif %}
             </div>
         </div>
     </div>

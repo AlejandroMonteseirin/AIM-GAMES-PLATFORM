@@ -12,7 +12,11 @@
           <div class="section">
               <p class="flow-text">{{message.text}}</p>
           </div>
+            {% if sub %}
           <a href="/message/reply/{{message.id}}"<div class="btn waves-effect waves-red center-align">{% trans "reply" %}</div></a>
+            {% else %}
+            <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="""<div class="btn waves-effect waves-red center-align">{% trans "reply" %}</div></a>
+            {% endif %}
         </div>
     </div>
 </body>

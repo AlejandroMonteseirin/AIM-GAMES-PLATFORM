@@ -1,0 +1,36 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% block content %}
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card color1 no-padding">
+        <div class="card-content white-text">
+          <p>Choose a Subscription Type</p>
+        </div>
+        <div class="card-tabs">
+          <ul class="tabs tabs-fixed-width  tabs-transparent">
+            {% for subs in subscriptions %}
+              <li class="tab"><a href="#{{subs.id}}">{{subs.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="card-content grey lighten-4">
+          {% for subs in subscriptions %}
+            <div id="{{subs.id}}">
+              {{subs.description}}<br><br>
+              <strong>{% trans 'Max Coins' %}:</strong> {{subs.maxCoins}}<br>
+              <strong>{% trans 'Coins Gain per month' %}:</strong> {{subs.coinsGain}}<br>
+              <strong>{% trans 'Price' %}:</strong> {{subs.price}}€<br><br>
+              <a href="/pagar_paypal_subscripcion/{{subs.id}}/{{businessId}}" > {{subs.name}}</a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+    
+</body>
+{% endblock %}

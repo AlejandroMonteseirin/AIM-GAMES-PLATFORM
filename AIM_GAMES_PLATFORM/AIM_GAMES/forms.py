@@ -12,7 +12,7 @@ import re
 class BusinessForm(ModelForm):
     class Meta:
         model = Business
-        exclude = ('lastPayment',)
+        exclude = ('lastPayment', 'subscriptionModel', 'coins')
 
     def __init__(self, *args, **kwargs):
         super(BusinessForm, self).__init__(*args, **kwargs)

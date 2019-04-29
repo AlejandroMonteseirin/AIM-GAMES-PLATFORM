@@ -23,6 +23,7 @@ admin.site.register(Message)
 admin.site.register(Event)
 admin.site.register(Challenge)
 admin.site.register(ChallengeResponse)
+admin.site.register(SubscriptionModel)
 
 
 # Register your models here.
