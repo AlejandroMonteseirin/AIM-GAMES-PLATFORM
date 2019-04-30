@@ -65,7 +65,7 @@ class SubscriptionModel(models.Model):
     name = models.CharField(max_length=30, verbose_name=_("Name"), blank=False, unique=True)
     description = models.CharField(max_length=60, verbose_name=_("Description"))
     maxCoins = models.IntegerField(verbose_name=_("Max Coin"), null=False)
-    coinsGain = models.IntegerField(verbose_name=_("Coin Coin"), null=False)
+    coinsGain = models.IntegerField(verbose_name=_("Coins Gain"), null=False)
     price = models.FloatField(verbose_name=_("Price"), null=False)
 
     def _str_(self):

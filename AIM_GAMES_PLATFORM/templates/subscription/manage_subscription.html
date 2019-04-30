@@ -9,7 +9,7 @@
       <div class="card  lighten-2 color1b">
         <h1>{{buss.profile.name}}</h1><br>
         <div class="card color1b2 targetaDentroDeTargetaxd">
-          <span class="card-title">{% trans "Current Subscription" %}:</span>
+          <span class="card-title">{% trans "Current Subs" %}:</span>
           {% if buss.subscriptionModel == None %}
           <br>
             <a href="subscription">{% trans "You don't have any subscription, click here for see ours subscription models" %}</a><br>
@@ -20,7 +20,7 @@
             <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<br>
             <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<br>
             <strong>{% trans 'Price' %}:</strong> {{buss.subscriptionModel.price}}€<br><br>
-            <!--{% trans "Cancel Subscription" %}-->
+            <!--{% trans "Cancel subs" %}-->
           {% endif %}
         </div>
       </div>
