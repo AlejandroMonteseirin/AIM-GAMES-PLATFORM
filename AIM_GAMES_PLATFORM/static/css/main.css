@@ -94,7 +94,13 @@ main {
 .color3b{
     background-color: rgba(162, 216, 162, 1);
 }
+@media (min-width: 600px) {
 
+.botonesLogin{
+    min-height: 5em !important;
+    text-align: center;
+}
+}
 .targetaDentroDeTargetaxd{
    padding:3em;
 }
