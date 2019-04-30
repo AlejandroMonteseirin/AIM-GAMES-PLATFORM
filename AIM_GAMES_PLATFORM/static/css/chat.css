@@ -1,0 +1,30 @@
+
+
+#myTable{
+    background-color: aqua;
+}
+
+.chat.card{
+    padding: -10em;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.overflowhidden{
+    overflow: hidden !important;
+}
+
+button{
+    min-height: 3em;
+    height: auto;
+    min-width: 3em;
+
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}

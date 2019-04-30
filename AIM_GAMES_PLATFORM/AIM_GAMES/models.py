@@ -342,6 +342,16 @@ class Message(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     readed = models.BooleanField(default=False)
 
+    def as_json(self,userName):
+        isPrincipal = False
+        if userName == self.sender.username:
+            isPrincipal = True
+        return dict(
+            id=self.id, 
+            sender=self.sender.username,
+            text=self.text,
+            isprincipal=isPrincipal)
+
 
 def getCurriculumData(self):
     professionalExperiences = ProfessionalExperience.objects.filter(

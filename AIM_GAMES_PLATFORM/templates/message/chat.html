@@ -1,0 +1,105 @@
+{% load staticfiles %}
+
+<head>
+        {% block title %}<title >AIM Games Platform</title>{% endblock %}
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+        <link rel="shortcut icon" href="{%  static 'icons/logo.ico' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<script type="text/javascript">   
+    $( document ).ready(function() {
+        window.scrollTo(0,document.body.scrollHeight);
+        setInterval(function(){
+            $.getJSON('/chat/update/{{user2.id}}',
+                    function (data) {
+                        var json = data['new_messages'];
+                        var tr;
+                        for (var i = 0; i < json.length; i++) {
+                            tr = $('<tr/>');
+                            aux = "";
+                            if (json[i].isprincipal){
+                                c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">'
+                                    + json[i].sender + 
+                                    '</span><p>' + json[i].text + '</p></div></div></div>';
+                            }else{
+                                c = '<div class="col s6 offset-s1 "> <div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">'
+                                    + json[i].sender + 
+                                    '</span><p>' + json[i].text + '</p></div></div></div>';
+                            }
+                            tr.append("<td>" + json[i].sender + aux + "</td>");
+                            tr.append("<td>" + json[i].text + "</td>");
+                            $('#myTable tbody').append(tr);
+
+                            
+                            $('#myRow').append(c); 
+
+                            window.scrollTo(0,document.body.scrollHeight);
+                            /* new Promise(resolve => setTimeout(resolve, 100)) */
+                        }
+                    });
+        },3000);
+    });
+    
+</script>
+
+<div class="">
+        <div class="row" id='myRow'>
+            {% for m in messages %}
+            {% if user2.username == m.sender.username%}
+            <div class="col s6 offset-s1">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ m.sender }}</span>
+                        <p>{{ m.text }}</p>
+                    </div>
+                </div>
+            </div>
+            {%else%}
+            <div class="col s6 offset-s5 ">
+                <div class="card green darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ m.sender }}</span>
+                        <p>{{ m.text }}</p>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            {% endfor %}
+        </div>
+</div>
+
+<form onsubmit="hola(); return false;">
+    <input id="le_input" type="text"/>
+    <button type="submit" class="botonwapowapo">wapisimo</button>
+</form>
+
+<script>
+    function hola(){
+        var message = $('#le_input').val();
+        if(message==""){
+            alert('no')
+        }else{
+            $.ajax
+            ({ 
+                url: '/chat/message/new',
+                data: {"text": message, "recipientId":"{{user2.id}}"},
+                type: 'post',
+                success: function(result){
+                    c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">{{ user1.username }}</span><p>' + message+ '</p></div></div></div>';
+                    $('#myRow').append(c); 
+                    $('#le_input').val('');
+                    window.scrollTo(0,document.body.scrollHeight);
+
+                }
+            });
+        } 
+    };
+</script>
+
+</body>

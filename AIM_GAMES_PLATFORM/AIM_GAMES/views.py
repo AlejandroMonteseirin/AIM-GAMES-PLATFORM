@@ -19,6 +19,7 @@ from django.http import HttpResponseRedirect
 
 from django.utils.translation import gettext as _
 from django.utils import translation
+from django.utils import timezone as timezoneDjango
 
 def index(request):
     # esto es como el controlador/servicios
@@ -1179,3 +1180,47 @@ def threadDelete(request, id):
         return redirect('/thread/business/list/')
     instance.delete()
     return redirect('/thread/business/list/')
+
+def chat(request,userId):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    user2 = get_object_or_404(User, pk=userId)
+    user1 = request.user
+    messages = list(Message.objects.filter(
+        Q(sender=user1,recipient=user2) | Q(sender=user2,recipient=user1),
+        ).order_by('-timestamp'))
+    messages.reverse()
+    return render(request, 'message/chat.html',{'messages': messages, 'user2':user2,'user1':user1})
+
+def chatUpdate(request,userId):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    user2 = get_object_or_404(User, pk=userId)
+    user1 = request.user
+    messagesQueryset = Message.objects.filter(
+        Q(sender=user2,recipient=user1,readed=False),
+        ).order_by('timestamp')
+    results = [ob.as_json(user1.username) for ob in messagesQueryset]
+    hola =  messagesQueryset.update(readed=True)
+    return JsonResponse({'new_messages': results})
+
+@csrf_exempt
+def message_new(request):
+    if request.method=="POST":
+        user1 = request.user
+        text = request.POST.get("text", "")
+        userId = int(request.POST.get("recipientId", ""))
+        recipientUser = User.objects.get(pk=userId)
+        print('esto esta hechisimo')
+        message = Message(
+            sender = user1,
+            recipient = recipientUser,
+            subject = "dummy",
+            text = text,
+        )
+        message.save()
+    return JsonResponse({})
+
+def chatUser(request,userId):
+    userId = User.objects.get(pk=userId)
+    return render(request, 'message/chatUser.html',{'user2':userId})
