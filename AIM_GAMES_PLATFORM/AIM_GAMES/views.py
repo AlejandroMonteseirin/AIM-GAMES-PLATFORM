@@ -45,7 +45,7 @@ def manage_subscription(request):
     if checkUser(request) != 'business':
         return handler500(request)
     business = findByPrincipal(request)
-    return render(request, 'subscription/manage_subscription.html', {'business': business})
+    return render(request, 'subscription/manage_subscription.html', {'buss': business})
 
 
 def pagarPaypal(request):
