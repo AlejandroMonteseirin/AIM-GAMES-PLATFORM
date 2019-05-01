@@ -89,7 +89,7 @@
                 data: {"text": message, "recipientId":"{{user2.id}}"},
                 type: 'post',
                 success: function(result){
-                    c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">{{ user1.profile.name }} {{ user1.profile.surname }}</span><p>' + message+ '</p></div></div></div>';
+                    c = '<div class="col s6 offset-s5 "> <div class="card color3b"><div class="card-content white-text"><span class="card-title">{{ user1.profile.name }} {{ user1.profile.surname }}</span><p>' + message+ '</p></div></div></div>';
                     $('#myRow').append(c); 
                     $('#le_input').val('');
                     window.scrollTo(0,document.body.scrollHeight);
