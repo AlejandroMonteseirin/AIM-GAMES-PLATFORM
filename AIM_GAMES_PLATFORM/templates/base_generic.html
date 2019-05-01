@@ -101,7 +101,7 @@
                     <li><a href="/admin">{% trans "Admin Panel" %}</a></li>
                 {% endif %}
                 {% if request.user.is_authenticated %}
-                    <li><a href="/message/list/">{% trans "Messages" %}
+                    <li><a href="/chats">{% trans "Messages" %}
                             {% if not request.session.message_count == 0 %}
                             ({{request.session.message_count}})
                             {% endif %}
