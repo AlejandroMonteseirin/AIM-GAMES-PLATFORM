@@ -36,43 +36,43 @@
 
     
         <nav class="color1">
-            <div class="nav-wrapper">
+            <div class="nav-wrapper" id="idParaFuente">
                     <a href="/" class="brand-logo "  ><span class="letrasHeader">AIM Games</a>
                     <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
                     <ul class="hide-on-med-and-down right">
                         <li class="active"><a href="/">{% trans "mainpage" %}</a></li>
                         {% if request.session.currentUser == 'business' %}
-                            <li><a href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
-                            <li><a href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
+                            <li><a class="headerenlace" href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
+                            <li><a class="headerenlace"  href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
                         {% endif %} 
                         {% if request.session.currentUser == 'freelancer' %}
-                            <li><a href="/freelancer/mycurriculum/-" target="_self" class="collection-item">{% trans "My curriculum" %}</a></li>
+                            <li><a  class="headerenlace" href="/freelancer/mycurriculum/-" target="_self" class="collection-item">{% trans "My curriculum" %}</a></li>
                         {% endif %}
                         {% if request.session.currentUser == 'manager' %}
-                            <li><a href="/curriculum/manager/list" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
+                            <li><a class="headerenlace" href="/curriculum/manager/list" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
                         {% endif %}
                         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
-                            <li><a href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
-                            <li><a href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
+                            <li><a  class="headerenlace" href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
+                            <li><a class="headerenlace" href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
                             
                         {% endif %}
                         {% if request.user.is_staff %}
-                        	<li><a href="/admin">{% trans "Admin Panel" %}</a></li>
+                        	<li><a class="headerenlace" href="/admin">{% trans "Admin Panel" %}</a></li>
                         {% endif %}
 
                         {% if request.user.is_authenticated %}
-                            <li><a href="/event/list/">{% trans "Events" %}</a></li>
-                            <li><a href="/message/list/">{% trans "Messages" %}
+                            <li><a class="headerenlace" href="/event/list/">{% trans "Events" %}</a></li>
+                            <li><a class="headerenlace" href="/chats">{% trans "Messages" %}
                             {% if not request.session.message_count == 0 %}
                             ({{request.session.message_count}})
                             {% endif %}
                             </a></li>
                             {% if request.session.currentUser == 'business' %}
-                                <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                                <li><a class="headerenlace" href="/manage_subscription">{% trans "Manage Subs" %}</a></li>
                             {% endif %}
-                            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                            <li><a  class="headerenlace" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         {% else %}
-                        <li><a href="/accounts/login/" target="_self" class="collection-item">{% trans "Log In" %}</a></li>
+                        <li><a href="/accounts/login/" target="_self" class="collection-item headerenlace">{% trans "Log In" %}</a></li>
                         {% endif %}
                     </ul>
             </div>
@@ -109,12 +109,17 @@
                     <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                     <li><a href="/event/list/">{% trans "Events" %}</a></li>
                 {% if request.session.currentUser == 'business' %}
-                    <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                    <li><a href="/manage_subscription">{% trans "Manage Subs" %}</a></li>
                 {% endif %}
                 {% else %}
                 <li><a href="/accounts/login/" target="_self" class="collection-item">{% trans "Log In" %}</a></li>
                 {% endif %}
             </ul>
+    <div class="right-align">
+        {% if request.session.currentUser == 'business' and wallet%}
+        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %} Coins
+        {% endif %}
+    </div>
             <main>
         {% block content %}<!-- default content text (typically empty) -->{% endblock %}
         {% cookielaw_banner %}

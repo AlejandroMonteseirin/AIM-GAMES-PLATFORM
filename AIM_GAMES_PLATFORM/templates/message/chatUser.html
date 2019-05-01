@@ -1,0 +1,34 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% load i18n %}
+
+
+
+<!-- <script type="text/javascript" src="{{STATIC_URL}}jquery-1.11.3.min.js"> </script> -->
+<!-- <div class="xd"> -->
+<div class="fixed-action-btn chatbtn">
+    <a class="btn-floating btn-large  waves-effect waves-light red" href="/chats">
+        <i class="large material-icons">arrow_back</i>
+    </a>
+</div>
+<iframe id="myIframe" height="" width="100%" src="/chat/{{user2.id}}"></iframe>
+<!-- </div> -->
+
+
+<script>
+    // Resize iframe to full height
+    function resizeIframe()
+    {
+      // "+60" is a general rule of thumb to allow for differences in
+      // IE & and FF height reporting, can be adjusted as required..
+        full = window.innerHeight;
+        console.log(full);
+        navbarH = document.getElementById('idParaFuente').offsetHeight;
+        console.log(navbarH);
+        document.getElementById('myIframe').height = full-navbarH;
+    }
+    resizeIframe();
+
+    window.onresize=function(){resizeIframe()}
+</script>
+{% endblock %}
