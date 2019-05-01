@@ -111,5 +111,15 @@ main {
 }
 
 .chatbtn{
-    margin-bottom: 200px;
+    position: fixed !important;
+    right: 5% !important;
+    bottom: 77% !important;
+}
+@media (max-width: 1300px) {
+
+.headerenlace{
+    padding-left: 0.4em;
+    padding-right: 0;
+    font-size: 90%;
+}
 }
