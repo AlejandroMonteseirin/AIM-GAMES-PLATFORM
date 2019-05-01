@@ -7,21 +7,28 @@
   <div class="row">
     <div class="col s12 m8 offset-m2">
       <div class="card  lighten-2 color1b">
-        <h1>{{business.profile.name}}</h1><br>
+        <h1>{{buss.profile.name}}</h1><br>
         <div class="card color1b2 targetaDentroDeTargetaxd">
-          <span class="card-title">{% trans "Current Subscription" %}:</span>
-          {% if business.subscriptionModel == None %}
+          <span class="card-title">{% trans "Current Subs" %}:</span>
+          {% if buss.subscriptionModel == None %}
           <br>
             <a href="subscription">{% trans "You don't have any subscription, click here for see ours subscription models" %}</a><br>
             <span>{% trans "Note that the subscription may take time to be updated" %}</span>
           {% else %}
-            <h5>{{business.subscriptionModel.name}}</h5>
-            <strong>{% trans 'Current Coins' %}:</strong> {{business.coins}}<br>
-            <strong>{% trans 'Max Coins' %}:</strong> {{business.subscriptionModel.maxCoins}}<br>
-            <strong>{% trans 'Coins Gain per month' %}:</strong> {{business.subscriptionModel.coinsGain}}<br>
-            <strong>{% trans 'Price' %}:</strong> {{business.subscriptionModel.price}}€<br><br>
-            <!--{% trans "Cancel Subscription" %}-->
+            <h5>{{buss.subscriptionModel.name}}</h5>
+            <strong>{% trans 'Current Coins' %}:</strong> {{buss.coins}}<br>
+            <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<br>
+            <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<br>
+            <strong>{% trans 'Price' %}:</strong> {{buss.subscriptionModel.price}}€<br><br>
+            <!--{% trans "Cancel subs" %}-->
           {% endif %}
+        </div>
+        <div class="card color1b2 targetaDentroDeTargetaxd">
+          <span class="card-title">{% trans "Buy Coins" %}:</span><br>
+          <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}</strong>
+          <form method="POST">{% csrf_token %}
+            <div class="col l4">{{form}}</div><br><input class="btn color1" type="submit" value="{% trans 'Submit' %}">
+          </form>
         </div>
       </div>
     </div>

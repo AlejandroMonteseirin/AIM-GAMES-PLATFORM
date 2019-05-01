@@ -7,6 +7,8 @@ from paypal.standard.forms import PayPalPaymentsForm,PayPalSharedSecretEncrypted
 from django.shortcuts import redirect
 from django.views.generic import FormView, CreateView, UpdateView
 from .models import *
+from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude,\
+    SubscriptionModel, SystemVariables
 from .forms import *
 from django.db.models import Q
 from datetime import datetime, timezone
@@ -20,6 +22,7 @@ from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
 
 from django.utils.translation import gettext as _
 from django.utils import translation
+from django.utils import timezone as timezoneDjango
 
 def index(request):
     # esto es como el controlador/servicios
@@ -46,7 +49,32 @@ def manage_subscription(request):
     if checkUser(request) != 'business':
         return handler500(request)
     business = findByPrincipal(request)
-    return render(request, 'subscription/manage_subscription.html', {'business': business})
+    if request.method == 'POST':
+        form = BuyCoinsForm(request.POST)
+        if form.is_valid():
+            return redirect('/buyCoins/' + str(form.cleaned_data['quantity']))
+    sysvar = SystemVariables.objects.first()
+    form = BuyCoinsForm()
+    return render(request, 'subscription/manage_subscription.html',
+                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
+
+
+def pagar_paypal_coins(request, quantity):
+    host = request.get_host()
+    sysvar = SystemVariables.objects.first()
+    amount = quantity*sysvar.directPurchaseCoinsPrice
+    business = findByPrincipal(request)
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': amount,
+        'item_name': 'AIM-GAMES Coins',
+        'currency_code': 'EUR',
+        'notify_url': 'https://aim-games-3.herokuapp.com/paypal_coins_ipn/' + str(business.id) + '/' + str(quantity),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pagarPaypal.html', {'form': form})
 
 
 def pagarPaypal(request):
@@ -152,7 +180,25 @@ def paypal_subscription_ipn(request, businessId):
     elif request.POST.get('subscr_failed ') == 'subscr_failed':
         print("Failed")
 
+    return JsonResponse({'ok': 'hoooh!'})
 
+@csrf_exempt
+def paypal_coins_ipn(request, business_id, quantity):
+    print("ipn recieved")
+    print(request.POST)
+    business = Business.objects.get(pk=business_id)
+    if business.subscriptionModel is not None:
+        if business.subscriptionModel.maxCoins > business.coins+quantity:
+            business.coins =+ quantity
+        else:
+            business.coins = business.subscriptionModel.maxCoins
+    else:
+        sysvar = SystemVariables.objects.first()
+        if sysvar.defaultMaxCoins > business.coins + quantity:
+            business.coins = + quantity
+        else:
+            business.coins = sysvar.defaultMaxCoins
+    business.save()
     return JsonResponse({'ok': 'hoooh!'})
 
 @csrf_exempt
@@ -285,6 +331,14 @@ class ThreadUpdate(UpdateView):
 
         return threadDetail(self.request, thread.id)
 
+    def get_context_data(self, **kwargs):
+        # This method is called before the view es generate and add the context
+        # It should return the context
+
+        context = super(ThreadUpdate,self).get_context_data(**kwargs)
+        context['edit'] = 'edit'
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         if checkUser(self.request) == 'business' and self.get_object().business.id == self.request.user.profile.business.id:
             return super(ThreadUpdate, self).dispatch(request, *args, **kwargs)
@@ -306,17 +360,24 @@ class ThreadCreate(CreateView):
 
         prof = Profile.objects.filter(user__pk=self.request.user.id)
         buss = Business.objects.filter(profile__pk=prof[0].id)
-        thread = form.save(buss)
-        buss.coins = buss.coins - 2
-        buss.save()
+        busi = buss[0]
+        price = SystemVariables.objects.all()[0].threadPrice
+        if busi.coins - price >= 0:
+            thread = form.save(buss)
+            busi.coins -= price
+            busi.save()
+            return threadDetail(self.request, thread.id)
+        else:
+            return handler500(self.request)
 
-        return threadDetail(self.request, thread.id)
+
 
     def get_context_data(self, **kwargs):
         # This method is called before the view es generate and add the context
         # It should return the context
-
         context = super(ThreadCreate, self).get_context_data(**kwargs)
+        price = SystemVariables.objects.all()[0].threadPrice
+        context['price'] = price
         context['buss'] = findByPrincipal(self.request)
 
         return context
@@ -714,21 +775,23 @@ def formationCreate(request):
 def jobOfferCreate(request):
     if checkUser(request)=='business':
         business = findByPrincipal(request)
+        price = SystemVariables.objects.all()[0].jobOfferPrice
         if request.method == 'POST':
             form = JobOfferForm(request.POST)
-            if form.is_valid():                
-                obj = form.save(commit=False)
-                obj.business = business
-                obj.save()
-                print('job offer saved')
-                business.coins = business.coins - 2
-                business.save()
+            if form.is_valid():
+                if business.coins - price >= 0:
+                    obj = form.save(commit=False)
+                    obj.business = business
+                    obj.save()
+                    print('job offer saved')
+                    business.coins = business.coins - price
+                    business.save()
                 return redirect('/joboffer/user/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
         else:
             form = JobOfferForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer'), 'buss': business})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer'), 'buss': business, 'price': price})
     else:
         return handler500(request)
 
@@ -745,7 +808,7 @@ def jobOfferEdit(request,id):
             obj.save()
             return redirect('/jobOffer/detail/'+ str(id))
         else:
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer')})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer'), 'edit':'edit'})
     else:
         return handler500(request)
 
@@ -944,21 +1007,23 @@ def challengeList(request):
 def challengeCreate(request):
     if checkUser(request)=='business':
         business = findByPrincipal(request)
+        price = SystemVariables.objects.all()[0].challengePrice
         if request.method == 'POST':
             form = ChallengeForm(request.POST)
-            if form.is_valid():                
-                obj = form.save(commit=False)
-                obj.business = business
-                obj.save()
-                print('Challenge saved')
-                business.coins = business.coins - 2
-                business.save()
+            if form.is_valid():
+                if business.coins - price >= 0:
+                    obj = form.save(commit=False)
+                    obj.business = business
+                    obj.save()
+                    print('Challenge saved')
+                    business.coins = business.coins - price
+                    business.save()
                 return redirect('/challenge/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
         else:
             form = ChallengeForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business, 'price': price})
     else:
         return render(request, 'index.html')
 
@@ -1239,3 +1304,66 @@ def threadDelete(request, id):
         return redirect('/thread/business/list/')
     instance.delete()
     return redirect('/thread/business/list/')
+
+def chat(request,userId):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    user2 = get_object_or_404(User, pk=userId)
+    user1 = request.user
+    messages = list(Message.objects.filter(
+        Q(sender=user1,recipient=user2) | Q(sender=user2,recipient=user1),
+        ).order_by('-timestamp'))
+    messages.reverse()
+    updatedNumber = Message.objects.filter(
+        Q(sender=user2,recipient=user1,readed=False),
+        ).update(readed=True)
+    return render(request, 'message/chat.html',{'messages': messages, 'user2':user2,'user1':user1})
+
+def chatUpdate(request,userId):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    user2 = get_object_or_404(User, pk=userId)
+    user1 = request.user
+    messagesQueryset = Message.objects.filter(
+        Q(sender=user2,recipient=user1,readed=False),
+        ).order_by('timestamp')
+    results = [ob.as_json(user1.username) for ob in messagesQueryset]
+    hola =  messagesQueryset.update(readed=True)
+    return JsonResponse({'new_messages': results})
+
+@csrf_exempt
+def message_new(request):
+    if request.method=="POST":
+        user1 = request.user
+        text = request.POST.get("text", "")
+        userId = int(request.POST.get("recipientId", ""))
+        recipientUser = User.objects.get(pk=userId)
+        print('esto esta hechisimo')
+        message = Message(
+            sender = user1,
+            recipient = recipientUser,
+            subject = "dummy",
+            text = text,
+        )
+        message.save()
+    return JsonResponse({})
+
+def chatUser(request,userId):
+    userId = User.objects.get(pk=userId)
+    return render(request, 'message/chatUser.html',{'user2':userId})
+
+def chats(request):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    aux = list(User.objects.exclude(Q(id=request.user.id)|Q(username='root')))
+    users = [[] for x in range(len(aux))]
+    for i in range(0,len(aux)):
+        messagesQueryset = Message.objects.filter(
+        Q(sender=aux[i],recipient=request.user,readed=False),
+        ).order_by('-timestamp')
+        users[i].append(aux[i])
+        messages = list(messagesQueryset)
+        users[i].append(len(messages))
+        if len(messages) > 0:
+            users[i].append(messages[0])
+    return render(request, 'message/chats.html',{'users':users})
