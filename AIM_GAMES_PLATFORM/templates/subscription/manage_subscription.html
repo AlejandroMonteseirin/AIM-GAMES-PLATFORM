@@ -25,9 +25,10 @@
         </div>
         <div class="card color1b2 targetaDentroDeTargetaxd">
           <span class="card-title">{% trans "Buy Coins" %}:</span><br>
-          <strong>{% trans 'Price' %}:</strong> {{directPurchaseCoinsPrice}}€<br>
-          <span>{% trans 'Buy ' %}</span>{{directPurchaseCoinsQuantity}}<span>{% trans ' coins instantly' %}</span><br><br>
-          <a href="/buyCoins" class="btn waves-effect waves-red color1">{% trans "Buy" %}</a>
+          <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}</strong>
+          <form method="POST">{% csrf_token %}
+            <div class="col l4">{{form}}</div><br><input class="btn color1" type="submit" value="{% trans 'Submit' %}">
+          </form>
         </div>
       </div>
     </div>

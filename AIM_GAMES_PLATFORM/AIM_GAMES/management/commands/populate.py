@@ -66,8 +66,7 @@ class Command(BaseCommand):
         management_group.user_set.add(user9)
 
         systemVariables = SystemVariables.objects.get_or_create(threadPrice=2, jobOfferPrice=2, challengePrice=2,
-                                                                defaultMaxCoins=10, directPurchaseCoinsPrice=5,
-                                                                directPurchaseCoinsQuantity=2)
+                                                                defaultMaxCoins=10, directPurchaseCoinsPrice=3)
 
         profile1= Profile(user=user1, name='Indiana', surname='Ford', email='indiana@test.com', city='Sevilla', 
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)

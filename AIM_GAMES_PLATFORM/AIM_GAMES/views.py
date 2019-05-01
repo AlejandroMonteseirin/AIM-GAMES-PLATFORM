@@ -46,10 +46,32 @@ def manage_subscription(request):
     if checkUser(request) != 'business':
         return handler500(request)
     business = findByPrincipal(request)
+    if request.method == 'POST':
+        form = BuyCoinsForm(request.POST)
+        if form.is_valid():
+            return redirect('/buyCoins/' + str(form.cleaned_data['quantity']))
     sysvar = SystemVariables.objects.first()
+    form = BuyCoinsForm()
     return render(request, 'subscription/manage_subscription.html',
-                  {'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice,
-                   'directPurchaseCoinsQuantity': sysvar.directPurchaseCoinsQuantity})
+                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
+
+
+def pagar_paypal_coins(request, quantity):
+    host = request.get_host()
+    sysvar = SystemVariables.objects.first()
+    amount = quantity*sysvar.directPurchaseCoinsPrice
+    business = findByPrincipal(request)
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': amount,
+        'item_name': 'AIM-GAMES Coins',
+        'currency_code': 'EUR',
+        'notify_url': 'https://aim-games-3.herokuapp.com/paypal_coins_ipn/' + str(business.id) + '/' + str(quantity),
+        'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
+        'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, 'pagarPaypal.html', {'form': form})
 
 
 def pagarPaypal(request):
@@ -155,7 +177,25 @@ def paypal_subscription_ipn(request, businessId):
     elif request.POST.get('subscr_failed ') == 'subscr_failed':
         print("Failed")
 
+    return JsonResponse({'ok': 'hoooh!'})
 
+@csrf_exempt
+def paypal_coins_ipn(request, business_id, quantity):
+    print("ipn recieved")
+    print(request.POST)
+    business = Business.objects.get(pk=business_id)
+    if business.subscriptionModel is not None:
+        if business.subscriptionModel.maxCoins > business.coins+quantity:
+            business.coins =+ quantity
+        else:
+            business.coins = business.subscriptionModel.maxCoins
+    else:
+        sysvar = SystemVariables.objects.first()
+        if sysvar.defaultMaxCoins > business.coins + quantity:
+            business.coins = + quantity
+        else:
+            business.coins = sysvar.defaultMaxCoins
+    business.save()
     return JsonResponse({'ok': 'hoooh!'})
 
 @csrf_exempt

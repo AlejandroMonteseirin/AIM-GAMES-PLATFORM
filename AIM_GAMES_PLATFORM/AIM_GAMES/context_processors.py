@@ -14,9 +14,9 @@ def messagesCount(request):
 
 def get_wallet(request):
     context_data = dict()
-    system_variables = SystemVariables.objects.first()
     wallet = None
     if request.user.is_authenticated:
+        system_variables = SystemVariables.objects.first()
         if request.session['currentUser'] == "business":
             wallet = get_object_or_404(Business, profile=request.user.profile)
             if wallet.subscriptionModel is None:

@@ -15,8 +15,7 @@ class SystemVariables(models.Model):
     jobOfferPrice = models.IntegerField(verbose_name=_("Job Offer Price"), null= False, default=0)
     challengePrice = models.IntegerField(verbose_name=_("Challenge Price"), null=False, default=0)
     defaultMaxCoins = models.IntegerField(verbose_name=_("Default maximum coins"), null=False, default=10)
-    directPurchaseCoinsPrice = models.FloatField(verbose_name=_("Coins price"), null=False, default=5)
-    directPurchaseCoinsQuantity = models.IntegerField(verbose_name=_("Coins quantity on purchase"), null=False, default=5)
+    directPurchaseCoinsPrice = models.FloatField(verbose_name=_("Coins price"), null=False, default=3)
 
 
 class Tag(models.Model):
@@ -126,6 +125,7 @@ class Curriculum(models.Model):
         Freelancer, on_delete=models.CASCADE, verbose_name=_("freelancer"))
     verified = models.BooleanField(verbose_name=_("verified"), default=False)
     featured = models.BooleanField(verbose_name=_("featured"), default=False)
+
 
 class ProfessionalExperience(models.Model):
     curriculum = models.ForeignKey(
