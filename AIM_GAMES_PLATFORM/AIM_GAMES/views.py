@@ -6,7 +6,8 @@ from django.shortcuts import render, get_list_or_404
 from paypal.standard.forms import PayPalPaymentsForm,PayPalSharedSecretEncryptedPaymentsForm
 from django.shortcuts import redirect
 from django.views.generic import FormView, CreateView, UpdateView
-from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude, SubscriptionModel
+from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude,\
+    SubscriptionModel, SystemVariables
 from .forms import *
 from django.db.models import Q
 from datetime import datetime, timezone
@@ -284,6 +285,14 @@ class ThreadUpdate(UpdateView):
 
         return threadDetail(self.request, thread.id)
 
+    def get_context_data(self, **kwargs):
+        # This method is called before the view es generate and add the context
+        # It should return the context
+
+        context = super(ThreadUpdate,self).get_context_data(**kwargs)
+        context['edit'] = 'edit'
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         if checkUser(self.request) == 'business' and self.get_object().business.id == self.request.user.profile.business.id:
             return super(ThreadUpdate, self).dispatch(request, *args, **kwargs)
@@ -305,17 +314,24 @@ class ThreadCreate(CreateView):
 
         prof = Profile.objects.filter(user__pk=self.request.user.id)
         buss = Business.objects.filter(profile__pk=prof[0].id)
-        thread = form.save(buss)
-        buss.coins = buss.coins - 2
-        buss.save()
+        busi = buss[0]
+        price = SystemVariables.objects.all()[0].threadPrice
+        if busi.coins - price >= 0:
+            thread = form.save(buss)
+            busi.coins -= price
+            busi.save()
+            return threadDetail(self.request, thread.id)
+        else:
+            return handler500(self.request)
 
-        return threadDetail(self.request, thread.id)
+
 
     def get_context_data(self, **kwargs):
         # This method is called before the view es generate and add the context
         # It should return the context
-
         context = super(ThreadCreate, self).get_context_data(**kwargs)
+        price = SystemVariables.objects.all()[0].threadPrice
+        context['price'] = price
         context['buss'] = findByPrincipal(self.request)
 
         return context
@@ -654,21 +670,23 @@ def formationCreate(request):
 def jobOfferCreate(request):
     if checkUser(request)=='business':
         business = findByPrincipal(request)
+        price = SystemVariables.objects.all()[0].jobOfferPrice
         if request.method == 'POST':
             form = JobOfferForm(request.POST)
-            if form.is_valid():                
-                obj = form.save(commit=False)
-                obj.business = business
-                obj.save()
-                print('job offer saved')
-                business.coins = business.coins - 2
-                business.save()
+            if form.is_valid():
+                if business.coins - price >= 0:
+                    obj = form.save(commit=False)
+                    obj.business = business
+                    obj.save()
+                    print('job offer saved')
+                    business.coins = business.coins - price
+                    business.save()
                 return redirect('/joboffer/user/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
         else:
             form = JobOfferForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer'), 'buss': business})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer'), 'buss': business, 'price': price})
     else:
         return handler500(request)
 
@@ -884,21 +902,23 @@ def challengeList(request):
 def challengeCreate(request):
     if checkUser(request)=='business':
         business = findByPrincipal(request)
+        price = SystemVariables.objects.all()[0].challengePrice
         if request.method == 'POST':
             form = ChallengeForm(request.POST)
-            if form.is_valid():                
-                obj = form.save(commit=False)
-                obj.business = business
-                obj.save()
-                print('Challenge saved')
-                business.coins = business.coins - 2
-                business.save()
+            if form.is_valid():
+                if business.coins - price >= 0:
+                    obj = form.save(commit=False)
+                    obj.business = business
+                    obj.save()
+                    print('Challenge saved')
+                    business.coins = business.coins - price
+                    business.save()
                 return redirect('/challenge/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
         else:
             form = ChallengeForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business, 'price': price})
     else:
         return render(request, 'index.html')
 

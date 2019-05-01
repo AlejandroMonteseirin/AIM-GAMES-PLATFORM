@@ -65,7 +65,10 @@ class Command(BaseCommand):
         management_group.user_set.add(user8)
         management_group.user_set.add(user9)
 
-        
+        systemVariables = SystemVariables.objects.get_or_create(threadPrice=2, jobOfferPrice=2, challengePrice=2,
+                                                                defaultMaxCoins=10, directPurchaseCoinsPrice=5,
+                                                                directPurchaseCoinsQuantity=2)
+
         profile1= Profile(user=user1, name='Indiana', surname='Ford', email='indiana@test.com', city='Sevilla', 
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         profile1.save()
@@ -97,10 +100,20 @@ class Command(BaseCommand):
         freelancer1,created = Freelancer.objects.get_or_create(profile=profile1, profession='Writer')
         freelancer2,created = Freelancer.objects.get_or_create(profile=profile2, profession='Programmer')
         freelancer3,created = Freelancer.objects.get_or_create(profile=profile3, profession='Art Designer')
+
+        subscription_model, created = SubscriptionModel.objects.get_or_create(name="Standard Subscription",
+                                                                     description="Gain 10 coins per month", maxCoins=50,
+                                                                     coinsGain=10, price=15)
+        subscription_model2, created = SubscriptionModel.objects.get_or_create(name="Premium Subscription",
+                                                                      description="Gain 50 coins per month",
+                                                                      maxCoins=300, coinsGain=50, price=30)
         
-        business1,created = Business.objects.get_or_create(profile=profile4, lastPayment='2014-12-12 00:00')
-        business2,created = Business.objects.get_or_create(profile=profile5, lastPayment='2014-12-12 00:00')
-        business3,created = Business.objects.get_or_create(profile=profile6, lastPayment='2014-12-12 00:00')
+        business1,created = Business.objects.get_or_create(profile=profile4, lastPayment='2014-12-12 00:00',
+                                                           subscriptionModel=subscription_model, coins=50)
+        business2,created = Business.objects.get_or_create(profile=profile5, lastPayment='2014-12-12 00:00',
+                                                           subscriptionModel=subscription_model2, coins=300)
+        business3,created = Business.objects.get_or_create(profile=profile6, lastPayment='2014-12-12 00:00',
+                                                           coins=5)
 
         manager1, created = Manager.objects.get_or_create(profile=profile7)
         manager2, created = Manager.objects.get_or_create(profile=profile8)
@@ -151,13 +164,6 @@ class Command(BaseCommand):
         schedule = '8am-3pm', salary=20000, ubication='Seville', description='Good ofert', images='https://www.linuxadictos.com/wp-content/uploads/unity-logo.jpg')
         jobOffer3, created = JobOffer.objects.get_or_create(business=business3, position='Art Designer',experienceRequired='Knows how to use Unity art software library',
         schedule = '8am-3pm', salary=20000, ubication='Seville', description='Create new art', images='http://www.funcage.com/blog/wp-content/uploads/2013/11/Random-Photoshopped-Pictures-006.jpg')
-
-        subscriptionModel = SubscriptionModel.objects.get_or_create(name="Standard Subscription",
-                                                                    description="Gain 10 coins per month", maxCoins=50,
-                                                                    coinsGain=10, price=15)
-        subscriptionModel2 = SubscriptionModel.objects.get_or_create(name="Premium Subscription",
-                                                                    description="Gain 50 coins per month", maxCoins=300,
-                                                                    coinsGain=50, price=30)
 
         t=(tag,)
         p=(url1,url2)

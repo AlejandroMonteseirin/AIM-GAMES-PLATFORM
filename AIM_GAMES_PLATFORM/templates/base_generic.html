@@ -117,7 +117,7 @@
             </ul>
     <div class="right-align">
         {% if request.session.currentUser == 'business' and wallet%}
-        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}10{% endif %} Coins
+        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %} Coins
         {% endif %}
     </div>
             <main>

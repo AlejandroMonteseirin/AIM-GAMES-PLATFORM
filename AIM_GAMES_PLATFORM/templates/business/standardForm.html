@@ -2,8 +2,8 @@
 {% block content %}
 {% load i18n %}
 
-{% if buss != None %}
-{% if buss.coins < 2 %}
+{% if buss != None and price != None %}
+{% if buss.coins < price %}
 <div class="row">
     <div class="col s12 m4 l3">
         <div class="card-panel color1b2">
@@ -40,8 +40,8 @@
                             
                         </div>
                         {% endfor %}
-                        {% if buss == None or buss.coins > 2 %}
-                        <input class="btn color1" type="submit" value="{% trans 'Submit' %}{% if buss != None %} (2C){% endif %}">
+                        {% if buss == None or buss.coins > price %}
+                        <input class="btn color1" type="submit" value="{% trans 'Submit' %}{% if buss != None %} ({{price}}C){% endif %}">
                         {% endif %}
                     </div>
                 </div>

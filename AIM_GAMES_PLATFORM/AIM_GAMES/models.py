@@ -10,6 +10,15 @@ from django.utils import timezone
 # System objects
 
 
+class SystemVariables(models.Model):
+    threadPrice = models.IntegerField(verbose_name=_("Thread Price"), null=False, default=0)
+    jobOfferPrice = models.IntegerField(verbose_name=_("Job Offer Price"), null= False, default=0)
+    challengePrice = models.IntegerField(verbose_name=_("Challenge Price"), null=False, default=0)
+    defaultMaxCoins = models.IntegerField(verbose_name=_("Default maximum coins"), null=False, default=10)
+    directPurchaseCoinsPrice = models.FloatField(verbose_name=_("Coins price"), null=False, default=5)
+    directPurchaseCoinsQuantity = models.IntegerField(verbose_name=_("Coins quantity on purchase"), null=False, default=5)
+
+
 class Tag(models.Model):
     title = models.TextField(verbose_name=_(
         "title"), max_length=20, primary_key=True, blank=False)
