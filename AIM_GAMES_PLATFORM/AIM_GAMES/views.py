@@ -703,7 +703,7 @@ def jobOfferEdit(request,id):
             obj.save()
             return redirect('/jobOffer/detail/'+ str(id))
         else:
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer')})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer'), 'edit':'edit'})
     else:
         return handler500(request)
 
