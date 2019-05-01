@@ -1299,7 +1299,7 @@ def chats(request):
     for i in range(0,len(aux)):
         messagesQueryset = Message.objects.filter(
         Q(sender=aux[i],recipient=request.user,readed=False),
-        ).order_by('timestamp')
+        ).order_by('-timestamp')
         users[i].append(aux[i])
         messages = list(messagesQueryset)
         users[i].append(len(messages))
