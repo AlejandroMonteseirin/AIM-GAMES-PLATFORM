@@ -6,6 +6,7 @@ from django.shortcuts import render, get_list_or_404
 from paypal.standard.forms import PayPalPaymentsForm,PayPalSharedSecretEncryptedPaymentsForm
 from django.shortcuts import redirect
 from django.views.generic import FormView, CreateView, UpdateView
+from .models import *
 from .models import Freelancer, Business, Thread, Response, Link, JobOffer, Curriculum, Profile, Aptitude,\
     SubscriptionModel, SystemVariables
 from .forms import *
@@ -17,6 +18,7 @@ from django.contrib.auth.models import Group
 from django.http import Http404,HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
+from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -478,12 +480,35 @@ def freelancerDetail(request, id):
 
     return render(request, 'freelancer/detail.html', {'freelancer': freelancer,'links':links,'formations':formation,'professionalExperiences':professionalExperience,'HTML5Showcase':HTML5Showcase,'graphicEngineExperiences':graphicEngineExperience,'aptitudes':aptitude})
 
+class GroupConcat(Aggregate):
+    function = 'GROUP_CONCAT'
+    template = '%(function)s(%(expressions)s)'
+
+    def __init__(self, expression, delimiter, **extra):
+        output_field = extra.pop('output_field', CharField())
+        delimiter = Value(delimiter)
+        super(GroupConcat, self).__init__(
+            expression, delimiter, output_field=output_field, **extra)
+
+    def as_postgresql(self, compiler, connection):
+        self.function = 'STRING_AGG'
+        return super(GroupConcat, self).as_sql(compiler, connection)
+
+
 def threadList(request):
     if checkUser(request)!='business' and checkUser(request)!='manager':
         return handler500(request)
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
-        q=Thread.objects.filter(business__profile__name__icontains=search)
+        strtags = search.replace('[^A-Za-z0-9 ]+', '').split(' ')
+        q=Thread.objects.annotate(str_tags=GroupConcat('tags__title', ' ')).filter((Q(business__profile__name__icontains=search)|
+            Q(title__icontains=search)|
+            Q(description__icontains=search))|
+            Q(str_tags__icontains=search))
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        for thread in list(q):
+            print(thread.str_tags)
+        
     else:
         q=Thread.objects.all()
     threads= q
@@ -494,17 +519,53 @@ def threadList(request):
         return handler500(request)
     return render(request, 'thread/threadList.html',{'threads':threads,'businessThread':businessThread})
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+def find_numbers_after_index(text, index):
+    isnumber = True
+    next_index = index + 1
+    size = 0
+    result = 0
+    while isnumber:
+        if is_number(text[next_index]):
+            size = size + 1
+            next_index = next_index + 1
+            if next_index >= len(text):
+                isnumber = False
+        else:
+            isnumber = False
+    if size>0:
+        result = int(text[index:index+size+1])
+
+    return result
+            
+
 def jobOfferList(request):
     if checkUser(request)!='freelancer' and checkUser(request)!='business' and checkUser(request)!='manager':
         return handler500(request)
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
+        
         try:
-            q=JobOffer.objects.filter( Q(business__profile__name__icontains=search)|
+            salary = 0
+            minsal = "minsal:"
+            if minsal in search:
+                index = search.find(minsal) + len(minsal)
+                salary = find_numbers_after_index(search,index)
+            minsal = minsal + str(salary)
+            search = search.replace(minsal, '')
+            search = search.replace('  ', ' ')
+            search = search.strip()
+            q=JobOffer.objects.filter( (Q(business__profile__name__icontains=search)|
             Q(position__icontains=search)|
             Q(experienceRequired__icontains=search)|
             Q(ubication__icontains=search)|
-            Q(description__icontains=search))
+            Q(description__icontains=search))&Q(salary__gte=salary))
             jobOffers= get_list_or_404(q)
         except:
             jobOffers=()

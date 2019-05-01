@@ -312,12 +312,12 @@ msgid "experienceRequired"
 msgstr "Experience required"
 
 #: .\AIM_GAMES\models.py:214 .\templates\jobOfferDetail.html:23
-#: .\templates\jobOfferList.html:20
+#: .\templates\jobOfferList.html:22
 msgid "schedule"
 msgstr "Schedule"
 
 #: .\AIM_GAMES\models.py:215 .\templates\jobOfferDetail.html:26
-#: .\templates\jobOfferList.html:19
+#: .\templates\jobOfferList.html:21
 msgid "salary"
 msgstr "Salary"
 
@@ -388,86 +388,86 @@ msgstr "Send"
 msgid "recipient"
 msgstr "Recipient"
 
-#: .\AIM_GAMES\views.py:571 .\AIM_GAMES\views.py:574
+#: .\AIM_GAMES\views.py:631 .\AIM_GAMES\views.py:634
 #: .\templates\freelancer\detail.html:65
 msgid "Add link"
 msgstr "Add link"
 
-#: .\AIM_GAMES\views.py:590 .\AIM_GAMES\views.py:593
+#: .\AIM_GAMES\views.py:650 .\AIM_GAMES\views.py:653
 #, fuzzy
 #| msgid "aptitudes"
 msgid "Add aptitude"
 msgstr "Add aptitudes"
 
-#: .\AIM_GAMES\views.py:609 .\AIM_GAMES\views.py:612
+#: .\AIM_GAMES\views.py:669 .\AIM_GAMES\views.py:672
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Add graphic engine experience"
 msgstr "Add graphic engine experience"
 
-#: .\AIM_GAMES\views.py:628 .\AIM_GAMES\views.py:631
+#: .\AIM_GAMES\views.py:688 .\AIM_GAMES\views.py:691
 #, fuzzy
 #| msgid "profession"
 msgid "Add professional experience"
 msgstr "Add professional experience"
 
-#: .\AIM_GAMES\views.py:647 .\AIM_GAMES\views.py:650
+#: .\AIM_GAMES\views.py:707 .\AIM_GAMES\views.py:710
 #, fuzzy
 #| msgid "formation"
 msgid "Add formation"
 msgstr "Add formation"
 
-#: .\AIM_GAMES\views.py:668 .\AIM_GAMES\views.py:671
+#: .\AIM_GAMES\views.py:728 .\AIM_GAMES\views.py:731
 msgid "Add Job Offer"
 msgstr "Add job offer"
 
-#: .\AIM_GAMES\views.py:688
+#: .\AIM_GAMES\views.py:748
 msgid "Edit Job Offer"
 msgstr "Edit job offer"
 
-#: .\AIM_GAMES\views.py:718
+#: .\AIM_GAMES\views.py:778
 #, fuzzy
 #| msgid "editHTML5Showcase"
 msgid "Edit HTML5Showcase"
 msgstr "Edit HTML5 Showcase"
 
-#: .\AIM_GAMES\views.py:735
+#: .\AIM_GAMES\views.py:795
 #, fuzzy
 #| msgid "formation"
 msgid "Edit Formation"
 msgstr "Edit formation"
 
-#: .\AIM_GAMES\views.py:752
+#: .\AIM_GAMES\views.py:812
 #, fuzzy
 #| msgid "addProfessionalExperience"
 msgid "Edit ProfessionalExperience"
 msgstr "Edit professional experience"
 
-#: .\AIM_GAMES\views.py:769
+#: .\AIM_GAMES\views.py:829
 #, fuzzy
 #| msgid "addAptitude"
 msgid "Edit Aptitude"
 msgstr "Edit aptitude"
 
-#: .\AIM_GAMES\views.py:786
+#: .\AIM_GAMES\views.py:846
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Edit Graphic Engine Experience"
 msgstr "Edit graphic engine experience"
 
-#: .\AIM_GAMES\views.py:803
+#: .\AIM_GAMES\views.py:863
 #, fuzzy
 #| msgid "Edit"
 msgid "Edit Link"
 msgstr "Edit link"
 
-#: .\AIM_GAMES\views.py:898 .\AIM_GAMES\views.py:901
+#: .\AIM_GAMES\views.py:958 .\AIM_GAMES\views.py:961
 #, fuzzy
 #| msgid "newChallenge"
 msgid "Add Challenge"
 msgstr "Add challenge"
 
-#: .\AIM_GAMES\views.py:1146 .\AIM_GAMES\views.py:1149
+#: .\AIM_GAMES\views.py:1206 .\AIM_GAMES\views.py:1209
 #, fuzzy
 #| msgid "Message"
 msgid "Create Message"
@@ -530,12 +530,15 @@ msgid "acceptTerms"
 msgstr "I accept "
 
 #: .\templates\accounts\signup.html:92 .\templates\accounts\signup.html:95
+#: .\templates\base_generic.html:85 .\templates\base_generic.html:138
+#: .\templates\base_generic.html:141
 #: .\templates\base_generic.html:85 .\templates\base_generic.html:143
 #: .\templates\base_generic.html:146
 msgid "terms-and-conditions"
 msgstr "Terms and Conditions"
 
 #: .\templates\accounts\signup.html:104
+#: .\templates\business\standardForm.html:47
 #: .\templates\business\standardForm.html:44
 #: .\templates\challenge\responseCreate.html:32
 #: .\templates\event\standardForm.html:32
@@ -587,6 +590,12 @@ msgid "Messages"
 msgstr "Messages"
 
 #: .\templates\base_generic.html:71 .\templates\base_generic.html:112
+#, fuzzy
+#| msgid "Description"
+msgid "Manage Subscription"
+msgstr "Description"
+
+#: .\templates\base_generic.html:147
 msgid "Manage Subs"
 msgstr "Manage Subscription"
 
@@ -633,7 +642,7 @@ msgstr "Response from freelancer"
 msgid "challengesList"
 msgstr "Challenge List"
 
-#: .\templates\challenge\challengeList.html:19 .\templates\jobOfferList.html:18
+#: .\templates\challenge\challengeList.html:19 .\templates\jobOfferList.html:20
 #: .\templates\thread\threadList.html:10 .\templates\thread\threadList.html:23
 #: .\templates\thread\threadList.html:25
 msgid "company"
@@ -643,6 +652,8 @@ msgstr "Company"
 #: .\templates\challenge\challengeList.html:30
 #: .\templates\curriculumList.html:38 .\templates\curriculumList.html:40
 #: .\templates\curriculumList.html:42 .\templates\event\eventList.html:29
+#: .\templates\event\eventList.html:31 .\templates\jobOfferList.html:33
+#: .\templates\jobOfferList.html:35 .\templates\message\list.html:23
 #: .\templates\event\eventList.html:31 .\templates\jobOfferList.html:31
 #: .\templates\jobOfferList.html:33 .\templates\message\list.html:23
 #: .\templates\message\list.html:31
@@ -652,7 +663,7 @@ msgstr "View"
 #: .\templates\challenge\challengeList.html:30
 #: .\templates\challenge\challengeList.html:44
 #: .\templates\curriculumList.html:40 .\templates\event\eventList.html:31
-#: .\templates\jobOfferList.html:33 .\templates\jobOfferList.html:46
+#: .\templates\jobOfferList.html:35 .\templates\jobOfferList.html:48
 #: .\templates\message\list.html:41 .\templates\message\show.html:18
 #: .\templates\thread\threadList.html:25 .\templates\thread\threadList.html:33
 msgid "Please, buy a subscription to access this functionality"
@@ -885,7 +896,13 @@ msgstr "Position"
 msgid "Contact"
 msgstr "Contact us"
 
-#: .\templates\jobOfferList.html:42 .\templates\jobOfferList.html:46
+#: .\templates\jobOfferList.html:12
+#, fuzzy
+#| msgid "joboffers"
+msgid "joboffersearchinfo"
+msgstr "To search job offers with a minimum salary, write minsal: followed by a number. Example: Unity minsal:15000"
+
+#: .\templates\jobOfferList.html:44 .\templates\jobOfferList.html:48
 msgid "newOffer"
 msgstr "Create offer"
 
