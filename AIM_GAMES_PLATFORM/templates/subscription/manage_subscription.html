@@ -23,6 +23,12 @@
             <!--{% trans "Cancel subs" %}-->
           {% endif %}
         </div>
+        <div class="card color1b2 targetaDentroDeTargetaxd">
+          <span class="card-title">{% trans "Buy Coins" %}:</span><br>
+          <strong>{% trans 'Price' %}:</strong> {{directPurchaseCoinsPrice}}€<br>
+          <span>{% trans 'Buy ' %}</span>{{directPurchaseCoinsQuantity}}<span>{% trans ' coins instantly' %}</span><br><br>
+          <a href="/buyCoins" class="btn waves-effect waves-red color1">{% trans "Buy" %}</a>
+        </div>
       </div>
     </div>
   </div>
