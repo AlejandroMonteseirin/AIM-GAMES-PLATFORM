@@ -601,7 +601,8 @@ def curriculumList(request):
         q=lista      
     else:
         q=Curriculum.objects.all()
-    curriculums= q
+    
+    curriculums= q.order_by('-featured')
     aptitudes={}
     for c in curriculums:
         aptitudesList=Aptitude.objects.filter(curriculum=c.id)
