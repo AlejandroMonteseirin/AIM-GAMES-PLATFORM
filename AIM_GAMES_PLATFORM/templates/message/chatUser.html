@@ -5,11 +5,27 @@
 
 
 <!-- <script type="text/javascript" src="{{STATIC_URL}}jquery-1.11.3.min.js"> </script> -->
-<iframe class="xd" src="/chat/{{user2.id}}"></iframe>
-
+<!-- <div class="xd"> -->
+<iframe id="myIframe" height="" width="100%" src="/chat/{{user2.id}}"></iframe>
+<!-- </div> -->
 <div class="fixed-action-btn chatbtn">
     <a class="btn-floating btn-large red" href="/chats">
         <i class="large material-icons">history</i>
     </a>
 </div>
+
+<script>
+    // Resize iframe to full height
+    function resizeIframe()
+    {
+      // "+60" is a general rule of thumb to allow for differences in
+      // IE & and FF height reporting, can be adjusted as required..
+        full = window.innerHeight;
+        console.log(full);
+        navbarH = document.getElementById('idParaFuente').offsetHeight;
+        console.log(navbarH);
+        document.getElementById('myIframe').height = full-navbarH;
+    }
+    resizeIframe();
+</script>
 {% endblock %}
