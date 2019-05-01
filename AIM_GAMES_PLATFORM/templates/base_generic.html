@@ -62,7 +62,7 @@
 
                         {% if request.user.is_authenticated %}
                             <li><a href="/event/list/">{% trans "Events" %}</a></li>
-                            <li><a href="/message/list/">{% trans "Messages" %}
+                            <li><a href="/chats">{% trans "Messages" %}
                             {% if not request.session.message_count == 0 %}
                             ({{request.session.message_count}})
                             {% endif %}
