@@ -68,7 +68,7 @@
                             {% endif %}
                             </a></li>
                             {% if request.session.currentUser == 'business' %}
-                                <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                                <li><a href="/manage_subscription">{% trans "Manage Subs" %}</a></li>
                             {% endif %}
                             <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         {% else %}
@@ -109,12 +109,17 @@
                     <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                     <li><a href="/event/list/">{% trans "Events" %}</a></li>
                 {% if request.session.currentUser == 'business' %}
-                    <li><a href="/manage_subscription">{% trans "Manage Subscription" %}</a></li>
+                    <li><a href="/manage_subscription">{% trans "Manage Subs" %}</a></li>
                 {% endif %}
                 {% else %}
                 <li><a href="/accounts/login/" target="_self" class="collection-item">{% trans "Log In" %}</a></li>
                 {% endif %}
             </ul>
+    <div class="right-align">
+        {% if request.session.currentUser == 'business' and wallet%}
+        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %} Coins
+        {% endif %}
+    </div>
             <main>
         {% block content %}<!-- default content text (typically empty) -->{% endblock %}
         {% cookielaw_banner %}

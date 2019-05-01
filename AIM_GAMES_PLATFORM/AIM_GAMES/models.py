@@ -10,6 +10,14 @@ from django.utils import timezone
 # System objects
 
 
+class SystemVariables(models.Model):
+    threadPrice = models.IntegerField(verbose_name=_("Thread Price"), null=False, default=0)
+    jobOfferPrice = models.IntegerField(verbose_name=_("Job Offer Price"), null= False, default=0)
+    challengePrice = models.IntegerField(verbose_name=_("Challenge Price"), null=False, default=0)
+    defaultMaxCoins = models.IntegerField(verbose_name=_("Default maximum coins"), null=False, default=10)
+    directPurchaseCoinsPrice = models.FloatField(verbose_name=_("Coins price"), null=False, default=3)
+
+
 class Tag(models.Model):
     title = models.TextField(verbose_name=_(
         "title"), max_length=20, primary_key=True, blank=False)
@@ -65,7 +73,7 @@ class SubscriptionModel(models.Model):
     name = models.CharField(max_length=30, verbose_name=_("Name"), blank=False, unique=True)
     description = models.CharField(max_length=60, verbose_name=_("Description"))
     maxCoins = models.IntegerField(verbose_name=_("Max Coin"), null=False)
-    coinsGain = models.IntegerField(verbose_name=_("Coin Coin"), null=False)
+    coinsGain = models.IntegerField(verbose_name=_("Coins Gain"), null=False)
     price = models.FloatField(verbose_name=_("Price"), null=False)
 
     def _str_(self):
@@ -117,6 +125,7 @@ class Curriculum(models.Model):
         Freelancer, on_delete=models.CASCADE, verbose_name=_("freelancer"))
     verified = models.BooleanField(verbose_name=_("verified"), default=False)
     featured = models.BooleanField(verbose_name=_("featured"), default=False)
+
 
 class ProfessionalExperience(models.Model):
     curriculum = models.ForeignKey(

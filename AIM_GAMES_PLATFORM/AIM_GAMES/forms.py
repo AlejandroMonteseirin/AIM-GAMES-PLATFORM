@@ -1,4 +1,4 @@
-from django.forms import ModelForm, forms, CharField,URLField, URLInput,Textarea,DateTimeField, ModelMultipleChoiceField,EmailInput, NumberInput, TextInput, MultipleChoiceField,EmailField, ModelMultipleChoiceField,CheckboxSelectMultiple, DateField, DateInput,SelectDateWidget,ChoiceField,RadioSelect,BooleanField
+from django.forms import ModelForm, forms, CharField,URLField, URLInput,Textarea,DateTimeField, ModelMultipleChoiceField,EmailInput, NumberInput, TextInput, MultipleChoiceField,EmailField, ModelMultipleChoiceField,CheckboxSelectMultiple, DateField, DateInput,SelectDateWidget,ChoiceField,RadioSelect,BooleanField, IntegerField
 from django.contrib.auth.forms import UserCreationForm
 from AIM_GAMES.models import *
 from django.contrib.auth.models import User, Group
@@ -228,11 +228,13 @@ class ThreadForm(ModelForm):
         obj.pics.set(pics)
         return obj
 
+
 class ResponseForm(ModelForm):
 
     class Meta:
         model = Response
         exclude = ('business','thread')
+
 
 class LinkForm(ModelForm):
     
@@ -246,11 +248,13 @@ class LinkForm(ModelForm):
         model = Link
         exclude = ('curriculum',)
 
+
 class GraphicEngineExperienceForm(ModelForm):
 
     class Meta:
         model = GraphicEngineExperience
         exclude = ['curriculum']
+
 
 class AptitudeForm(ModelForm):
     aptitude = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('Aptitudes'),)
@@ -258,6 +262,7 @@ class AptitudeForm(ModelForm):
     class Meta:
         model = Aptitude
         exclude = ['curriculum']
+
 
 class ProfessionalExperienceForm(ModelForm):
     """ startDate = DateField(widget=SelectDateWidget()) """
@@ -268,6 +273,7 @@ class ProfessionalExperienceForm(ModelForm):
         model = ProfessionalExperience
         exclude = ['curriculum']
 
+
 class FormationForm(ModelForm):
     center = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('Center'),)
     formation = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('Formation'),)
@@ -275,6 +281,7 @@ class FormationForm(ModelForm):
     class Meta:
         model = Formation
         exclude = ['curriculum']
+
 
 class html5showcaseForm(ModelForm):
     embedCode = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('embedCode'),)
@@ -305,11 +312,13 @@ class ChallengeForm(ModelForm):
         model = Challenge
         exclude = ['business', 'freelancers']
 
+
 class ChallengeResponseForm(ModelForm):
 
     class Meta:
         model = ChallengeResponse
         exclude = ('freelancer','challenge')
+
 
 class EventForm(ModelForm):
     location = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('location'),)
@@ -320,14 +329,21 @@ class EventForm(ModelForm):
         model = Event
         exclude = ['manager', 'freelancers','companies']
 
+
 class MessageForm(ModelForm):
 
     class Meta:
         model = Message
         exclude = ['sender', 'timestamp', 'readed']
 
+
 class ReplyForm(ModelForm):
 
     class Meta:
         model = Message
         exclude = ['sender','recipient', 'subject', 'timestamp', 'readed']
+
+
+class BuyCoinsForm(forms.Form):
+    quantity = IntegerField(label=_('Quantity'))
+
