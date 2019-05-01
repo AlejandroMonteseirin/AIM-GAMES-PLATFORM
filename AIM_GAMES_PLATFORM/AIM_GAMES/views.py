@@ -1190,6 +1190,9 @@ def chat(request,userId):
         Q(sender=user1,recipient=user2) | Q(sender=user2,recipient=user1),
         ).order_by('-timestamp'))
     messages.reverse()
+    updatedNumber = Message.objects.filter(
+        Q(sender=user2,recipient=user1,readed=False),
+        ).update(readed=True)
     return render(request, 'message/chat.html',{'messages': messages, 'user2':user2,'user1':user1})
 
 def chatUpdate(request,userId):
@@ -1224,3 +1227,19 @@ def message_new(request):
 def chatUser(request,userId):
     userId = User.objects.get(pk=userId)
     return render(request, 'message/chatUser.html',{'user2':userId})
+
+def chats(request):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    aux = list(User.objects.exclude(Q(id=request.user.id)|Q(username='root')))
+    users = [[] for x in range(len(aux))]
+    for i in range(0,len(aux)):
+        messagesQueryset = Message.objects.filter(
+        Q(sender=aux[i],recipient=request.user,readed=False),
+        ).order_by('timestamp')
+        users[i].append(aux[i])
+        messages = list(messagesQueryset)
+        users[i].append(len(messages))
+        if len(messages) > 0:
+            users[i].append(messages[0])
+    return render(request, 'message/chats.html',{'users':users})

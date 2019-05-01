@@ -101,7 +101,8 @@ urlpatterns = [
     path('chat/<int:userId>', chat,name='chatDisplay'),
     path('chat/update/<int:userId>', chatUpdate,name='chatUpdate'),
     path('chat/message/new', message_new,name='chatDisplay'),
-    path('chat/user/<int:userId>', chatUser,name='chatTest'),
+    path('chat/user/<int:userId>', chatUser,name='chatUser'),
+    path('chats', chats,name='chats'),
     
 
 ]

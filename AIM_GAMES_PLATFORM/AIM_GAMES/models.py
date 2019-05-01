@@ -349,6 +349,8 @@ class Message(models.Model):
         return dict(
             id=self.id, 
             sender=self.sender.username,
+            senderName=self.sender.profile.name,
+            senderSurname=self.sender.profile.surname,
             text=self.text,
             isprincipal=isPrincipal)
 

@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load i18n %}
 
 <head>
         {% block title %}<title >AIM Games Platform</title>{% endblock %}
@@ -22,19 +23,15 @@
                         var tr;
                         for (var i = 0; i < json.length; i++) {
                             tr = $('<tr/>');
-                            aux = "";
                             if (json[i].isprincipal){
                                 c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">'
-                                    + json[i].sender + 
+                                    + json[i].senderName + " " + json[i].senderSurname +
                                     '</span><p>' + json[i].text + '</p></div></div></div>';
                             }else{
                                 c = '<div class="col s6 offset-s1 "> <div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">'
-                                    + json[i].sender + 
+                                    + json[i].senderName + " " + json[i].senderSurname +
                                     '</span><p>' + json[i].text + '</p></div></div></div>';
                             }
-                            tr.append("<td>" + json[i].sender + aux + "</td>");
-                            tr.append("<td>" + json[i].text + "</td>");
-                            $('#myTable tbody').append(tr);
 
                             
                             $('#myRow').append(c); 
@@ -43,10 +40,11 @@
                             /* new Promise(resolve => setTimeout(resolve, 100)) */
                         }
                     });
-        },3000);
+        },10000);
     });
     
 </script>
+
 
 <div class="">
         <div class="row" id='myRow'>
@@ -55,7 +53,7 @@
             <div class="col s6 offset-s1">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">{{ m.sender }}</span>
+                        <span class="card-title">{{ m.sender.profile.name }} {{ m.sender.profile.surname }}</span>
                         <p>{{ m.text }}</p>
                     </div>
                 </div>
@@ -64,7 +62,7 @@
             <div class="col s6 offset-s5 ">
                 <div class="card green darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">{{ m.sender }}</span>
+                        <span class="card-title">{{ m.sender.profile.name }} {{ m.sender.profile.surname }}</span>
                         <p>{{ m.text }}</p>
                     </div>
                 </div>
@@ -76,14 +74,14 @@
 
 <form onsubmit="hola(); return false;">
     <input id="le_input" type="text"/>
-    <button type="submit" class="botonwapowapo">wapisimo</button>
+    <button type="submit" class="botonwapowapo btn waves-effect color1 waves-light">{% trans "Submit" %}</button>
 </form>
 
 <script>
     function hola(){
         var message = $('#le_input').val();
         if(message==""){
-            alert('no')
+            
         }else{
             $.ajax
             ({ 
@@ -91,7 +89,7 @@
                 data: {"text": message, "recipientId":"{{user2.id}}"},
                 type: 'post',
                 success: function(result){
-                    c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">{{ user1.username }}</span><p>' + message+ '</p></div></div></div>';
+                    c = '<div class="col s6 offset-s5 "> <div class="card green darken-1"><div class="card-content white-text"><span class="card-title">{{ user1.profile.name }} {{ user1.profile.surname }}</span><p>' + message+ '</p></div></div></div>';
                     $('#myRow').append(c); 
                     $('#le_input').val('');
                     window.scrollTo(0,document.body.scrollHeight);
