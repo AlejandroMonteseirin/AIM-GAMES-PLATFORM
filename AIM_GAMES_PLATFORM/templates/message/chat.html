@@ -1,0 +1,103 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<head>
+        {% block title %}<title >AIM Games Platform</title>{% endblock %}
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+        <link rel="shortcut icon" href="{%  static 'icons/logo.ico' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<script type="text/javascript">   
+    $( document ).ready(function() {
+        window.scrollTo(0,document.body.scrollHeight);
+        setInterval(function(){
+            $.getJSON('/chat/update/{{user2.id}}',
+                    function (data) {
+                        var json = data['new_messages'];
+                        var tr;
+                        for (var i = 0; i < json.length; i++) {
+                            tr = $('<tr/>');
+                            if (json[i].isprincipal){
+                                c = '<div class="col s9 m6 offset-s2 offset-m5 "> <div class="card color3b "><div class="card-content white-text"><span class="card-title">'
+                                    + json[i].senderName + " " + json[i].senderSurname +
+                                    '</span><p>' + json[i].text + '</p></div></div></div>';
+                            }else{
+                                c = '<div class="col s9 m6 offset-s1 offset-m1 "> <div class="card color1b "><div class="card-content white-text"><span class="card-title">'
+                                    + json[i].senderName + " " + json[i].senderSurname +
+                                    '</span><p>' + json[i].text + '</p></div></div></div>';
+                            }
+
+                            
+                            $('#myRow').append(c); 
+
+                            window.scrollTo(0,document.body.scrollHeight);
+                            /* new Promise(resolve => setTimeout(resolve, 100)) */
+                        }
+                    });
+        },10000);
+    });
+    
+</script>
+
+
+<div class="">
+        <div class="row" id='myRow'>
+            {% for m in messages %}
+            {% if user2.username == m.sender.username%}
+            <div class="col s9 m6 offset-s1 offset-m1">
+                <div class="card color1b">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ m.sender.profile.name }} {{ m.sender.profile.surname }}</span>
+                        <p>{{ m.text }}</p>
+                    </div>
+                </div>
+            </div>
+            {%else%}
+            <div class="col s9 m6 offset-s2 offset-m5">
+                <div class="card color3b">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ m.sender.profile.name }} {{ m.sender.profile.surname }}</span>
+                        <p>{{ m.text }}</p>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            {% endfor %}
+        </div>
+</div>
+
+<form onsubmit="hola(); return false;">
+    <input id="le_input" type="text"/>
+    <button type="submit" class="botonwapowapo btn waves-effect color1 waves-light">{% trans "Submit" %}</button>
+</form>
+
+<script>
+    function hola(){
+        var message = $('#le_input').val();
+        if(message==""){
+            
+        }else{
+            $.ajax
+            ({ 
+                url: '/chat/message/new',
+                data: {"text": message, "recipientId":"{{user2.id}}"},
+                type: 'post',
+                success: function(result){
+                    c = '<div class="col s9 m6 offset-s2 offset-m5 "> <div class="card color3b"><div class="card-content white-text"><span class="card-title">{{ user1.profile.name }} {{ user1.profile.surname }}</span><p>' + message+ '</p></div></div></div>';
+                    $('#myRow').append(c); 
+                    $('#le_input').val('');
+                    window.scrollTo(0,document.body.scrollHeight);
+
+                }
+            });
+        } 
+    };
+</script>
+
+</body>

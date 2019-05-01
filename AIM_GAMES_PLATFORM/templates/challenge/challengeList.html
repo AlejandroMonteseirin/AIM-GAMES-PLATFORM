@@ -39,7 +39,7 @@
                 <div class="right">
                     <a href="/business/challenge/create" class="color1 btn waves-effect waves-red">{% trans "newChallenge" %}</a>
                 </div>
-            {% else %}
+            {% elif request.session.currentUser == 'business' %}
                 <div class="right">
                     <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="color1 btn waves-effect waves-red">{% trans "newChallenge" %}</a>
                 </div>

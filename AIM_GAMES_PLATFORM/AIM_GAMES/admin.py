@@ -24,6 +24,7 @@ admin.site.register(Event)
 admin.site.register(Challenge)
 admin.site.register(ChallengeResponse)
 admin.site.register(SubscriptionModel)
+admin.site.register(SystemVariables)
 
 
 # Register your models here.

@@ -9,6 +9,8 @@
                 <div class="input-field">
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <input id="search" name="search" type="search" style="padding-left:2em">
+                <a class="tooltipped" data-position="bottom" data-tooltip="{% trans "joboffersearchinfo" %}"><i class="material-icons left">info</i></a>
+                </br>
                 <i class="material-icons">close</i>
                 </div>
             </form>
@@ -44,10 +46,6 @@
             {% elif request.session.currentUser == 'business' %}
                 <div class="right">
                     <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
-                </div>
-            {% else %}
-                <div class="right">
-                    <a href="/business/joboffer/create" class="btn waves-effect waves-red color1 ">{% trans "newOffer" %}</a>
                 </div>
             {% endif %}
         </div>
