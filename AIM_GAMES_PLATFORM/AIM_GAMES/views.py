@@ -189,13 +189,13 @@ def paypal_coins_ipn(request, business_id, quantity):
     business = Business.objects.get(pk=business_id)
     if business.subscriptionModel is not None:
         if business.subscriptionModel.maxCoins > business.coins+quantity:
-            business.coins =+ quantity
+            business.coins += quantity
         else:
             business.coins = business.subscriptionModel.maxCoins
     else:
         sysvar = SystemVariables.objects.first()
         if sysvar.defaultMaxCoins > business.coins + quantity:
-            business.coins = + quantity
+            business.coins += quantity
         else:
             business.coins = sysvar.defaultMaxCoins
     business.save()
