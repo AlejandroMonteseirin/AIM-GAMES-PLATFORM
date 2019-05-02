@@ -16,16 +16,16 @@
             <span>{% trans "Note that the subscription may take time to be updated" %}</span>
           {% else %}
             <h5>{{buss.subscriptionModel.name}}</h5>
-            <strong>{% trans 'Current Coins' %}:</strong> {{buss.coins}}<br>
-            <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<br>
-            <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<br>
+            <strong>{% trans 'Current Coins' %}:</strong> {{buss.coins}}<i class="tiny material-icons">blur_circular</i><br>
+            <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<i class="tiny material-icons">blur_circular</i><br>
+            <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<i class="tiny material-icons">blur_circular</i><br>
             <strong>{% trans 'Price' %}:</strong> {{buss.subscriptionModel.price}}€<br><br>
             <!--{% trans "Cancel subs" %}-->
           {% endif %}
         </div>
         <div class="card color1b2 targetaDentroDeTargetaxd">
           <span class="card-title">{% trans "Buy Coins" %}:</span><br>
-          <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}</strong>
+          <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}<i class="tiny material-icons">blur_circular</i></strong>
           <form method="POST">{% csrf_token %}
             <div class="col l4">{{form}}</div><br><input class="btn color1" type="submit" value="{% trans 'Submit' %}">
           </form>
