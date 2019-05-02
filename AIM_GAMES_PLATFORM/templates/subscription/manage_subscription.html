@@ -8,7 +8,17 @@
     <div class="col s12 m8 offset-m2">
       <div class="card  lighten-2 color1b">
         <h1>{{buss.profile.name}}</h1><br>
-        <div class="card color1b2 targetaDentroDeTargetaxd">
+        <div class="card hoverable">
+            <div class="card-title">
+                {% trans "Discover our subscription models" %}
+            </div>
+            <div class="card-content">
+                <p>
+                {% trans "Our subscription models allow you to make use of all the tools that AIM-GAMES has available to business. By adopting one of our subscription models you will earn monthly coins that you can spend to make use of our services. If you run out of coins. Do not worry! AIM-GAMES offers you the option of immediate purchase of coins so you can continue using our services without interruptions." %}
+                </p>
+            </div>
+        </div>
+        <div class="card targetaDentroDeTargetaxd">
           <span class="card-title">{% trans "Current Subs" %}:</span>
           {% if buss.subscriptionModel == None %}
           <br>
@@ -23,7 +33,7 @@
             <!--{% trans "Cancel subs" %}-->
           {% endif %}
         </div>
-        <div class="card color1b2 targetaDentroDeTargetaxd">
+        <div class="card targetaDentroDeTargetaxd">
           <span class="card-title">{% trans "Buy Coins" %}:</span><br>
           <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}<i class="tiny material-icons">blur_circular</i></strong>
           <form method="POST">{% csrf_token %}

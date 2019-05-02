@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-02 11:00+0200\n"
+"POT-Creation-Date: 2019-05-02 11:26+0200\n"
 "PO-Revision-Date: 2019-03-29 13:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -249,7 +249,7 @@ msgid "Coins Gain"
 msgstr "Monedas Ganadas"
 
 #: .\AIM_GAMES\models.py:77
-#: .\templates\subscription\manage_subscription.html:22
+#: .\templates\subscription\manage_subscription.html:32
 #: .\templates\subscription\subscription.html:25
 msgid "Price"
 msgstr "Precio"
@@ -580,7 +580,7 @@ msgstr "Términos y Condiciones"
 #: .\templates\event\standardForm.html:32
 #: .\templates\freelancer\standardForm.html:34 .\templates\message\chat.html:77
 #: .\templates\message\create.html:32
-#: .\templates\subscription\manage_subscription.html:30
+#: .\templates\subscription\manage_subscription.html:40
 #: .\templates\thread\form.html:43
 msgid "Submit"
 msgstr "Enviar"
@@ -990,50 +990,63 @@ msgstr "El proceso de pago se ha cancelado, intentelo de nuevo"
 msgid "paymentdone"
 msgstr "El proceso de pago se ha realizado correctamente"
 
-#: .\templates\subscription\manage_subscription.html:12
+#: .\templates\subscription\manage_subscription.html:13
+msgid "Discover our subscription models"
+msgstr ""
+
+#: .\templates\subscription\manage_subscription.html:17
+msgid ""
+"Our subscription models allow you to make use of all the tools that AIM-"
+"GAMES has available to business. By adopting one of our subscription models "
+"you will earn monthly coins that you can spend to make use of our services. "
+"If you run out of coins. Do not worry! AIM-GAMES offers you the option of "
+"immediate purchase of coins so you can continue using our services without "
+"interruptions."
+msgstr "Nuestros modelos de suscripción te permiten hacer uso de todas las herramientas que AIM-GAMES tiene a disposición de las empresas.Al adoptar uno de nuestros modelos de suscripción ganarás monedas mensualmente que podrás gastar para hacer uso de nuestros servicios."
+
+#: .\templates\subscription\manage_subscription.html:22
 msgid "Current Subs"
 msgstr "Subscripción Actual"
 
-#: .\templates\subscription\manage_subscription.html:15
+#: .\templates\subscription\manage_subscription.html:25
 msgid ""
 "You don't have any subscription, click here for see ours subscription models"
 msgstr ""
 "No dispone de ninguna subscripción, haga click aquí para ver nuestros "
 "modelos de subscripción"
 
-#: .\templates\subscription\manage_subscription.html:16
+#: .\templates\subscription\manage_subscription.html:26
 msgid "Note that the subscription may take time to be updated"
 msgstr ""
 "Tenga en cuenta que la subcripción puede tardar un tiempo en ser actualizada"
 
-#: .\templates\subscription\manage_subscription.html:19
+#: .\templates\subscription\manage_subscription.html:29
 msgid "Current Coins"
 msgstr "Monedas actuales"
 
-#: .\templates\subscription\manage_subscription.html:20
+#: .\templates\subscription\manage_subscription.html:30
 #: .\templates\subscription\subscription.html:23
 #, fuzzy
 #| msgid "Coins"
 msgid "Max Coins"
 msgstr "Monedas Máximas"
 
-#: .\templates\subscription\manage_subscription.html:21
+#: .\templates\subscription\manage_subscription.html:31
 #: .\templates\subscription\subscription.html:24
 msgid "Coins Gain per month"
 msgstr "Monedas Ganadas al mes"
 
-#: .\templates\subscription\manage_subscription.html:23
+#: .\templates\subscription\manage_subscription.html:33
 #, fuzzy
 #| msgid "Description"
 msgid "Cancel subs"
 msgstr "Cancelar subscripción"
 
-#: .\templates\subscription\manage_subscription.html:27
-#| msgid "Buy Coins"
+#: .\templates\subscription\manage_subscription.html:37
 msgid "Buy Coins"
 msgstr "Comprar monedas"
 
-#: .\templates\subscription\manage_subscription.html:28
+#: .\templates\subscription\manage_subscription.html:38
 msgid "per coin"
 msgstr "por moneda"
 
