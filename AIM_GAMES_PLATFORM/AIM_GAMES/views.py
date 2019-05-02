@@ -495,7 +495,7 @@ class GroupConcat(Aggregate):
         return super(GroupConcat, self).as_sql(compiler, connection)
 
 
-def threadList(request):
+def threadSearch(request):
     if checkUser(request)!='business' and checkUser(request)!='manager':
         return handler500(request)
     if(request.GET.__contains__('search')):
@@ -511,12 +511,17 @@ def threadList(request):
         
     else:
         q=Thread.objects.all()
-    threads= q
-    #Esta llamada sirve también como comprobación de si la llamada se hace desde una URL que no es de business
+
     try:
         businessThread = get_object_or_404(Business,profile=request.user.profile)
     except AttributeError:
         return handler500(request)
+
+    return q, businessThread
+
+def threadList(request):
+    threads, businessThread = threadSearch(request)
+   
     return render(request, 'thread/threadList.html',{'threads':threads,'businessThread':businessThread})
 
 def is_number(s):
@@ -544,8 +549,7 @@ def find_numbers_after_index(text, index):
 
     return result
             
-
-def jobOfferList(request):
+def jobOfferSearch(request):
     if checkUser(request)!='freelancer' and checkUser(request)!='business' and checkUser(request)!='manager':
         return handler500(request)
     if(request.GET.__contains__('search')):
@@ -576,9 +580,14 @@ def jobOfferList(request):
         sub = False
     else:
         sub = True
+    
+    return q, sub
+def jobOfferList(request):
+    jobOffers, sub = jobOfferSearch(request)
+
     return render(request, 'jobOfferList.html',{'jobOffers':jobOffers, 'sub': sub})
 
-def curriculumList(request):
+def curriculumSearch(request):
     if checkUser(request)!='business':
         return handler500(request)
     if(request.GET.__contains__('search')):
@@ -601,7 +610,7 @@ def curriculumList(request):
         q=lista      
     else:
         q=Curriculum.objects.all()
-    
+        q = q.order_by('-featured')
     curriculums= q.order_by('-featured')
     aptitudes={}
     for c in curriculums:
@@ -614,6 +623,11 @@ def curriculumList(request):
             sub = True
     except AttributeError:
         return handler500(request)
+
+    return curriculums, aptitudes, sub
+
+def curriculumList(request):
+    curriculums, aptitudes, sub = curriculumSearch(request)
     return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes, 'sub': sub})
 
 def checkUser(request):
@@ -1368,3 +1382,12 @@ def chats(request):
         if len(messages) > 0:
             users[i].append(messages[0])
     return render(request, 'message/chats.html',{'users':users})
+
+def global_search(request):
+    jobOffers, joboffer_sub = jobOfferSearch(request)
+    curriculums, aptitudes, curriculum_sub = curriculumSearch(request)
+    threads, businessThread = threadSearch(request)
+
+
+    return render(request, 'search.html', {'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub, 'curriculums': curriculums,
+     'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub, 'threads': threads, 'businessThread':businessThread})
