@@ -22,5 +22,5 @@ def get_wallet(request):
                 wallet = get_object_or_404(Business, profile=request.user.profile)
                 if wallet.subscriptionModel is None:
                     context_data['maxCoins'] = system_variables.defaultMaxCoins
-        context_data['wallet'] = wallet
-        return context_data
+    context_data['wallet'] = wallet
+    return context_data
