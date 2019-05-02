@@ -25,7 +25,7 @@ SECRET_KEY = 'oci=@^)#+uz-b6g(%0)_xtschhw&_^1ff!@az_(9wm^p!3)auv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if 'DYNO' in os.environ:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
