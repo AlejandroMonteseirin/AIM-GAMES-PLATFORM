@@ -17,9 +17,10 @@ def get_wallet(request):
     wallet = None
     if request.user.is_authenticated:
         system_variables = SystemVariables.objects.first()
-        if request.session['currentUser'] == "business":
-            wallet = get_object_or_404(Business, profile=request.user.profile)
-            if wallet.subscriptionModel is None:
-                context_data['maxCoins'] = system_variables.defaultMaxCoins
-    context_data['wallet'] = wallet
-    return context_data
+        if "currentUser" in request.session:
+            if request.session['currentUser'] == "business":
+                wallet = get_object_or_404(Business, profile=request.user.profile)
+                if wallet.subscriptionModel is None:
+                    context_data['maxCoins'] = system_variables.defaultMaxCoins
+        context_data['wallet'] = wallet
+        return context_data
