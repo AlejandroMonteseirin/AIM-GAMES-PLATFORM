@@ -29,10 +29,11 @@ class AIM_GAMES_TestCase(TestCase):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
-            postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+            postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000',photo=url1)
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertTrue(form.is_valid())
 
@@ -40,9 +41,11 @@ class AIM_GAMES_TestCase(TestCase):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
-            postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000')
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber,}
+            postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000')
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber,}
         form = ProfileForm(data=data)
         self.assertTrue(form.is_valid())
 
@@ -51,9 +54,10 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='nophone',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertFalse(form.is_valid())
 
@@ -62,9 +66,10 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='95486512',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertFalse(form.is_valid())
 
@@ -73,9 +78,10 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='nonCode', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertFalse(form.is_valid())
 
@@ -84,9 +90,10 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='4100', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertFalse(form.is_valid())
 
@@ -95,9 +102,10 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
         self.assertFalse(form.is_valid())
 
@@ -106,11 +114,13 @@ class AIM_GAMES_TestCase(TestCase):
         url1=URL.objects.create(uri="http://www.pruebas3.com")
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='2012-12-12 00:00', phoneNumber='987456321',photo=url1)
-        data = {'user': profile1.user, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email, 'city': profile1.city, 
-        'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 'phoneNumber': profile1.phoneNumber, 
-        'photo': profile1.photo,}
+        data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
-        self.assertFalse(form.is_valid())
+        self.assertFalse(form.is_valid())    
+
     
     def test_Freelancer(self):
         user2 = User.objects.create_user(username='userFreelancerTest', password='userFreelancerPass')
@@ -121,12 +131,15 @@ class AIM_GAMES_TestCase(TestCase):
         self.assertEqual(freelancer1.id, 1003)
 
     def test_valid_Freelancer(self):
-        user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
+        user1 = User.objects.create_user(username='userProfileTest2', password='ContraseñaMuyNovedosa')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
-            postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
-        freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
-        data = {'profile': freelancer1.profile, 'profession': freelancer1.profession,}
+        profile1= Profile.objects.create(user=user1, name='Pepe', surname='Perez', email='antonio@gmail.com', city='Sevilla', 
+            postalCode='41009', idCardNumber='12345678Z', dateOfBirth='1992-12-12', phoneNumber='635874125',photo=url1)
+        freelancer1= Freelancer.objects.create(profile=profile1, profession='Test profesion de pepe')
+        data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = FreelancerForm(data=data)
         self.assertTrue(form.is_valid())
 
@@ -402,24 +415,3 @@ class AIM_GAMES_TestCase(TestCase):
         message= Message.objects.create(id= 1011, sender=userSender,recipient=userRecipient, subject="Asunto",
         text="Texto correo",timestamp='2018-12-12 00:00',readed=False)
         self.assertEqual(message.id, 1011)
-
-    def test_valid_Message(self):
-        userSender = User.objects.create_user(username='userSenderTest', password='userSenderPass')
-        userRecipient = User.objects.create_user(username='userRecipientTest', password='userRecipientPass')
-        message= Message.objects.create(sender=userSender,recipient=userRecipient, subject="Asunto",
-        text="Texto correo",timestamp='2018-12-12 00:00',readed=False)
-        data = {'sender': message.sender, 'recipient': message.recipient, 'subject': message.subject, 
-        'text': message.text, 'timestamp': message.timestamp,'readed': message.readed,}
-        form = MessageForm(data=data)
-        self.assertTrue(form.is_valid())
-
-    def test_invalid_Message(self):
-        # Atributo text inexistente
-        userSender = User.objects.create_user(username='userSenderTest', password='userSenderPass')
-        userRecipient = User.objects.create_user(username='userRecipientTest', password='userRecipientPass')
-        message= Message.objects.create(sender=userSender,recipient=userRecipient, subject="Asunto",
-        text="Texto correo",timestamp='2018-12-12 00:00',readed=False)
-        data = {'sender': message.sender, 'recipient': message.recipient, 'subject': message.subject, 
-        'timestamp': message.timestamp,'readed': message.readed,}
-        form = MessageForm(data=data)
-        self.assertFalse(form.is_valid())
