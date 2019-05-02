@@ -334,6 +334,7 @@ class Event(models.Model):
     title = models.TextField(max_length=150, blank=False,
                              verbose_name=_("title"))
     description = models.TextField(blank=False, verbose_name=_("description"))
+    messageOnJoin = models.TextField(blank=True, verbose_name=_("Predefined message for joining"))
     moment = models.DateTimeField(null=False)
     freelancers = models.ManyToManyField(
         Freelancer, verbose_name=_("freelancers"))

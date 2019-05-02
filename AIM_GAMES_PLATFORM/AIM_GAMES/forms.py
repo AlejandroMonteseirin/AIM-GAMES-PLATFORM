@@ -324,6 +324,7 @@ class EventForm(ModelForm):
     location = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('location'),)
     title = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('title'),)
     description = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('description'),)
+    messageOnJoin = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('Predefined message for joining'), )
     moment = DateField(widget=DateInput(), label=_("moment"))
 
     class Meta:
