@@ -583,7 +583,7 @@ msgstr "Main page"
 #: .\templates\base_generic.html:46 .\templates\base_generic.html:88
 #: .\templates\thread\threadList.html:9
 msgid "threads"
-msgstr "Threads"
+msgstr "Forum"
 
 #: .\templates\base_generic.html:47 .\templates\base_generic.html:53
 #: .\templates\base_generic.html:89 .\templates\base_generic.html:99
@@ -1066,7 +1066,7 @@ msgstr "New response"
 #, fuzzy
 #| msgid "threads"
 msgid "New thread"
-msgstr "Threads"
+msgstr "New thread"
 
 #, fuzzy
 #~| msgid "Description"
