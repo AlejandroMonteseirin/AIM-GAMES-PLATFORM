@@ -66,7 +66,7 @@
                             <li><a class="headerenlace" href="/event/list/">{% trans "Events" %}</a></li>
                             <li><a class="headerenlace" href="/chats">{% trans "Messages" %}
                             {% if not request.session.message_count == 0 %}
-                            ({{request.session.message_count}})
+                                <span class="new badge">{{request.session.message_count}}</span>
                             {% endif %}
                             </a></li>
                             {% if request.session.currentUser == 'business' %}

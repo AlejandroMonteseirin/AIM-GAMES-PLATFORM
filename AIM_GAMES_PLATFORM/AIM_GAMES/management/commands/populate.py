@@ -246,13 +246,13 @@ class Command(BaseCommand):
         challenge1.save
 
 
-        event1, created = Event.objects.get_or_create(manager = manager1, location = "Seville", title="AIMGAME-FEST",description="All you indie developers will be here", moment= "2019-12-12 00:00")
+        event1, created = Event.objects.get_or_create(manager = manager1, location = "Seville", title="AIMGAME-FEST",description="All you indie developers will be here", messageOnJoin="Welcome to the AimGames Fest!\nUpon arrival, please contact Alejandro Monteseirín for further information. Don't forget your laptop!", moment= "2019-12-12 00:00")
         freelancers1= (freelancer1,)
         businesses1 = (business1,business2)
         event1.freelancers.set(freelancers1)
         event1.companies.set(businesses1)
 
-        event2, created = Event.objects.get_or_create(manager = manager2, location = "Seville", title="Game Camp",description="Want to create some games? you only need to come and have fun", moment= "2019-12-12 00:00")
+        event2, created = Event.objects.get_or_create(manager = manager2, location = "Seville", title="Game Camp",description="Want to create some games? you only need to come and have fun", messageOnJoin="Please don't throw food at the developers", moment= "2019-12-12 00:00")
         freelancers2= (freelancer1,freelancer2)
         businesses2 = (business1,)
         event2.freelancers.set(freelancers2)

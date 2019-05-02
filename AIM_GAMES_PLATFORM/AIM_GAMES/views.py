@@ -19,6 +19,7 @@ from django.http import Http404,HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
+import random
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -1186,6 +1187,9 @@ def eventEdit(request, event_id):
 
 def eventJoin(request, event_id): 
     userRole=checkUser(request)
+    manager = random.choice(Manager.objects.all())
+    manager = manager.profile.user
+    recipientUser = request.user.profile.user
     if userRole!='business' and userRole!='freelancer':
         return handler500(request)
     instance = get_object_or_404(Event, id=event_id)
@@ -1193,6 +1197,14 @@ def eventJoin(request, event_id):
 
     form = EventForm(instance=instance)
     obj = form.save(commit=False)
+    if obj.messageOnJoin is not None:
+        message = Message(
+            sender=manager,
+            recipient=recipientUser,
+            subject="dummy",
+            text=obj.messageOnJoin,
+        )
+        message.save()
     if userRole=='freelancer':
         obj.freelancers.add(user)
     else:
