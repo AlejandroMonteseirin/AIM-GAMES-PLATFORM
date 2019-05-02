@@ -324,10 +324,21 @@ class EventForm(ModelForm):
     location = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('location'),)
     title = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('title'),)
     description = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('description'),)
+    moment = DateField(widget=DateInput(), label=_("moment"))
 
     class Meta:
         model = Event
         exclude = ['manager', 'freelancers','companies']
+
+    def clean_moment(self):
+        print('clean: EventForm: moment')
+        data = self.cleaned_data['moment']
+        from_date = datetime.now()
+        print(str(from_date))
+        print(str(data))
+        if data < datetime.date(from_date):
+            raise ValidationError(_("Select a date that has not passed"))
+        return data
 
 
 class MessageForm(ModelForm):
