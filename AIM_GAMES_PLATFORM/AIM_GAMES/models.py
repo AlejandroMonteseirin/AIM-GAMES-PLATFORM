@@ -226,7 +226,7 @@ class JobOffer(models.Model):
         "ubication"), max_length=100, blank=False)
     description = models.TextField(verbose_name=_(
         "description"), max_length=10000, blank=False)
-    images = models.TextField(verbose_name=_("images"), blank=False)
+    images = models.TextField(verbose_name=_("images"), blank=True)
 
     def getData(self):
         data = "Position: " + self.position + "\n" + "Experience required: " + self.experienceRequired + "\n" + "Schedule: " + self.schedule + \

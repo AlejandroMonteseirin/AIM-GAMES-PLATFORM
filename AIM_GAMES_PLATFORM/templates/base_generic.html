@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="shortcut icon" href="{%  static 'icons/logo.ico' %}">
         <script src="{% static 'cookielaw/js/cookielaw.js'%}" type="text/javascript"></script>
         <link href="{% static 'cookielaw/css/cookielaw.css'%}" rel="stylesheet" />
@@ -117,7 +118,7 @@
             </ul>
     <div class="right-align">
         {% if request.session.currentUser == 'business' and wallet%}
-        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %} Coins
+        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="tiny material-icons">blur_circular</i>
         {% endif %}
     </div>
             <main>
