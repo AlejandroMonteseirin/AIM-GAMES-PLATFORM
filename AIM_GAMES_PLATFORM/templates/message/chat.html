@@ -24,11 +24,11 @@
                         for (var i = 0; i < json.length; i++) {
                             tr = $('<tr/>');
                             if (json[i].isprincipal){
-                                c = '<div class="col s9 m6 offset-s2 offset-m5 "> <div class="card color1b "><div class="card-content white-text"><span class="card-title">'
+                                c = '<div class="col s9 m6 offset-s2 offset-m5 "> <div class="card color3b "><div class="card-content white-text"><span class="card-title">'
                                     + json[i].senderName + " " + json[i].senderSurname +
                                     '</span><p>' + json[i].text + '</p></div></div></div>';
                             }else{
-                                c = '<div class="col s9 m6 offset-s1 offset-m1 "> <div class="card color3b "><div class="card-content white-text"><span class="card-title">'
+                                c = '<div class="col s9 m6 offset-s1 offset-m1 "> <div class="card color1b "><div class="card-content white-text"><span class="card-title">'
                                     + json[i].senderName + " " + json[i].senderSurname +
                                     '</span><p>' + json[i].text + '</p></div></div></div>';
                             }
