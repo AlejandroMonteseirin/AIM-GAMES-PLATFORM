@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 04:11+0200\n"
+"POT-Creation-Date: 2019-05-03 10:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,82 +70,87 @@ msgstr "Phone Number must be a 9 digits number"
 msgid "validatePostal"
 msgstr "Postal Code must be a 5 digits number"
 
-#: .\AIM_GAMES\forms.py:126
+#: .\AIM_GAMES\forms.py:117
+#| msgid "emailUnique"
+msgid "emailUnique"
+msgstr "An account with that email already exist"
+
+#: .\AIM_GAMES\forms.py:132
 #, fuzzy
 #| msgid "IDCard Number"
 msgid "ID Card Number not valid"
 msgstr "Invalid IDCard Number"
 
-#: .\AIM_GAMES\forms.py:136
+#: .\AIM_GAMES\forms.py:142
 msgid "You must be over 18 to sign up"
 msgstr "You must be over 18 to sign up"
 
-#: .\AIM_GAMES\forms.py:142
+#: .\AIM_GAMES\forms.py:148
 msgid "User not valid"
 msgstr "User not valid"
 
-#: .\AIM_GAMES\forms.py:159
+#: .\AIM_GAMES\forms.py:165
 msgid "Title"
 msgstr "Title"
 
-#: .\AIM_GAMES\forms.py:160 .\AIM_GAMES\models.py:74
+#: .\AIM_GAMES\forms.py:166 .\AIM_GAMES\models.py:74
 #: .\templates\challenge\challengeDetail.html:18
 #: .\templates\thread\threadDetail.html:30
 msgid "Description"
 msgstr "Description"
 
-#: .\AIM_GAMES\forms.py:161 .\templates\thread\threadDetail.html:34
+#: .\AIM_GAMES\forms.py:167 .\templates\thread\threadDetail.html:34
 msgid "Tags"
 msgstr "Tags"
 
-#: .\AIM_GAMES\forms.py:162
+#: .\AIM_GAMES\forms.py:168
 msgid "Image URLs"
 msgstr "Image URLs"
 
-#: .\AIM_GAMES\forms.py:163
+#: .\AIM_GAMES\forms.py:169
 msgid "Attachment URLs"
 msgstr "Attachment URLs"
 
-#: .\AIM_GAMES\forms.py:197
+#: .\AIM_GAMES\forms.py:203
 msgid ""
 "Please, enter valid URLS separated by comas in the images and files field"
 msgstr ""
 "Please, enter valid URLS separated by spaces in the images and files field"
 
-#: .\AIM_GAMES\forms.py:260
+#: .\AIM_GAMES\forms.py:266
 #, fuzzy
 #| msgid "aptitudes"
 msgid "Aptitudes"
 msgstr "Aptitudes"
 
-#: .\AIM_GAMES\forms.py:269 .\AIM_GAMES\forms.py:278
+#: .\AIM_GAMES\forms.py:275 .\AIM_GAMES\forms.py:284
 #, fuzzy
 #| msgid "center"
 msgid "Center"
 msgstr "Center"
 
-#: .\AIM_GAMES\forms.py:270 .\AIM_GAMES\forms.py:279
+#: .\AIM_GAMES\forms.py:276 .\AIM_GAMES\forms.py:285
 #, fuzzy
 #| msgid "formation"
 msgid "Formation"
 msgstr "Formation"
 
-#: .\AIM_GAMES\forms.py:287 .\AIM_GAMES\models.py:185
+#: .\AIM_GAMES\forms.py:293 .\AIM_GAMES\models.py:185
 msgid "embedCode"
 msgstr "Iframe source"
 
-#: .\AIM_GAMES\forms.py:298
+#: .\AIM_GAMES\forms.py:304
 msgid "Please, enter a valid URL"
 msgstr "Please, enter a valid URL (starting with http/https)"
 
-#: .\AIM_GAMES\forms.py:324 .\AIM_GAMES\models.py:333
+#: .\AIM_GAMES\forms.py:330 .\AIM_GAMES\models.py:333
 #: .\templates\event\eventDetail.html:18 .\templates\event\eventList.html:20
 #, fuzzy
 #| msgid "valoration"
 msgid "location"
 msgstr "Location"
 
-#: .\AIM_GAMES\forms.py:325 .\AIM_GAMES\models.py:23 .\AIM_GAMES\models.py:31
+#: .\AIM_GAMES\forms.py:331 .\AIM_GAMES\models.py:23 .\AIM_GAMES\models.py:31
 #: .\AIM_GAMES\models.py:243 .\AIM_GAMES\models.py:280
 #: .\AIM_GAMES\models.py:298 .\AIM_GAMES\models.py:316
 #: .\AIM_GAMES\models.py:335 .\templates\challenge\challengeList.html:20
@@ -155,27 +160,27 @@ msgstr "Location"
 msgid "title"
 msgstr "Title"
 
-#: .\AIM_GAMES\forms.py:326 .\AIM_GAMES\models.py:228 .\AIM_GAMES\models.py:244
+#: .\AIM_GAMES\forms.py:332 .\AIM_GAMES\models.py:228 .\AIM_GAMES\models.py:244
 #: .\AIM_GAMES\models.py:281 .\AIM_GAMES\models.py:299
 #: .\AIM_GAMES\models.py:317 .\AIM_GAMES\models.py:336
 #: .\templates\event\eventDetail.html:13 .\templates\jobOfferDetail.html:32
 msgid "description"
 msgstr "Description"
 
-#: .\AIM_GAMES\forms.py:327 .\AIM_GAMES\models.py:337
+#: .\AIM_GAMES\forms.py:333 .\AIM_GAMES\models.py:337
 msgid "Predefined message for joining"
 msgstr ""
 
-#: .\AIM_GAMES\forms.py:328 .\templates\event\eventDetail.html:23
+#: .\AIM_GAMES\forms.py:334 .\templates\event\eventDetail.html:23
 #: .\templates\event\eventList.html:21
 msgid "moment"
 msgstr "Date"
 
-#: .\AIM_GAMES\forms.py:341
+#: .\AIM_GAMES\forms.py:347
 msgid "Select a date that has not passed"
 msgstr "Select a date that has not passed"
 
-#: .\AIM_GAMES\forms.py:360
+#: .\AIM_GAMES\forms.py:366
 msgid "Quantity"
 msgstr ""
 
