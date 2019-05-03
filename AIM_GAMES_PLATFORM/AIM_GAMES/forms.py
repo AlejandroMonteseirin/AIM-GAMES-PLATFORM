@@ -111,6 +111,12 @@ class ProfileForm(ModelForm):
             raise ValidationError(_("validatePostal"))
         return data
 
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if Profile.objects.filter(email=data):
+            raise ValidationError(_("emailUnique"))
+        return data
+
     def clean_idCardNumber(self):
         data = self.cleaned_data['idCardNumber']
         word = 'TRWAGMYFPDXBNJZSQVHLCKE'
@@ -324,10 +330,22 @@ class EventForm(ModelForm):
     location = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('location'),)
     title = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('title'),)
     description = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('description'),)
+    messageOnJoin = CharField(widget=Textarea(attrs={'class': 'materialize-textarea'}), label=_('Predefined message for joining'), )
+    moment = DateField(widget=DateInput(), label=_("moment"))
 
     class Meta:
         model = Event
         exclude = ['manager', 'freelancers','companies']
+
+    def clean_moment(self):
+        print('clean: EventForm: moment')
+        data = self.cleaned_data['moment']
+        from_date = datetime.now()
+        print(str(from_date))
+        print(str(data))
+        if data < datetime.date(from_date):
+            raise ValidationError(_("Select a date that has not passed"))
+        return data
 
 
 class MessageForm(ModelForm):

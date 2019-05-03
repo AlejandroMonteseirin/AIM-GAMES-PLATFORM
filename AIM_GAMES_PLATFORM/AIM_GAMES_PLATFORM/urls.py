@@ -105,6 +105,7 @@ urlpatterns = [
     path('chat/message/new', message_new,name='chatDisplay'),
     path('chat/user/<int:userId>', chatUser,name='chatUser'),
     path('chats', chats,name='chats'),
+    path('search', global_search),
     
 
 ]
