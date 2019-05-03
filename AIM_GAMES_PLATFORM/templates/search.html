@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+{% block content %} 
+  
+<body>
+    <div class="container">
+        <div class="col s12">  
+            <h3>{% trans "curriculums" %}</h3>      
+            <form action="/search/">
+                <div class="input-field">
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <input id="search" name="search" type="search" style="padding-left:2em">
+                <i class="material-icons">close</i>
+                </div>
+            </form>
+        </div>
+        <div class="col s12">
+            <div class="row">
+                <div class="col s4"><h5>{% trans "name" %}</h5></div>
+                <div class="col s4"><h5>{% trans "aptitudes" %}</h5></div>
+            </div>
+            <div class="collection">
+                {% for curriculum in curriculums %}
+                <div class="collection-item">
+                    <div class="row">
+                        {% if curriculums %}
+                        <div class="col s4">{{curriculum.freelancer.profile.name }}</div>
+                        <div class="col s4">
+                            {% for key, value in aptitudes.items %}
+                                {% if curriculum.id == key %}
+                                    {% for v in value %}
+                                        {{ v.aptitude }}<br/>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div><div class="col s4 ">
+                        {% if curriculum_sub and request.session.currentUser == 'business' %}
+                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
+                        {% elif request.session.currentUser == 'business' %}
+                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
+                        {% else %}
+                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
+                        {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

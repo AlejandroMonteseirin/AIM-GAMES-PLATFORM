@@ -10,7 +10,9 @@
     <li class="collection-item avatar" onclick="location.href = '/chat/user/{{u.0.id}}';">
         <img src="{{u.0.profile.photo}}" onerror="this.src='https://cdn.pixabay.com/photo/2012/04/26/19/43/profile-42914__340.png'" alt="" class="circle">
         <span class="title">{{u.0.profile.name}} {{u.0.profile.surname}}</span>
-        <span class="new badge">{{u.1}}</span>
+        {% if u.1 > 0 %}
+            <span class="new badge">{{u.1}}</span>
+        {% endif %}
         <p>{{u.2.text}}</p>
       </li>
     {% endfor %}
