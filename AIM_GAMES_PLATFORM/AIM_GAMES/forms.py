@@ -379,3 +379,9 @@ class BuyCoinsForm(forms.Form):
                 business.subscriptionModel is None and system_variable.defaultMaxCoins < total:
             raise ValidationError(_("You can not buy more coins that the coins your wallet can hold"))
         return quantity
+
+class BroadcastForm(ModelForm):
+    
+    class Meta:
+        model = Message
+        fields = ['text']

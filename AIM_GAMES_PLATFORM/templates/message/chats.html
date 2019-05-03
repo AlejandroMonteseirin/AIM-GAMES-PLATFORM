@@ -5,6 +5,13 @@
   
 <body>
 <div class="container">
+  {% if request.session.currentUser == 'manager' %}
+  <div class="center-align broadcastbtn">
+  <a  href="/broadcast/create">
+    <button class="btn waves-effect color1 waves-light">{% trans "sendBroadcast" %}</button>
+  </a>
+</div>
+  {% endif %}
   <ul class="collection">
     {% for u in users %}
     <li class="collection-item avatar" onclick="location.href = '/chat/user/{{u.0.id}}';">

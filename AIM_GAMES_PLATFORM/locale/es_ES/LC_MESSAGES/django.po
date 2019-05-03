@@ -1187,3 +1187,9 @@ msgstr "Nuevo hilo"
 
 #~ msgid "contactus"
 #~ msgstr "Contáctanos"
+
+msgid "sendBroadcast"
+msgstr "Enviar difusión"
+
+msgid "Add broadcast"
+msgstr "Crear difusión"
