@@ -58,8 +58,7 @@ def manage_subscription(request):
     sysvar = SystemVariables.objects.first()
     form = BuyCoinsForm()
     return render(request, 'subscription/manage_subscription.html',
-                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice,
-                   "encoded_email" : quote(settings.PAYPAL_RECEIVER_EMAIL)})
+                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
 
 
 def pagar_paypal_coins(request, quantity):
