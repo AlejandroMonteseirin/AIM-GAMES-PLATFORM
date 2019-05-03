@@ -53,14 +53,14 @@ def manage_subscription(request):
         return handler500(request)
     business = findByPrincipal(request)
     if request.method == 'POST':
-        form = BuyCoinsForm(request.POST)
+        form = BuyCoinsForm(request.POST, buss_id=business.id)
         if form.is_valid():
             return redirect('/buyCoins/' + str(form.cleaned_data['quantity']))
+    else:
+        form = BuyCoinsForm(buss_id=business.id)
     sysvar = SystemVariables.objects.first()
-    form = BuyCoinsForm()
     return render(request, 'subscription/manage_subscription.html',
-                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice,
-                   "encoded_email" : quote(settings.PAYPAL_RECEIVER_EMAIL)})
+                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
 
 
 def pagar_paypal_coins(request, quantity):
@@ -193,13 +193,13 @@ def paypal_coins_ipn(request, business_id, quantity):
     business = Business.objects.get(pk=business_id)
     if business.subscriptionModel is not None:
         if business.subscriptionModel.maxCoins > business.coins+quantity:
-            business.coins =+ quantity
+            business.coins += quantity
         else:
             business.coins = business.subscriptionModel.maxCoins
     else:
         sysvar = SystemVariables.objects.first()
         if sysvar.defaultMaxCoins > business.coins + quantity:
-            business.coins = + quantity
+            business.coins += quantity
         else:
             business.coins = sysvar.defaultMaxCoins
     business.save()
