@@ -1414,23 +1414,24 @@ def chats(request):
 
 def global_search(request):
     values = {}
-    usertype = checkUser(request)
-    if usertype=='freelancer' or usertype=='business' or usertype=='manager':
-        jobOffers, joboffer_sub = jobOfferSearch(request)
-        values = {**values, **{'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub}}
-    if usertype=='business':
-        curriculums, aptitudes, curriculum_sub = curriculumSearch(request)
-        values = {**values, **{'curriculums': curriculums,'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub}}
-    if usertype=='business' or usertype=='manager':
-        threads, businessThread = threadSearch(request)
-        values = {**values, **{'threads': threads, 'businessThread':businessThread}}
-    if request.user.is_authenticated:
-        events, sub_events = eventSearch(request)
-        values = {**values, **{'events': events, 'sub_events':sub_events}}
-    challenges, sub_challenges = challengeSearch(request)
-    values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
-
-
+    try:
+        usertype = checkUser(request)
+        if usertype=='freelancer' or usertype=='business' or usertype=='manager':
+            jobOffers, joboffer_sub = jobOfferSearch(request)
+            values = {**values, **{'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub}}
+        if usertype=='business':
+            curriculums, aptitudes, curriculum_sub = curriculumSearch(request)
+            values = {**values, **{'curriculums': curriculums,'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub}}
+        if usertype=='business' or usertype=='manager':
+            threads, businessThread = threadSearch(request)
+            values = {**values, **{'threads': threads, 'businessThread':businessThread}}
+        if request.user.is_authenticated:
+            events, sub_events = eventSearch(request)
+            values = {**values, **{'events': events, 'sub_events':sub_events}}
+        challenges, sub_challenges = challengeSearch(request)
+        values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
+    except:
+        result = values
     result = render(request, 'search.html', values) 
     return result
 
