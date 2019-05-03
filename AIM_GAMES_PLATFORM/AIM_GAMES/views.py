@@ -21,6 +21,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
 import random
 from urllib.parse import urlparse, quote
+from itertools import chain
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -517,8 +518,8 @@ def threadSearch(request):
 
     try:
         businessThread = get_object_or_404(Business,profile=request.user.profile)
-    except AttributeError:
-        return handler500(request)
+    except:
+        businessThread = None
 
     return q, businessThread
 
@@ -597,24 +598,27 @@ def curriculumSearch(request):
         search=request.GET.get('search')
         lista= set()
         pe=ProfessionalExperience.objects.filter( Q(center__icontains=search)
-        |Q(formation__icontains=search)).select_related('curriculum')
+        |Q(formation__icontains=search)).select_related('curriculum').order_by('-curriculum__featured')
         fo=Formation.objects.filter( Q(center__icontains=search)
-        |Q(formation__icontains=search)).select_related('curriculum')
-        ap=Aptitude.objects.filter(aptitude__icontains=search).select_related('curriculum')
-        gee=GraphicEngineExperience.objects.filter(graphicEngine__title__icontains=search).select_related('curriculum')
+        |Q(formation__icontains=search)).select_related('curriculum').order_by('-curriculum__featured')
+        ap=Aptitude.objects.filter(aptitude__icontains=search).select_related('curriculum').order_by('-curriculum__featured')
+        gee=GraphicEngineExperience.objects.filter(graphicEngine__title__icontains=search).select_related('curriculum').order_by('-curriculum__featured')
+        
+        
         for p in pe:
-            lista.add(p.curriculum)
+            lista.add(p.curriculum.id)
         for f in fo:
-            lista.add(f.curriculum)
+            lista.add(f.curriculum.id)
         for a in ap:
-            lista.add(a.curriculum)
+            lista.add(a.curriculum.id)
         for g in gee:
-            lista.add(g.curriculum) 
-        q=lista      
+            lista.add(g.curriculum.id)
+
+        q=Curriculum.objects.filter(id__in=lista).order_by('-featured')
     else:
         q=Curriculum.objects.all()
         q = q.order_by('-featured')
-    curriculums= q.order_by('-featured')
+    curriculums= q
     aptitudes={}
     for c in curriculums:
         aptitudesList=Aptitude.objects.filter(curriculum=c.id)
@@ -1005,7 +1009,8 @@ def linkDelete(request, id):
     instance.delete()
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
-def challengeList(request):
+
+def challengeSearch(request):
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
         try:
@@ -1020,6 +1025,10 @@ def challengeList(request):
         sub = False
     else:
         sub = True
+
+    return challenges, sub
+def challengeList(request):
+    challenges, sub = challengeSearch(request)
     return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub})
 
 def challengeCreate(request):
@@ -1118,7 +1127,7 @@ def terminosYCondiciones(request):
 def politicaPrivacidad(request):
     return render(request, "politica-privacidad.html")   
 
-def eventList(request):
+def eventSearch(request):
     if not request.user.is_authenticated:
         return handler500(request)
     if(request.GET.__contains__('search')):
@@ -1133,6 +1142,11 @@ def eventList(request):
         sub = False
     else:
         sub = True
+
+        return events, sub
+
+def eventList(request):
+    events, sub = eventSearch(request)
 
     return render(request, 'event/eventList.html', {'events':events, 'sub': sub})
 
@@ -1378,7 +1392,8 @@ def message_new(request):
     return JsonResponse({})
 
 def chatUser(request,userId):
-    userId = User.objects.get(pk=userId)
+    #userId = User.objects.get(pk=userId)
+    userId = get_object_or_404(User, pk=userId)
     return render(request, 'message/chatUser.html',{'user2':userId})
 
 def chats(request):
@@ -1398,10 +1413,28 @@ def chats(request):
     return render(request, 'message/chats.html',{'users':users})
 
 def global_search(request):
-    jobOffers, joboffer_sub = jobOfferSearch(request)
-    curriculums, aptitudes, curriculum_sub = curriculumSearch(request)
-    threads, businessThread = threadSearch(request)
+    values = {}
+    try:
+        usertype = checkUser(request)
+        if usertype=='freelancer' or usertype=='business' or usertype=='manager':
+            jobOffers, joboffer_sub = jobOfferSearch(request)
+            values = {**values, **{'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub}}
+        if usertype=='business':
+            curriculums, aptitudes, curriculum_sub = curriculumSearch(request)
+            values = {**values, **{'curriculums': curriculums,'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub}}
+        if usertype=='business' or usertype=='manager':
+            threads, businessThread = threadSearch(request)
+            values = {**values, **{'threads': threads, 'businessThread':businessThread}}
+        if request.user.is_authenticated:
+            events, sub_events = eventSearch(request)
+            values = {**values, **{'events': events, 'sub_events':sub_events}}
+        challenges, sub_challenges = challengeSearch(request)
+        values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
+    except:
+        result = values
+    result = render(request, 'search.html', values) 
+    return result
 
-
-    return render(request, 'search.html', {'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub, 'curriculums': curriculums,
-     'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub, 'threads': threads, 'businessThread':businessThread})
+    
+    #return render(request, 'search.html', {'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub, 'curriculums': curriculums,
+    # 'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub, 'threads': threads, 'businessThread':businessThread})
