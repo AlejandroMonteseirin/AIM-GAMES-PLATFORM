@@ -20,6 +20,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
 import random
+from urllib.parse import urlparse, quote
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -57,7 +58,8 @@ def manage_subscription(request):
     sysvar = SystemVariables.objects.first()
     form = BuyCoinsForm()
     return render(request, 'subscription/manage_subscription.html',
-                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
+                  {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice,
+                   "encoded_email" : quote(settings.PAYPAL_RECEIVER_EMAIL)})
 
 
 def pagar_paypal_coins(request, quantity):
