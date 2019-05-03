@@ -40,7 +40,7 @@
             <div class="col s12">
                 <div class="right">
                     {% if buss.coins >= price or edit %}
-                    <input style="font-size: 14pt;" type="submit" class="btn waves-effect waves btn-small" value="{% trans "Submit" %} {% if price %}({{price}}(C)){%endif%}">
+                    <input class="btn color1" type="submit" value="{% trans 'Submit' %}{% if price %} ({{price}} {% trans 'Coins' %}){% endif %}">
                     {% endif %}
 
                 </div>
