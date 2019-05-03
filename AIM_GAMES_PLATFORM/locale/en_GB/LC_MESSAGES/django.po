@@ -949,7 +949,6 @@ msgid "Contact"
 msgstr "Contact us"
 
 #: .\templates\jobOfferList.html:12
-#, fuzzy
 #| msgid "joboffers"
 msgid "joboffersearchinfo"
 msgstr ""

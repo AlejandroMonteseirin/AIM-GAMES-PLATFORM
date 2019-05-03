@@ -978,7 +978,6 @@ msgid "Contact"
 msgstr "Contacto"
 
 #: .\templates\jobOfferList.html:12
-#, fuzzy
 #| msgid "joboffers"
 msgid "joboffersearchinfo"
 msgstr ""
