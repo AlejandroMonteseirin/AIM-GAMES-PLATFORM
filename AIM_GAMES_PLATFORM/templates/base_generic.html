@@ -42,7 +42,7 @@
                     <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
                     <ul class="hide-on-med-and-down right">
                         <li><a href="/search"><i class="large material-icons">search</i></a></li>
-                        <li class="active"><a href="/">{% trans "mainpage" %}</a></li>
+                        <li><a href="/">{% trans "mainpage" %}</a></li>
                         {% if request.session.currentUser == 'business' %}
                             <li><a class="headerenlace" href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
                             <li><a class="headerenlace"  href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
@@ -83,7 +83,7 @@
 
         </div>
             <ul class="sidenav" id="slide_out">
-                <li class="active"><a>{% trans "mainpage" %}</a></li>
+                <li><a href="/">{% trans "mainpage" %}</a></li>
                 <li><a href="/terms-and-conditions" target="_self" class="collection-item">{% trans "terms-and-conditions" %}</a></li>
 				{% if request.session.currentUser == 'business' %}
                 	<li><a href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
