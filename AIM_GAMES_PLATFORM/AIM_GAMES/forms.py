@@ -365,3 +365,17 @@ class ReplyForm(ModelForm):
 class BuyCoinsForm(forms.Form):
     quantity = IntegerField(label=_('Quantity'))
 
+    def __init__(self,  *args, **kwargs):
+        self.buss = kwargs.pop('buss_id', None)
+        super(BuyCoinsForm, self).__init__(*args, **kwargs)
+
+    def clean_quantity(self):
+        print('clean: BuyCoinsForm: quantity')
+        quantity = self.cleaned_data['quantity']
+        business = Business.objects.get(pk=self.buss)
+        total = business.coins + quantity
+        system_variable = SystemVariables.objects.first()
+        if business.subscriptionModel and business.subscriptionModel.maxCoins < total or \
+                business.subscriptionModel is None and system_variable.defaultMaxCoins < total:
+            raise ValidationError(_("You can not buy more coins that the coins your wallet can hold"))
+        return quantity

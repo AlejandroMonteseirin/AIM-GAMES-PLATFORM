@@ -30,17 +30,24 @@
             <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<i class="tiny material-icons">blur_circular</i><br>
             <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<i class="tiny material-icons">blur_circular</i><br>
             <strong>{% trans 'Price' %}:</strong> {{buss.subscriptionModel.price}}€<br><br>
-            <!--{% trans "Cancel subs" %}-->
-
-            <a href="https://www.sandbox.paypal.com/myaccount/autopay/">{% trans "You can unsubscribe at any moment using paypal control panel" %}</A>
+            <a href="https://www.sandbox.paypal.com/myaccount/autopay/">{% trans "You can unsubscribe at any moment using paypal control panel" %}</a>
           {% endif %}
         </div>
         <div class="card targetaDentroDeTargetaxd">
           <span class="card-title">{% trans "Buy Coins" %}:</span><br>
           <strong>{{directPurchaseCoinsPrice}}€ {% trans "per coin" %}<i class="tiny material-icons">blur_circular</i></strong>
           <form method="POST">{% csrf_token %}
-            <div class="col l4">{{form}}</div><br><input class="btn color1" type="submit" value="{% trans 'Submit' %}">
-          </form>
+            <div class="col l4">
+            {% for field in form.visible_fields %}
+                {{field.label_tag }}
+                {{field}}
+            {% endfor %}
+            </div><br><input class="btn color1" type="submit" value="{% trans 'Submit' %}">
+              {% for field in form.visible_fields %}
+                <span class="red-text">{{ field.errors }}</span>
+              {% endfor %}
+          </form><br>
+            <span>{% trans "Note that you can't use coins if you are not subscribed " %}</span>
         </div>
       </div>
     </div>

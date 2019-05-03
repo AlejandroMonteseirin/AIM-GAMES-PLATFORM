@@ -52,11 +52,12 @@ def manage_subscription(request):
         return handler500(request)
     business = findByPrincipal(request)
     if request.method == 'POST':
-        form = BuyCoinsForm(request.POST)
+        form = BuyCoinsForm(request.POST, buss_id=business.id)
         if form.is_valid():
             return redirect('/buyCoins/' + str(form.cleaned_data['quantity']))
+    else:
+        form = BuyCoinsForm(buss_id=business.id)
     sysvar = SystemVariables.objects.first()
-    form = BuyCoinsForm()
     return render(request, 'subscription/manage_subscription.html',
                   {'form': form, 'buss': business, 'directPurchaseCoinsPrice': sysvar.directPurchaseCoinsPrice})
 
