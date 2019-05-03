@@ -106,6 +106,6 @@ urlpatterns = [
     path('chat/user/<int:userId>', chatUser,name='chatUser'),
     path('chats', chats,name='chats'),
     path('search', global_search),
-    
+    path('broadcast/create', broadcastCreate,name='broadcast'),
 
 ]

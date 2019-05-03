@@ -1435,6 +1435,29 @@ def global_search(request):
     result = render(request, 'search.html', values) 
     return result
 
-    
+def broadcastCreate(request):
+    if not request.user.is_authenticated:
+        return handler500(request)
+    if checkUser(request)=='manager':
+        user = request.user
+        if request.method == 'POST':
+            form = BroadcastForm(request.POST)
+            if form.is_valid():                
+                message = form.save(commit=False)
+                text = message.text
+                users = User.objects.exclude(pk=user.id)
+                for u in users:
+                    newMessage = Message(sender = user,recipient = u,subject = "dummy",text = text)
+                    newMessage.save()
+                print('broadcast done')
+                return redirect('/chats')
+            else:
+                return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add broadcast')})
+        else:
+            form = BroadcastForm()
+            return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add broadcast')})
+    else:
+        return handler500(request)
+
     #return render(request, 'search.html', {'jobOffers': jobOffers, 'joboffer_sub': joboffer_sub, 'curriculums': curriculums,
     # 'aptitudes': aptitudes, 'curriculum_sub': curriculum_sub, 'threads': threads, 'businessThread':businessThread})

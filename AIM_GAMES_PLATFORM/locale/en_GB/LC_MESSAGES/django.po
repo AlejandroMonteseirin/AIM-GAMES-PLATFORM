@@ -1143,3 +1143,9 @@ msgstr "New thread"
 
 #~ msgid "aboutus"
 #~ msgstr "About us"
+
+msgid "sendBroadcast"
+msgstr "Send broadcast"
+
+msgid "Add broadcast"
+msgstr "Create broadcast"
