@@ -1392,7 +1392,8 @@ def message_new(request):
     return JsonResponse({})
 
 def chatUser(request,userId):
-    userId = User.objects.get(pk=userId)
+    #userId = User.objects.get(pk=userId)
+    userId = get_object_or_404(User, pk=userId)
     return render(request, 'message/chatUser.html',{'user2':userId})
 
 def chats(request):
