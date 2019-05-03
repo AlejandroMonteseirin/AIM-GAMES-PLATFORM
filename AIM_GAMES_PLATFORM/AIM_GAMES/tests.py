@@ -21,14 +21,14 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Profile(self):
         user1 = User.objects.create_user(username='userProfileTest', password='userProfilePass')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(id=1001,user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(id=1001,user=user1, name='Antonio', surname='Arenas', email='userProfileTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         self.assertEqual(profile1.id, 1001)
 
     def test_valid_Profile(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -41,7 +41,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_ProfileNoURL(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio2@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000')
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -53,7 +53,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfilePhoneNumberNotDigit(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='nophone',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -65,7 +65,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfilePhoneNumberWrongDigit(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='95486512',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -77,7 +77,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfilePostalCodeNotDigit(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='nonCode', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -89,7 +89,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfilePostalCodeWrongDigit(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -101,7 +101,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfileIDCardNumber(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -113,7 +113,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_invalid_ProfileDateOfBirth(self):
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='2012-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
@@ -126,7 +126,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Freelancer(self):
         user2 = User.objects.create_user(username='userFreelancerTest', password='userFreelancerPass')
         url2=URL.objects.create(uri="http://www.pruebas.com")
-        profile2= Profile.objects.create(id=1002,user=user2, name='AntonioF', surname='ArenasF', email='antoniof@test.com', city='Sevilla', 
+        profile2= Profile.objects.create(id=1002,user=user2, name='AntonioF', surname='ArenasF', email='userFreelancerTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url2)
         freelancer1= Freelancer.objects.create(id=1003,profile=profile2,profession='Test profesion')
         self.assertEqual(freelancer1.id, 1003)
@@ -134,7 +134,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Freelancer(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='ContraseñaMuyNovedosa')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Pepe', surname='Perez', email='antonio2@gmail.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Pepe', surname='Perez', email='userProfileTest2@gmail.com', city='Sevilla',
             postalCode='41009', idCardNumber='12345678Z', dateOfBirth='1992-12-12', phoneNumber='635874125',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1, profession='Test profesion de pepe')
         data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
@@ -148,7 +148,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Profile inválido
         user1 = User.objects.create_user(username='userProfileTest3', password='userProfilePass3')
         url1=URL.objects.create(uri="http://www.pruebas3.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='2012-12-12 00:00', phoneNumber='987456321',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
@@ -161,7 +161,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Manager(self):
         user3 = User.objects.create_user(username='userBusinessTest', password='userBusinessPass')
         url3=URL.objects.create(uri="http://www.pruebas.com")
-        profile3= Profile.objects.create(user=user3, name='AntonioF', surname='ArenasF', email='antoniob@test.com', city='Sevilla',
+        profile3= Profile.objects.create(user=user3, name='AntonioF', surname='ArenasF', email='userBusinessTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url3)
         manager1= Manager.objects.create(id=1004,profile=profile3)
         self.assertEqual(manager1.id, 1004)
@@ -169,7 +169,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Curriculum(self):
         user4 = User.objects.create_user(username='userCurriculumTest', password='userCurriculumPass')
         url4=URL.objects.create(uri="http://www.pruebasC.com")
-        profile4= Profile.objects.create(user=user4, name='AntonioC', surname='ArenasC', email='antonioc@test.com', city='Sevilla', 
+        profile4= Profile.objects.create(user=user4, name='AntonioC', surname='ArenasC', email='userCurriculumTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url4)
         freelancer4= Freelancer.objects.create(profile=profile4,profession='Test curriculum')
         curriculum1= Curriculum.objects.create(id= 1005,freelancer=freelancer4,verified=True)
@@ -178,7 +178,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Profesional_Experience(self):
         user5 = User.objects.create_user(username='userPExperienceTest', password='userPExperiencePass')
         url5=URL.objects.create(uri="http://www.pruebasPE.com")
-        profile5= Profile.objects.create(user=user5, name='AntonioP', surname='ArenasE', email='antoniope@test.com', city='Sevilla', 
+        profile5= Profile.objects.create(user=user5, name='AntonioP', surname='ArenasE', email='userPExperienceTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url5)
         freelancer5= Freelancer.objects.create(profile=profile5,profession='Test profesionalExperience')
         curriculum1= Curriculum.objects.create(freelancer=freelancer5,verified=True)
@@ -189,7 +189,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Profesional_Experience(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antoniope2@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -204,7 +204,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Fecha fin inexistente
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio2@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -218,7 +218,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_GraphicEngine_Experience(self):
         user5 = User.objects.create_user(username='userGEExperienceTest', password='userGEExperiencePass')
         url5=URL.objects.create(uri="http://www.pruebasGEE.com")
-        profile5= Profile.objects.create(user=user5, name='AntonioG', surname='ArenasEE', email='antonioGEE@test.com', city='Sevilla', 
+        profile5= Profile.objects.create(user=user5, name='AntonioG', surname='ArenasEE', email='userGEExperienceTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url5)
         freelancer5= Freelancer.objects.create(profile=profile5,profession='Test GraphicprofesionalExperience')
         curriculum3= Curriculum.objects.create(freelancer=freelancer5,verified=True)
@@ -229,7 +229,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_GraphicEngine_Experience(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla',
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -244,7 +244,7 @@ class AIM_GAMES_TestCase(TestCase):
         #Probando el rango justo en los limites
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -259,7 +259,7 @@ class AIM_GAMES_TestCase(TestCase):
         #Probando el rango justo en los limites
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -274,7 +274,7 @@ class AIM_GAMES_TestCase(TestCase):
         #Probando el rango justo en los limites
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -289,7 +289,7 @@ class AIM_GAMES_TestCase(TestCase):
         #Probando el rango justo en los limites
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -304,7 +304,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Valor -1 (rango 0 a 100)
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -319,7 +319,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Valor 101 (rango 0 a 100)
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -335,7 +335,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_HTML5_Showcase(self):
         user6 = User.objects.create_user(username='userHTML5Test', password='userHTML5Pass')
         url6=URL.objects.create(uri="http://www.pruebasHTML5.com")
-        profile6= Profile.objects.create(user=user6, name='AntonioP', surname='ArenasE', email='antonioc@test.com', city='Sevilla', 
+        profile6= Profile.objects.create(user=user6, name='AntonioP', surname='ArenasE', email='userHTML5Test@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url6)
         freelancer6= Freelancer.objects.create(profile=profile6,profession='Test HTML5')
         curriculum5= Curriculum.objects.create(freelancer=freelancer6,verified=True)
@@ -345,7 +345,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Aptitude(self):
         user7 = User.objects.create_user(username='userAptitudeTest', password='userAptitudePass')
         url7=URL.objects.create(uri="http://www.pruebasAptitude.com")
-        profile7= Profile.objects.create(user=user7, name='AntonioAP', surname='ArenasTI', email='antoniotude@test.com', city='Sevilla', 
+        profile7= Profile.objects.create(user=user7, name='AntonioAP', surname='ArenasTI', email='userAptitudeTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url7)
         freelancer7= Freelancer.objects.create(profile=profile7,profession='Test Aptitude')
         curriculum6= Curriculum.objects.create(freelancer=freelancer7,verified=True)
@@ -355,7 +355,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Aptitude(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -368,7 +368,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Atributo aptitude inexistente
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -381,7 +381,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_Link(self):
         user8 = User.objects.create_user(username='userLinkTest', password='userLinkPass')
         url8=URL.objects.create(uri="http://www.pruebasLink.com")
-        profile8= Profile.objects.create(user=user8, name='AntonioL', surname='ArenasI', email='antonionk@test.com', city='Sevilla', 
+        profile8= Profile.objects.create(user=user8, name='AntonioL', surname='ArenasI', email='userLinkTest@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url8)
         freelancer8= Freelancer.objects.create(profile=profile8,profession='Test Link')
         curriculum6= Curriculum.objects.create(freelancer=freelancer8,verified=True)
@@ -391,7 +391,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Link(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
@@ -404,7 +404,7 @@ class AIM_GAMES_TestCase(TestCase):
         # Atributo URL inexistente
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='691000000',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
         curriculum1= Curriculum.objects.create(freelancer=freelancer1,verified=True)
