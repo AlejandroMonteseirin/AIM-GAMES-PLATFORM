@@ -111,6 +111,12 @@ class ProfileForm(ModelForm):
             raise ValidationError(_("validatePostal"))
         return data
 
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if Profile.objects.filter(email=data):
+            raise ValidationError(_("emailUnique"))
+        return data
+
     def clean_idCardNumber(self):
         data = self.cleaned_data['idCardNumber']
         word = 'TRWAGMYFPDXBNJZSQVHLCKE'
