@@ -661,7 +661,7 @@ msgstr "Borra tu cuenta para siempre"
 
 #: .\templates\business\standardForm.html:10 .\templates\thread\form.html:11
 msgid "You don't have enough coins to use this service"
-msgstr "No dispone de suficientes moendas para usar este servicio"
+msgstr "No dispone de suficientes monedas para usar este servicio"
 
 #: .\templates\challenge\challengeDetail.html:8
 msgid "Challenge details"
