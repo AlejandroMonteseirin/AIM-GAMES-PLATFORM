@@ -17,6 +17,13 @@
        }
    }
 </script>
+<style>
+  @media (max-width: 600px){
+    .vertical-margin4{
+      margin:4px 0px
+    }
+  }
+</style>
   
   
     <h3>{% trans "freelancerDetails" %}</h3>    
@@ -212,7 +219,7 @@
         </div>
         {% if request.session.currentUser == 'freelancer' %}
         <div class="col s12 m4 l4">
-                      <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "editHTML5Showcase" %}</a>
+                      <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red vertical-margin4">{% trans "editHTML5Showcase" %}</a>
         </div>
         <div class="col s12  m4 l4">
               <a href="/freelancer/html5showcase/delete/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "Delete" %}</a>
