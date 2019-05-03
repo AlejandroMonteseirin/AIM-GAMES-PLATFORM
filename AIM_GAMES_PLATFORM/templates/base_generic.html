@@ -119,7 +119,7 @@
             </ul>
     <div class="right-align">
         {% if request.session.currentUser == 'business' and wallet%}
-        {{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="tiny material-icons">blur_circular</i>
+        <span class="valign-wrapper right">{{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="small material-icons">blur_circular</i></span>
         {% endif %}
     </div>
             <main>
