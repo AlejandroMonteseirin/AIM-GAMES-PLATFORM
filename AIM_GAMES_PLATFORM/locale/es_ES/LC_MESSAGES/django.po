@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 10:14+0200\n"
+"POT-Creation-Date: 2019-05-03 11:21+0200\n"
 "PO-Revision-Date: 2019-03-29 13:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -70,7 +70,6 @@ msgid "validatePostal"
 msgstr "El Código Postal debe ser un número de 5 cifras"
 
 #: .\AIM_GAMES\forms.py:117
-#| msgid "emailUnique"
 msgid "emailUnique"
 msgstr "Ya existe una cuenta con ese correo electrónico"
 
@@ -443,88 +442,88 @@ msgstr "Enviar"
 msgid "recipient"
 msgstr "Destinatario"
 
-#: .\AIM_GAMES\views.py:708 .\AIM_GAMES\views.py:711
+#: .\AIM_GAMES\views.py:709 .\AIM_GAMES\views.py:712
 #: .\templates\freelancer\detail.html:65
 msgid "Add link"
 msgstr "Añadir enlace"
 
-#: .\AIM_GAMES\views.py:727 .\AIM_GAMES\views.py:730
+#: .\AIM_GAMES\views.py:728 .\AIM_GAMES\views.py:731
 #, fuzzy
 #| msgid "aptitudes"
 msgid "Add aptitude"
 msgstr "Añadir aptitud"
 
-#: .\AIM_GAMES\views.py:746 .\AIM_GAMES\views.py:749
+#: .\AIM_GAMES\views.py:747 .\AIM_GAMES\views.py:750
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Add graphic engine experience"
 msgstr "Añadir experiencia con motores gráficos"
 
-#: .\AIM_GAMES\views.py:765 .\AIM_GAMES\views.py:768
+#: .\AIM_GAMES\views.py:766 .\AIM_GAMES\views.py:769
 #, fuzzy
 #| msgid "profession"
 msgid "Add professional experience"
 msgstr "Añadir experiencia profesional"
 
-#: .\AIM_GAMES\views.py:784 .\AIM_GAMES\views.py:787
+#: .\AIM_GAMES\views.py:785 .\AIM_GAMES\views.py:788
 #, fuzzy
 #| msgid "formation"
 msgid "Add formation"
 msgstr "Añadir formación"
 
-#: .\AIM_GAMES\views.py:807 .\AIM_GAMES\views.py:810
+#: .\AIM_GAMES\views.py:808 .\AIM_GAMES\views.py:811
 #, fuzzy
 #| msgid "Edit Job Offer"
 msgid "Add Job Offer"
 msgstr "Añadir oferta de trabajo"
 
-#: .\AIM_GAMES\views.py:827
+#: .\AIM_GAMES\views.py:828
 msgid "Edit Job Offer"
 msgstr "Modificar oferta de trabajo"
 
-#: .\AIM_GAMES\views.py:857
+#: .\AIM_GAMES\views.py:858
 #, fuzzy
 #| msgid "editHTML5Showcase"
 msgid "Edit HTML5Showcase"
 msgstr "Modificar expositor de HTML5"
 
-#: .\AIM_GAMES\views.py:874
+#: .\AIM_GAMES\views.py:875
 #, fuzzy
 #| msgid "formation"
 msgid "Edit Formation"
 msgstr "Modificar formación"
 
-#: .\AIM_GAMES\views.py:891
+#: .\AIM_GAMES\views.py:892
 #, fuzzy
 #| msgid "addProfessionalExperience"
 msgid "Edit ProfessionalExperience"
 msgstr "Modificar experiencia profesional"
 
-#: .\AIM_GAMES\views.py:908
+#: .\AIM_GAMES\views.py:909
 #, fuzzy
 #| msgid "addAptitude"
 msgid "Edit Aptitude"
 msgstr "Modificar aptitud"
 
-#: .\AIM_GAMES\views.py:925
+#: .\AIM_GAMES\views.py:926
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Edit Graphic Engine Experience"
 msgstr "Modificar experiencia con motores gráficos"
 
-#: .\AIM_GAMES\views.py:942
+#: .\AIM_GAMES\views.py:943
 #, fuzzy
 #| msgid "Edit"
 msgid "Edit Link"
 msgstr "Modificar enlaces"
 
-#: .\AIM_GAMES\views.py:1039 .\AIM_GAMES\views.py:1042
+#: .\AIM_GAMES\views.py:1040 .\AIM_GAMES\views.py:1043
 #, fuzzy
 #| msgid "newChallenge"
 msgid "Add Challenge"
 msgstr "Añadir reto"
 
-#: .\AIM_GAMES\views.py:1298 .\AIM_GAMES\views.py:1301
+#: .\AIM_GAMES\views.py:1299 .\AIM_GAMES\views.py:1302
 #, fuzzy
 #| msgid "Message"
 msgid "Create Message"
@@ -599,7 +598,7 @@ msgstr "Términos y Condiciones"
 #: .\templates\event\standardForm.html:32
 #: .\templates\freelancer\standardForm.html:34 .\templates\message\chat.html:77
 #: .\templates\message\create.html:32
-#: .\templates\subscription\manage_subscription.html:40
+#: .\templates\subscription\manage_subscription.html:42
 #: .\templates\thread\form.html:43
 msgid "Submit"
 msgstr "Enviar"
@@ -1064,11 +1063,15 @@ msgstr "Monedas Ganadas al mes"
 msgid "Cancel subs"
 msgstr "Cancelar subscripción"
 
-#: .\templates\subscription\manage_subscription.html:37
+#: .\templates\subscription\manage_subscription.html:35
+msgid "You can unsubscribe at any moment using paypal control panel"
+msgstr "Puedes desuscribirte en cualquier momento usando el panel de control de paypal"
+
+#: .\templates\subscription\manage_subscription.html:39
 msgid "Buy Coins"
 msgstr "Comprar monedas"
 
-#: .\templates\subscription\manage_subscription.html:38
+#: .\templates\subscription\manage_subscription.html:40
 msgid "per coin"
 msgstr "por moneda"
 

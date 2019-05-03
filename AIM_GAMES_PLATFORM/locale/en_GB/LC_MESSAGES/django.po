@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 10:14+0200\n"
+"POT-Creation-Date: 2019-05-03 11:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,7 +71,6 @@ msgid "validatePostal"
 msgstr "Postal Code must be a 5 digits number"
 
 #: .\AIM_GAMES\forms.py:117
-#| msgid "emailUnique"
 msgid "emailUnique"
 msgstr "An account with that email already exist"
 
@@ -437,86 +436,86 @@ msgstr "Send"
 msgid "recipient"
 msgstr "Recipient"
 
-#: .\AIM_GAMES\views.py:708 .\AIM_GAMES\views.py:711
+#: .\AIM_GAMES\views.py:709 .\AIM_GAMES\views.py:712
 #: .\templates\freelancer\detail.html:65
 msgid "Add link"
 msgstr "Add link"
 
-#: .\AIM_GAMES\views.py:727 .\AIM_GAMES\views.py:730
+#: .\AIM_GAMES\views.py:728 .\AIM_GAMES\views.py:731
 #, fuzzy
 #| msgid "aptitudes"
 msgid "Add aptitude"
 msgstr "Add aptitudes"
 
-#: .\AIM_GAMES\views.py:746 .\AIM_GAMES\views.py:749
+#: .\AIM_GAMES\views.py:747 .\AIM_GAMES\views.py:750
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Add graphic engine experience"
 msgstr "Add graphic engine experience"
 
-#: .\AIM_GAMES\views.py:765 .\AIM_GAMES\views.py:768
+#: .\AIM_GAMES\views.py:766 .\AIM_GAMES\views.py:769
 #, fuzzy
 #| msgid "profession"
 msgid "Add professional experience"
 msgstr "Add professional experience"
 
-#: .\AIM_GAMES\views.py:784 .\AIM_GAMES\views.py:787
+#: .\AIM_GAMES\views.py:785 .\AIM_GAMES\views.py:788
 #, fuzzy
 #| msgid "formation"
 msgid "Add formation"
 msgstr "Add formation"
 
-#: .\AIM_GAMES\views.py:807 .\AIM_GAMES\views.py:810
+#: .\AIM_GAMES\views.py:808 .\AIM_GAMES\views.py:811
 msgid "Add Job Offer"
 msgstr "Add job offer"
 
-#: .\AIM_GAMES\views.py:827
+#: .\AIM_GAMES\views.py:828
 msgid "Edit Job Offer"
 msgstr "Edit job offer"
 
-#: .\AIM_GAMES\views.py:857
+#: .\AIM_GAMES\views.py:858
 #, fuzzy
 #| msgid "editHTML5Showcase"
 msgid "Edit HTML5Showcase"
 msgstr "Edit HTML5 Showcase"
 
-#: .\AIM_GAMES\views.py:874
+#: .\AIM_GAMES\views.py:875
 #, fuzzy
 #| msgid "formation"
 msgid "Edit Formation"
 msgstr "Edit formation"
 
-#: .\AIM_GAMES\views.py:891
+#: .\AIM_GAMES\views.py:892
 #, fuzzy
 #| msgid "addProfessionalExperience"
 msgid "Edit ProfessionalExperience"
 msgstr "Edit professional experience"
 
-#: .\AIM_GAMES\views.py:908
+#: .\AIM_GAMES\views.py:909
 #, fuzzy
 #| msgid "addAptitude"
 msgid "Edit Aptitude"
 msgstr "Edit aptitude"
 
-#: .\AIM_GAMES\views.py:925
+#: .\AIM_GAMES\views.py:926
 #, fuzzy
 #| msgid "addGraphicEngineExperience"
 msgid "Edit Graphic Engine Experience"
 msgstr "Edit graphic engine experience"
 
-#: .\AIM_GAMES\views.py:942
+#: .\AIM_GAMES\views.py:943
 #, fuzzy
 #| msgid "Edit"
 msgid "Edit Link"
 msgstr "Edit link"
 
-#: .\AIM_GAMES\views.py:1039 .\AIM_GAMES\views.py:1042
+#: .\AIM_GAMES\views.py:1040 .\AIM_GAMES\views.py:1043
 #, fuzzy
 #| msgid "newChallenge"
 msgid "Add Challenge"
 msgstr "Add challenge"
 
-#: .\AIM_GAMES\views.py:1298 .\AIM_GAMES\views.py:1301
+#: .\AIM_GAMES\views.py:1299 .\AIM_GAMES\views.py:1302
 #, fuzzy
 #| msgid "Message"
 msgid "Create Message"
@@ -590,7 +589,7 @@ msgstr "Terms and Conditions"
 #: .\templates\event\standardForm.html:32
 #: .\templates\freelancer\standardForm.html:34 .\templates\message\chat.html:77
 #: .\templates\message\create.html:32
-#: .\templates\subscription\manage_subscription.html:40
+#: .\templates\subscription\manage_subscription.html:42
 #: .\templates\thread\form.html:43
 msgid "Submit"
 msgstr "Submit"
@@ -1025,11 +1024,15 @@ msgstr ""
 msgid "Cancel subs"
 msgstr "Cancel Subscription"
 
-#: .\templates\subscription\manage_subscription.html:37
+#: .\templates\subscription\manage_subscription.html:35
+msgid "You can unsubscribe at any moment using paypal control panel"
+msgstr ""
+
+#: .\templates\subscription\manage_subscription.html:39
 msgid "Buy Coins"
 msgstr ""
 
-#: .\templates\subscription\manage_subscription.html:38
+#: .\templates\subscription\manage_subscription.html:40
 msgid "per coin"
 msgstr ""
 
