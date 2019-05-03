@@ -28,7 +28,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Profile(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio3@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
@@ -40,7 +40,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_ProfileNoURL(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='userProfilePass2')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio@test.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='antonio2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000')
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
@@ -133,7 +133,7 @@ class AIM_GAMES_TestCase(TestCase):
     def test_valid_Freelancer(self):
         user1 = User.objects.create_user(username='userProfileTest2', password='ContraseñaMuyNovedosa')
         url1=URL.objects.create(uri="http://www.pruebas.com")
-        profile1= Profile.objects.create(user=user1, name='Pepe', surname='Perez', email='antonio@gmail.com', city='Sevilla', 
+        profile1= Profile.objects.create(user=user1, name='Pepe', surname='Perez', email='antonio2@gmail.com', city='Sevilla',
             postalCode='41009', idCardNumber='12345678Z', dateOfBirth='1992-12-12', phoneNumber='635874125',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1, profession='Test profesion de pepe')
         data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
