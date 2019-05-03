@@ -1143,7 +1143,7 @@ def eventSearch(request):
     else:
         sub = True
 
-        return events, sub
+    return events, sub
 
 def eventList(request):
     events, sub = eventSearch(request)
