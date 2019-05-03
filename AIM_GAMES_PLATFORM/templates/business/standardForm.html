@@ -41,7 +41,7 @@
                         </div>
                         {% endfor %}
                         {% if buss == None or buss.coins > price %}
-                        <input class="btn color1" type="submit" value="{% trans 'Submit' %}{% if buss != None %} ({{price}}Coins){% endif %}">
+                        <input class="btn color1" type="submit" value="{% trans 'Submit' %}{% if buss != None %} ({{price}} {% trans 'Coins' %}){% endif %}">
                         {% endif %}
                     </div>
                 </div>
