@@ -31,10 +31,11 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
+        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_valid_ProfileNoURL(self):
@@ -43,7 +44,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest2@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12', phoneNumber='691000000')
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber,}
         form = ProfileForm(data=data)
@@ -55,7 +56,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='nophone',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -67,7 +68,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='41008', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='95486512',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -79,7 +80,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='nonCode', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -91,7 +92,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678Z', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -103,7 +104,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='1990-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -115,7 +116,7 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='2012-12-12 00:00', phoneNumber='987456321',photo=url1)
         data = {'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = ProfileForm(data=data)
@@ -137,7 +138,7 @@ class AIM_GAMES_TestCase(TestCase):
             postalCode='41009', idCardNumber='12345678Z', dateOfBirth='1992-12-12', phoneNumber='635874125',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1, profession='Test profesion de pepe')
         data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
-        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': profile1.email,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
         'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = FreelancerForm(data=data)
@@ -150,7 +151,10 @@ class AIM_GAMES_TestCase(TestCase):
         profile1= Profile.objects.create(user=user1, name='Antonio', surname='Arenas', email='userProfileTest3@test.com', city='Sevilla',
             postalCode='4100', idCardNumber='12345678A', dateOfBirth='2012-12-12 00:00', phoneNumber='987456321',photo=url1)
         freelancer1= Freelancer.objects.create(profile=profile1,profession='Test profesion')
-        data = {'profile': freelancer1.profile, 'profession': freelancer1.profession,}
+        data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
+        'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
+        'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
         form = FreelancerForm(data=data)
         self.assertFalse(form.is_valid())
 
