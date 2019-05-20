@@ -337,8 +337,9 @@ class Event(models.Model):
     messageOnJoin = models.TextField(blank=True, verbose_name=_("Predefined message for joining"))
     moment = models.DateTimeField(null=False)
     freelancers = models.ManyToManyField(
-        Freelancer, verbose_name=_("freelancers"))
-    companies = models.ManyToManyField(Business, verbose_name=_("companies"))
+        Freelancer, verbose_name=_("freelancers"),blank=True)
+    companies = models.ManyToManyField(Business, verbose_name=_("companies"),blank=True)
+    tags = models.ManyToManyField(Tag, related_name='tags',verbose_name=_("tags"),)
 
 # Objects for all users
 

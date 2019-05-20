@@ -1134,7 +1134,7 @@ def eventSearch(request):
         search=request.GET.get('search')
         q=Event.objects.filter( Q(location__icontains=search)|
             Q(title__icontains=search)|
-            Q(description__icontains=search))
+            Q(description__icontains=search)).select_related('tags')
     else:
         q=Event.objects.all()
     events= q
@@ -1155,10 +1155,14 @@ def eventCreate(request):
         manager = findByPrincipal(request)
         if request.method == 'POST':
             form = EventForm(request.POST)
-            if form.is_valid():                
+            
+            if form.is_valid(): 
+                tags = form.cleaned_data['tags']            
                 obj = form.save(commit=False)
                 obj.manager = manager
                 obj.save()
+                for tag in tags:
+                    obj.tags.add(tag)
                 print('Event saved')
                 return redirect('/event/list/')
             else:
@@ -1192,12 +1196,15 @@ def eventEdit(request, event_id):
 
     instance = get_object_or_404(Event, id=event_id)
     manager = findByPrincipal(request)
-
     form = EventForm(request.POST or None, instance=instance)
     if form.is_valid():
+        tags = form.cleaned_data['tags']
         obj = form.save(commit=False)
         obj.manager = manager
         obj.save()
+        obj.tags.set(())
+        for tag in tags:
+            obj.tags.add(tag)
         return redirect('/event/detail/'+str(event_id))
     return render(request,'event/standardForm.html',{'form':form})
 
