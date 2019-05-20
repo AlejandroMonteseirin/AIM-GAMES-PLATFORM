@@ -151,7 +151,7 @@
                 <div class="col s12 m3">
                 {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
                     <a class="colorEnlace right"  onclick="window.open('/userDownloadData')" >{% trans "DownloadData" %}</a><br>
-                    <a class="colorEnlace right"  href="/deleteUser" >{% trans "DeleteAllyourData" %}</a>
+                    <a class="colorEnlace right"  href="/deleteUser" onclick="return confirm('{% trans "You´re about to delete all your data. This action is irreversible, are you sure?" %}')">{% trans "DeleteAllyourData" %}</a>
 
                 {% endif %}
 

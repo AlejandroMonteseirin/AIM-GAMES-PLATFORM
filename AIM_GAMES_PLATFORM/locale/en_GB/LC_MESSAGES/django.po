@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 16:23+0200\n"
+"POT-Creation-Date: 2019-05-20 11:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -528,6 +528,10 @@ msgstr "Add challenge"
 msgid "Create Message"
 msgstr "Create message"
 
+#: .\AIM_GAMES\views.py:1455 .\AIM_GAMES\views.py:1458
+msgid "Add broadcast"
+msgstr "Create broadcast"
+
 #: .\templates\404.html:18
 msgid "error404"
 msgstr ""
@@ -539,7 +543,7 @@ msgid "error500"
 msgstr "Error in the server, relax by looking at this cats and try again"
 
 #: .\templates\accounts\login.html:20 .\templates\accounts\login.html:50
-#: .\templates\base_generic.html:77 .\templates\base_generic.html:117
+#: .\templates\base_generic.html:83 .\templates\base_generic.html:123
 msgid "Log In"
 msgstr "Log In"
 
@@ -551,8 +555,8 @@ msgstr "Loged as"
 msgid ", please logout before login again"
 msgstr ", please logout befor login again"
 
-#: .\templates\accounts\login.html:23 .\templates\base_generic.html:75
-#: .\templates\base_generic.html:115
+#: .\templates\accounts\login.html:23 .\templates\base_generic.html:81
+#: .\templates\base_generic.html:121
 msgid "Logout"
 msgstr "Logout"
 
@@ -585,8 +589,8 @@ msgid "acceptTerms"
 msgstr "I accept "
 
 #: .\templates\accounts\signup.html:92 .\templates\accounts\signup.html:95
-#: .\templates\base_generic.html:87 .\templates\base_generic.html:145
-#: .\templates\base_generic.html:148
+#: .\templates\base_generic.html:93 .\templates\base_generic.html:151
+#: .\templates\base_generic.html:154
 msgid "terms-and-conditions"
 msgstr "Terms and Conditions"
 
@@ -601,57 +605,63 @@ msgstr "Terms and Conditions"
 msgid "Submit"
 msgstr "Submit"
 
-#: .\templates\base_generic.html:45 .\templates\base_generic.html:86
+#: .\templates\base_generic.html:51 .\templates\base_generic.html:92
 msgid "mainpage"
 msgstr "Main page"
 
-#: .\templates\base_generic.html:47 .\templates\base_generic.html:89
+#: .\templates\base_generic.html:53 .\templates\base_generic.html:95
 #: .\templates\search.html:89 .\templates\thread\threadList.html:9
 msgid "threads"
 msgstr "Forum"
 
-#: .\templates\base_generic.html:48 .\templates\base_generic.html:54
-#: .\templates\base_generic.html:90 .\templates\base_generic.html:100
+#: .\templates\base_generic.html:54 .\templates\base_generic.html:60
+#: .\templates\base_generic.html:96 .\templates\base_generic.html:106
 #: .\templates\curriculumList.html:8 .\templates\search.html:18
 msgid "curriculums"
 msgstr "Curriculums"
 
-#: .\templates\base_generic.html:51 .\templates\base_generic.html:93
+#: .\templates\base_generic.html:57 .\templates\base_generic.html:99
 msgid "My curriculum"
 msgstr "Curriculums"
 
-#: .\templates\base_generic.html:57 .\templates\base_generic.html:96
+#: .\templates\base_generic.html:63 .\templates\base_generic.html:102
 #: .\templates\jobOfferList.html:7 .\templates\search.html:56
 msgid "joboffers"
 msgstr "Job offers"
 
-#: .\templates\base_generic.html:58 .\templates\base_generic.html:97
+#: .\templates\base_generic.html:64 .\templates\base_generic.html:103
 #, fuzzy
 #| msgid "newChallenge"
 msgid "Challenges"
 msgstr "Challenges"
 
-#: .\templates\base_generic.html:62 .\templates\base_generic.html:103
+#: .\templates\base_generic.html:68 .\templates\base_generic.html:109
 msgid "Admin Panel"
 msgstr "Admin Panel"
 
-#: .\templates\base_generic.html:66 .\templates\base_generic.html:111
+#: .\templates\base_generic.html:72 .\templates\base_generic.html:117
 msgid "Events"
 msgstr "Events"
 
-#: .\templates\base_generic.html:67 .\templates\base_generic.html:106
+#: .\templates\base_generic.html:73 .\templates\base_generic.html:112
 msgid "Messages"
 msgstr "Messages"
 
-#: .\templates\base_generic.html:73 .\templates\base_generic.html:113
+#: .\templates\base_generic.html:79 .\templates\base_generic.html:119
 msgid "Manage Subs"
 msgstr "Manage Subscription"
 
-#: .\templates\base_generic.html:153
+#: .\templates\base_generic.html:159
 msgid "DownloadData"
 msgstr "Download all your data"
 
-#: .\templates\base_generic.html:154
+#: .\templates\base_generic.html:160
+msgid ""
+"You´re about to delete all your data. This action is irreversible, are you "
+"sure?"
+msgstr ""
+
+#: .\templates\base_generic.html:160
 msgid "DeleteAllyourData"
 msgstr "Delete your account forever"
 
@@ -949,7 +959,6 @@ msgid "Contact"
 msgstr "Contact us"
 
 #: .\templates\jobOfferList.html:12
-#| msgid "joboffers"
 msgid "joboffersearchinfo"
 msgstr ""
 "To search job offers with a minimum salary, write minsal: followed by a "
@@ -958,6 +967,10 @@ msgstr ""
 #: .\templates\jobOfferList.html:44 .\templates\jobOfferList.html:48
 msgid "newOffer"
 msgstr "Create offer"
+
+#: .\templates\message\chats.html:11
+msgid "sendBroadcast"
+msgstr "Send broadcast"
 
 #: .\templates\message\create.html:7
 msgid "Message"
@@ -1143,9 +1156,3 @@ msgstr "New thread"
 
 #~ msgid "aboutus"
 #~ msgstr "About us"
-
-msgid "sendBroadcast"
-msgstr "Send broadcast"
-
-msgid "Add broadcast"
-msgstr "Create broadcast"
