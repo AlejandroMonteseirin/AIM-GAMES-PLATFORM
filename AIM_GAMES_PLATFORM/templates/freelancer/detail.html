@@ -25,9 +25,15 @@
   }
 </style>
   
-  
-    <h3>{% trans "freelancerDetails" %}</h3>    
-    <h5>{{ freelancer.profile.name }}</h5> 
+  <div class="row">
+    <div class="col s12 m12 l8 offset-l2">
+
+      <h3>{% trans "freelancerDetails" %}</h3>    
+      <h5>{{ freelancer.profile.name }}</h5> 
+    
+    </div> 
+          
+  </div>
     <div class="row">
       <div class="col s12 m12 l8 offset-l2 color1b">
 
@@ -41,10 +47,13 @@
             <a href="/freelancer/curriculum/unverify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "unverify" %}</a>
           {% endif %}
           {% if freelancer.curriculum.verified == True %}
-            {% trans "Verified curriculum" %}
-          {% endif %}
-          {% if freelancer.curriculum.verified == False %}
-            {% trans "Unverified curriculum" %}
+          <br>
+            <div class="center z-depth-3">
+              <div class="color1">
+                <span class="colorBlanco">{% trans "Verified curriculum" %}<i class="small material-icons">verified_user</i></span>
+              </div>
+            </div>
+            <br>
           {% endif %}
           {% if freelancer.curriculum.featured == False and request.session.currentUser == 'freelancer' %}
             <a href="/pagar_paypal_curriculum/" class="btn color1 waves-effect waves-red">{% trans "featured" %}</a>
@@ -225,9 +234,12 @@
               <a href="/freelancer/html5showcase/delete/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red">{% trans "Delete" %}</a>
           </div>
         {% endif %} 
-
+        <div class="col s12  m12 l12">
+          <div class="section"></div>
+        </div>
       </div>
     </div>
+    
 
 
 

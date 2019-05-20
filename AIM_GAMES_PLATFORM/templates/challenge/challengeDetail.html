@@ -24,6 +24,7 @@
     </div>
   </div>
   <div class="divider"></div>
+  {% if lookResponses == True %}
   <div class="row">
     <h4 class ="col m1.5"  >{% trans "responsesChallenge" %}:</h4>
     </div>
@@ -35,5 +36,6 @@
     </div>
     <div class="divider"></div>
     {% endfor %}
+  {% endif %}
 </div>  
 {% endblock %}
