@@ -1075,9 +1075,13 @@ def challengeResponse_create(request, challengeId):
 def challengeDetail(request, challenge_id):
         challenge = get_object_or_404(Challenge, pk=challenge_id)
         responsesChallenge = challenge.challengeresponse_set.all()
+        if challenge.business == findByPrincipal(request):
+            lookResponses = True
+        else:
+            lookResponses = False
         if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
             return handler500(request)
-        return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge})
+        return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses})
 
 def curriculumVerify(request, id):
     userString = checkUser(request)

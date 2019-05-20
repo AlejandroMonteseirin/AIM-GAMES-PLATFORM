@@ -145,7 +145,6 @@ msgstr "Please, enter a valid URL (starting with http/https)"
 #: .\AIM_GAMES\forms.py:330 .\AIM_GAMES\models.py:333
 #: .\templates\event\eventDetail.html:18 .\templates\event\eventList.html:20
 #: .\templates\search.html:109
-#, fuzzy
 #| msgid "valoration"
 msgid "location"
 msgstr "Location"
@@ -1104,10 +1103,8 @@ msgid "createAResponseForThisThread"
 msgstr "Create a response for this thread"
 
 #: .\templates\thread\threadDetail.html:67
-#, fuzzy
-#| msgid "newResponse"
 msgid "responses"
-msgstr "New response"
+msgstr "Responses"
 
 #: .\templates\thread\threadList.html:31 .\templates\thread\threadList.html:33
 #, fuzzy
