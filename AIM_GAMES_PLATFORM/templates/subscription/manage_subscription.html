@@ -22,7 +22,7 @@
           <span class="card-title">{% trans "Current Subs" %}:</span>
           {% if buss.subscriptionModel == None %}
           <br>
-            <a href="subscription">{% trans "You don't have any subscription, click here for see ours subscription models" %}</a><br>
+            <a href="subscription" onclick="alert('{% trans "Note that the subscription may take time to be updated" %}')">{% trans "You don't have any subscription, click here for see ours subscription models" %}</a><br>
             <span>{% trans "Note that the subscription may take time to be updated" %}</span>
           {% else %}
             <h5>{{buss.subscriptionModel.name}}</h5>
