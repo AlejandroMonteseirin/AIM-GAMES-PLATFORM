@@ -17,7 +17,7 @@
                 <div class="card-content center">
                     <div class="row">
                         {% for field in form.visible_fields %}
-
+                        <span class="red-text">{{ field.errors }}</span>
                         <div class="input-field col s12">
                             {% if 'Date' in field.html_name %}
                                 <div class="labelxd">{{ field.label_tag }}</div>
