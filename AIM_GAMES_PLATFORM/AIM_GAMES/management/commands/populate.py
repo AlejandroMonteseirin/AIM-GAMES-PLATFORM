@@ -100,11 +100,15 @@ class Command(BaseCommand):
         freelancer2,created = Freelancer.objects.get_or_create(profile=profile2, profession='Programmer')
         freelancer3,created = Freelancer.objects.get_or_create(profile=profile3, profession='Art Designer')
 
-        subscription_model, created = SubscriptionModel.objects.get_or_create(name="Standard Subscription",
-                                                                     description="Gain 10 coins per month", maxCoins=50,
+        subscription_model, created = SubscriptionModel.objects.get_or_create(name_eng="Standard Subscription",
+                                                                              name="Suscripción Estándar",
+                                                                     description_eng="Gain 10 coins per month",
+                                                                      description="Gana 10 monedas al mes", maxCoins=50,
                                                                      coinsGain=10, price=15)
-        subscription_model2, created = SubscriptionModel.objects.get_or_create(name="Premium Subscription",
-                                                                      description="Gain 50 coins per month",
+        subscription_model2, created = SubscriptionModel.objects.get_or_create(name_eng="Premium Subscription",
+                                                                               name="Suscripción Premium",
+                                                                      description_eng="Gain 50 coins per month",
+                                                                        description="Gana 50 monedas al mes",
                                                                       maxCoins=300, coinsGain=50, price=30)
         
         business1,created = Business.objects.get_or_create(profile=profile4, lastPayment='2014-12-12 00:00',

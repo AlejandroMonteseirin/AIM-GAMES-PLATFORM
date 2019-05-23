@@ -12,18 +12,32 @@
         <div class="card-tabs">
           <ul class="tabs tabs-fixed-width  tabs-transparent">
             {% for subs in subscriptions %}
-              <li class="tab"><a href="#{{subs.id}}">{{subs.name}}</a></li>
+              <li class="tab"><a href="#{{subs.id}}">
+                {%if request.session.language == 'es-ES'%}
+              {{subs.name}}
+              {% else %}
+              {{subs.name_eng}}
+              {%endif%}</a></li>
             {% endfor %}
           </ul>
         </div>
         <div class="card-content grey lighten-4">
           {% for subs in subscriptions %}
             <div id="{{subs.id}}">
-              {{subs.description}}<br><br>
+              {%if request.session.language == 'es-ES'%}
+              {{subs.description}}
+              {% else %}
+              {{subs.description_eng}}
+              {%endif%}
+              <br><br>
               <strong>{% trans 'Max Coins' %}:</strong> {{subs.maxCoins}}<i class="tiny material-icons">blur_circular</i><br>
               <strong>{% trans 'Coins Gain per month' %}:</strong> {{subs.coinsGain}}<i class='tiny material-icons'>blur_circular</i><br>
               <strong>{% trans 'Price' %}:</strong> {{subs.price}}€<br><br>
-              <a href="/pagar_paypal_subscripcion/{{subs.id}}/{{businessId}}" > {{subs.name}}</a>
+              <a href="/pagar_paypal_subscripcion/{{subs.id}}/{{businessId}}" > {%if request.session.language == 'es-ES'%}
+              {{subs.name}}
+              {% else %}
+              {{subs.name_eng}}
+              {%endif%}</a>
             </div>
           {% endfor %}
         </div>

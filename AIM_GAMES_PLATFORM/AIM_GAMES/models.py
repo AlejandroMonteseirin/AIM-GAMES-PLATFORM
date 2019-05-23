@@ -71,7 +71,9 @@ class Profile(models.Model):
 
 class SubscriptionModel(models.Model):
     name = models.CharField(max_length=30, verbose_name=_("Name"), blank=False, unique=True)
-    description = models.CharField(max_length=60, verbose_name=_("Description"))
+    name_eng = models.CharField(max_length=30, verbose_name=_("Name_ENG"), blank=False, unique=True)
+    description = models.CharField(max_length=60, verbose_name=_("Description"), default="")
+    description_eng = models.CharField(max_length=60, verbose_name=_("Description_ENG"), default="")
     maxCoins = models.IntegerField(verbose_name=_("Max Coin"), null=False)
     coinsGain = models.IntegerField(verbose_name=_("Coins Gain"), null=False)
     price = models.FloatField(verbose_name=_("Price"), null=False)
@@ -105,6 +107,7 @@ class Business(models.Model):
     coins = models.IntegerField(verbose_name=_("Coins"), null=False, default=0)
     lastPayment = models.DateTimeField(
         verbose_name=_("lastPayment"), null=True)
+    transactionStarted = models.BooleanField(verbose_name=_("Transaction Started"), null=False, default=False)
 
     def __str__(self):
         return self.profile.email
