@@ -29,16 +29,13 @@
     <div class="col s12 m12 l8 offset-l2">
 
       <h3>{% trans "freelancerDetails" %}</h3>    
-      <h5>{{ freelancer.profile.name }}</h5> 
+      <h5>{{ freelancer.profile.name }}</h5>
     
     </div> 
           
   </div>
     <div class="row">
       <div class="col s12 m12 l8 offset-l2 color1b">
-
-
-        
         <div class="col s12 m10 l10 offset-l1 offset-m1">
           {% if request.session.currentUser == 'manager' and freelancer.curriculum.verified == False%}
             <a href="/freelancer/curriculum/verify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "verify" %}</a>
@@ -54,6 +51,14 @@
               </div>
             </div>
             <br>
+          {% endif %}
+          {% if freelancer.curriculum.featured == True and request.session.currentUser == 'freelancer' %}
+
+            <div class="center z-depth-3">
+              <div class="color1">
+                <span class="colorBlanco">{% trans "Your curriculum is now featured" %}<i class="material-icons">star</i></span>
+              </div>
+            </div>
           {% endif %}
           {% if freelancer.curriculum.featured == False and request.session.currentUser == 'freelancer' %}
             <a href="/pagar_paypal_curriculum/" class="btn color1 waves-effect waves-red">{% trans "featured" %}</a>

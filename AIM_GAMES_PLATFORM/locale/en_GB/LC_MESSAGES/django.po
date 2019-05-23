@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-21 13:15+0200\n"
+"POT-Creation-Date: 2019-05-23 20:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -265,7 +265,7 @@ msgstr "Freelancer details"
 msgid "verified"
 msgstr "Verified"
 
-#: .\AIM_GAMES\models.py:127 .\templates\freelancer\detail.html:59
+#: .\AIM_GAMES\models.py:127 .\templates\freelancer\detail.html:64
 msgid "featured"
 msgstr "Highlight your curriculum"
 
@@ -280,7 +280,7 @@ msgid "center"
 msgstr "Center"
 
 #: .\AIM_GAMES\models.py:136 .\AIM_GAMES\models.py:154
-#: .\templates\freelancer\detail.html:86
+#: .\templates\freelancer\detail.html:91
 msgid "formation"
 msgstr "Formation"
 
@@ -395,7 +395,7 @@ msgid "recipient"
 msgstr "Recipient"
 
 #: .\AIM_GAMES\views.py:714 .\AIM_GAMES\views.py:717
-#: .\templates\freelancer\detail.html:81
+#: .\templates\freelancer\detail.html:86
 msgid "Add link"
 msgstr "Add link"
 
@@ -635,8 +635,8 @@ msgstr "Company"
 
 #: .\templates\challenge\challengeList.html:28
 #: .\templates\challenge\challengeList.html:30
-#: .\templates\curriculumList.html:38 .\templates\curriculumList.html:40
-#: .\templates\curriculumList.html:42 .\templates\event\eventList.html:36
+#: .\templates\curriculumList.html:39 .\templates\curriculumList.html:41
+#: .\templates\curriculumList.html:43 .\templates\event\eventList.html:36
 #: .\templates\event\eventList.html:38 .\templates\jobOfferList.html:33
 #: .\templates\jobOfferList.html:35 .\templates\message\list.html:23
 #: .\templates\message\list.html:31 .\templates\search.html:40
@@ -649,7 +649,7 @@ msgstr "View"
 
 #: .\templates\challenge\challengeList.html:30
 #: .\templates\challenge\challengeList.html:44
-#: .\templates\curriculumList.html:40 .\templates\event\eventList.html:38
+#: .\templates\curriculumList.html:41 .\templates\event\eventList.html:38
 #: .\templates\jobOfferList.html:35 .\templates\jobOfferList.html:48
 #: .\templates\message\list.html:41 .\templates\message\show.html:18
 #: .\templates\search.html:42 .\templates\search.html:74
@@ -686,7 +686,7 @@ msgstr ""
 msgid "Agreed"
 msgstr "Agreed"
 
-#: .\templates\curriculumList.html:20 .\templates\freelancer\detail.html:161
+#: .\templates\curriculumList.html:20 .\templates\freelancer\detail.html:166
 #: .\templates\search.html:22
 msgid "aptitudes"
 msgstr "Aptitudes"
@@ -703,21 +703,21 @@ msgstr "Join"
 msgid "Disjoin"
 msgstr "Disjoin"
 
-#: .\templates\event\eventDetail.html:74 .\templates\freelancer\detail.html:72
-#: .\templates\freelancer\detail.html:106
-#: .\templates\freelancer\detail.html:143
-#: .\templates\freelancer\detail.html:169
-#: .\templates\freelancer\detail.html:197 .\templates\jobOfferDetail.html:35
+#: .\templates\event\eventDetail.html:74 .\templates\freelancer\detail.html:77
+#: .\templates\freelancer\detail.html:111
+#: .\templates\freelancer\detail.html:148
+#: .\templates\freelancer\detail.html:174
+#: .\templates\freelancer\detail.html:202 .\templates\jobOfferDetail.html:35
 #: .\templates\thread\threadDetail.html:46
 msgid "Edit"
 msgstr "Edit"
 
-#: .\templates\event\eventDetail.html:75 .\templates\freelancer\detail.html:73
-#: .\templates\freelancer\detail.html:107
-#: .\templates\freelancer\detail.html:144
-#: .\templates\freelancer\detail.html:170
-#: .\templates\freelancer\detail.html:198
-#: .\templates\freelancer\detail.html:234 .\templates\jobOfferDetail.html:36
+#: .\templates\event\eventDetail.html:75 .\templates\freelancer\detail.html:78
+#: .\templates\freelancer\detail.html:112
+#: .\templates\freelancer\detail.html:149
+#: .\templates\freelancer\detail.html:175
+#: .\templates\freelancer\detail.html:203
+#: .\templates\freelancer\detail.html:239 .\templates\jobOfferDetail.html:36
 #: .\templates\thread\threadDetail.html:47
 msgid "Delete"
 msgstr "Delete"
@@ -744,59 +744,63 @@ msgstr ""
 msgid "freelancerDetails"
 msgstr "Freelancer details"
 
-#: .\templates\freelancer\detail.html:44
+#: .\templates\freelancer\detail.html:42
+msgid "Your curriculum is now featured"
+msgstr ""
+
+#: .\templates\freelancer\detail.html:49
 msgid "verify"
 msgstr "Verify curriculum"
 
-#: .\templates\freelancer\detail.html:47
+#: .\templates\freelancer\detail.html:52
 msgid "unverify"
 msgstr "Unverify curriculum"
 
-#: .\templates\freelancer\detail.html:53
+#: .\templates\freelancer\detail.html:58
 msgid "Verified curriculum"
 msgstr "Verified curriculum"
 
-#: .\templates\freelancer\detail.html:62
+#: .\templates\freelancer\detail.html:67
 msgid "links"
 msgstr "Links"
 
-#: .\templates\freelancer\detail.html:117
+#: .\templates\freelancer\detail.html:122
 msgid "addFormation"
 msgstr "Add formation"
 
-#: .\templates\freelancer\detail.html:122
+#: .\templates\freelancer\detail.html:127
 msgid "professionalExperience"
 msgstr "Professional experience"
 
-#: .\templates\freelancer\detail.html:154
+#: .\templates\freelancer\detail.html:159
 msgid "addProfessionalExperience"
 msgstr "Add professional experience"
 
-#: .\templates\freelancer\detail.html:178
+#: .\templates\freelancer\detail.html:183
 msgid "addAptitude"
 msgstr "Add aptitude"
 
-#: .\templates\freelancer\detail.html:184
+#: .\templates\freelancer\detail.html:189
 msgid "graphicEngineExperiences"
 msgstr "Graphic engine experiences"
 
-#: .\templates\freelancer\detail.html:207
+#: .\templates\freelancer\detail.html:212
 msgid "addGraphicEngineExperience"
 msgstr "Add graphic engine experience"
 
-#: .\templates\freelancer\detail.html:214
+#: .\templates\freelancer\detail.html:219
 msgid "HTML5Showcase"
 msgstr "HTML5 Showcase"
 
-#: .\templates\freelancer\detail.html:220
+#: .\templates\freelancer\detail.html:224
 msgid "mostrar"
 msgstr "Show HTML5 Showcase"
 
-#: .\templates\freelancer\detail.html:226
+#: .\templates\freelancer\detail.html:230
 msgid "Game not fully compatible? Try it out at "
 msgstr "Game not fully compatible? Try it out at "
 
-#: .\templates\freelancer\detail.html:231
+#: .\templates\freelancer\detail.html:236
 msgid "editHTML5Showcase"
 msgstr "Edit HTML5 Showcase"
 
@@ -938,14 +942,15 @@ msgid "Current Subs"
 msgstr "Current Subscription"
 
 #: .\templates\subscription\manage_subscription.html:25
+#: .\templates\subscription\manage_subscription.html:26
+msgid "Note that the subscription may take time to be updated"
+msgstr ""
+
+#: .\templates\subscription\manage_subscription.html:25
 msgid ""
 "You don't have any subscription, click here for see ours subscription models"
 msgstr ""
 "You don't have any subscription, click here to see ours subscription models"
-
-#: .\templates\subscription\manage_subscription.html:26
-msgid "Note that the subscription may take time to be updated"
-msgstr ""
 
 #: .\templates\subscription\manage_subscription.html:29
 msgid "Current Coins"
