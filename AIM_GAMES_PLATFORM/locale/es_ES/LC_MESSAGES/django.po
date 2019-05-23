@@ -999,8 +999,8 @@ msgstr ""
 msgid ""
 "You don't have any subscription, click here for see ours subscription models"
 msgstr ""
-"No dispone de ninguna susscripción, haga click aquí para ver nuestros "
-"modelos de susscripción"
+"No dispone de ninguna suscripción, haga click aquí para ver nuestros "
+"modelos de suscripción"
 
 #: .\templates\subscription\manage_subscription.html:29
 msgid "Current Coins"
