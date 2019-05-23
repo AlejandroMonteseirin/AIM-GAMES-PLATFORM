@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-23 20:13+0200\n"
+"POT-Creation-Date: 2019-05-23 21:17+0200\n"
 "PO-Revision-Date: 2019-03-29 13:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Profile not valid"
 msgstr "Perfil no válido"
 
-#: .\AIM_GAMES\forms.py:42 .\AIM_GAMES\models.py:88
+#: .\AIM_GAMES\forms.py:42 .\AIM_GAMES\models.py:90
 msgid "profession"
 msgstr "Profesión"
 
@@ -89,7 +89,7 @@ msgstr "Perfil no válido"
 msgid "Title"
 msgstr "Título"
 
-#: .\AIM_GAMES\forms.py:166 .\AIM_GAMES\models.py:74
+#: .\AIM_GAMES\forms.py:166 .\AIM_GAMES\models.py:75
 #: .\templates\challenge\challengeDetail.html:18
 #: .\templates\thread\threadDetail.html:30
 msgid "Description"
@@ -127,7 +127,7 @@ msgstr "Centro"
 msgid "Formation"
 msgstr "Formación"
 
-#: .\AIM_GAMES\forms.py:293 .\AIM_GAMES\models.py:185
+#: .\AIM_GAMES\forms.py:293 .\AIM_GAMES\models.py:188
 msgid "embedCode"
 msgstr "Fuente para iframe"
 
@@ -135,29 +135,29 @@ msgstr "Fuente para iframe"
 msgid "Please, enter a valid URL"
 msgstr "Por favor, introduzca una URL válida (Comenzando por http/https)"
 
-#: .\AIM_GAMES\forms.py:330 .\AIM_GAMES\models.py:333
+#: .\AIM_GAMES\forms.py:330 .\AIM_GAMES\models.py:336
 #: .\templates\event\eventDetail.html:18 .\templates\event\eventList.html:20
 #: .\templates\search.html:109
 msgid "location"
 msgstr "Lugar"
 
 #: .\AIM_GAMES\forms.py:331 .\AIM_GAMES\models.py:23 .\AIM_GAMES\models.py:31
-#: .\AIM_GAMES\models.py:243 .\AIM_GAMES\models.py:280
-#: .\AIM_GAMES\models.py:298 .\AIM_GAMES\models.py:316
-#: .\AIM_GAMES\models.py:335 .\templates\challenge\challengeList.html:20
+#: .\AIM_GAMES\models.py:246 .\AIM_GAMES\models.py:283
+#: .\AIM_GAMES\models.py:301 .\AIM_GAMES\models.py:319
+#: .\AIM_GAMES\models.py:338 .\templates\challenge\challengeList.html:20
 #: .\templates\event\eventList.html:19 .\templates\search.html:108
 #: .\templates\search.html:135
 msgid "title"
 msgstr "Título"
 
-#: .\AIM_GAMES\forms.py:332 .\AIM_GAMES\models.py:228 .\AIM_GAMES\models.py:244
-#: .\AIM_GAMES\models.py:281 .\AIM_GAMES\models.py:299
-#: .\AIM_GAMES\models.py:317 .\AIM_GAMES\models.py:336
+#: .\AIM_GAMES\forms.py:332 .\AIM_GAMES\models.py:231 .\AIM_GAMES\models.py:247
+#: .\AIM_GAMES\models.py:284 .\AIM_GAMES\models.py:302
+#: .\AIM_GAMES\models.py:320 .\AIM_GAMES\models.py:339
 #: .\templates\event\eventDetail.html:13 .\templates\jobOfferDetail.html:32
 msgid "description"
 msgstr "Descripción"
 
-#: .\AIM_GAMES\forms.py:333 .\AIM_GAMES\models.py:337
+#: .\AIM_GAMES\forms.py:333 .\AIM_GAMES\models.py:340
 msgid "Predefined message for joining"
 msgstr "Mensaje predefinido al unirse"
 
@@ -231,232 +231,248 @@ msgstr "Número de Teléfono"
 msgid "Photo"
 msgstr "Foto URL"
 
-#: .\AIM_GAMES\models.py:75
+#: .\AIM_GAMES\models.py:74
+#, fuzzy
+#| msgid "Name"
+msgid "Name_ENG"
+msgstr "Nombre"
+
+#: .\AIM_GAMES\models.py:76
+#, fuzzy
+#| msgid "Description"
+msgid "Description_ENG"
+msgstr "Descripción"
+
+#: .\AIM_GAMES\models.py:77
 msgid "Max Coin"
 msgstr "Monedas máximas"
 
-#: .\AIM_GAMES\models.py:76
+#: .\AIM_GAMES\models.py:78
 msgid "Coins Gain"
 msgstr "Monedas Ganadas"
 
-#: .\AIM_GAMES\models.py:77
+#: .\AIM_GAMES\models.py:79
 #: .\templates\subscription\manage_subscription.html:32
-#: .\templates\subscription\subscription.html:25
+#: .\templates\subscription\subscription.html:43
 msgid "Price"
 msgstr "Precio"
 
-#: .\AIM_GAMES\models.py:87 .\AIM_GAMES\models.py:103 .\AIM_GAMES\models.py:115
+#: .\AIM_GAMES\models.py:89 .\AIM_GAMES\models.py:105 .\AIM_GAMES\models.py:118
 msgid "profile"
 msgstr "Perfil"
 
-#: .\AIM_GAMES\models.py:105 .\templates\business\standardForm.html:44
+#: .\AIM_GAMES\models.py:107 .\templates\business\standardForm.html:44
 #: .\templates\thread\form.html:43
 msgid "Coins"
 msgstr "Monedas"
 
-#: .\AIM_GAMES\models.py:107
+#: .\AIM_GAMES\models.py:109
 msgid "lastPayment"
 msgstr "Último pago"
 
-#: .\AIM_GAMES\models.py:125 .\AIM_GAMES\models.py:312
+#: .\AIM_GAMES\models.py:110
+msgid "Transaction Started"
+msgstr ""
+
+#: .\AIM_GAMES\models.py:128 .\AIM_GAMES\models.py:315
 msgid "freelancer"
 msgstr "Detalles del freelancer"
 
-#: .\AIM_GAMES\models.py:126
+#: .\AIM_GAMES\models.py:129
 msgid "verified"
 msgstr "Verificado"
 
-#: .\AIM_GAMES\models.py:127 .\templates\freelancer\detail.html:64
+#: .\AIM_GAMES\models.py:130 .\templates\freelancer\detail.html:64
 msgid "featured"
 msgstr "Destaca tu curriculum"
 
-#: .\AIM_GAMES\models.py:132 .\AIM_GAMES\models.py:150
-#: .\AIM_GAMES\models.py:168 .\AIM_GAMES\models.py:184
-#: .\AIM_GAMES\models.py:194 .\AIM_GAMES\models.py:205
+#: .\AIM_GAMES\models.py:135 .\AIM_GAMES\models.py:153
+#: .\AIM_GAMES\models.py:171 .\AIM_GAMES\models.py:187
+#: .\AIM_GAMES\models.py:197 .\AIM_GAMES\models.py:208
 msgid "curriculum"
 msgstr "Curriculums"
 
-#: .\AIM_GAMES\models.py:134 .\AIM_GAMES\models.py:152
+#: .\AIM_GAMES\models.py:137 .\AIM_GAMES\models.py:155
 msgid "center"
 msgstr "Centro"
 
-#: .\AIM_GAMES\models.py:136 .\AIM_GAMES\models.py:154
+#: .\AIM_GAMES\models.py:139 .\AIM_GAMES\models.py:157
 #: .\templates\freelancer\detail.html:91
 msgid "formation"
 msgstr "Formación"
 
-#: .\AIM_GAMES\models.py:137 .\AIM_GAMES\models.py:155
+#: .\AIM_GAMES\models.py:140 .\AIM_GAMES\models.py:158
 msgid "startDate"
 msgstr "Fecha de comienzo"
 
-#: .\AIM_GAMES\models.py:138 .\AIM_GAMES\models.py:156
+#: .\AIM_GAMES\models.py:141 .\AIM_GAMES\models.py:159
 msgid "endDate"
 msgstr "Fecha de fin"
 
-#: .\AIM_GAMES\models.py:139 .\AIM_GAMES\models.py:157
+#: .\AIM_GAMES\models.py:142 .\AIM_GAMES\models.py:160
 msgid "miniature"
 msgstr "Miniatura"
 
-#: .\AIM_GAMES\models.py:170
+#: .\AIM_GAMES\models.py:173
 msgid "graphicEngine"
 msgstr "Experiencias con motores gráficos"
 
-#: .\AIM_GAMES\models.py:171
+#: .\AIM_GAMES\models.py:174
 msgid "graphicExperience"
 msgstr "Experiencias con motores gráficos"
 
-#: .\AIM_GAMES\models.py:196
+#: .\AIM_GAMES\models.py:199
 msgid "aptitude"
 msgstr "Aptitudes"
 
-#: .\AIM_GAMES\models.py:206
+#: .\AIM_GAMES\models.py:209
 msgid "url"
 msgstr "URL"
 
-#: .\AIM_GAMES\models.py:217 .\AIM_GAMES\models.py:241
-#: .\AIM_GAMES\models.py:268 .\AIM_GAMES\models.py:276
-#: .\AIM_GAMES\models.py:296 .\templates\thread\threadDetail.html:74
+#: .\AIM_GAMES\models.py:220 .\AIM_GAMES\models.py:244
+#: .\AIM_GAMES\models.py:271 .\AIM_GAMES\models.py:279
+#: .\AIM_GAMES\models.py:299 .\templates\thread\threadDetail.html:74
 msgid "business"
 msgstr "Registrarse como empresa"
 
-#: .\AIM_GAMES\models.py:219
+#: .\AIM_GAMES\models.py:222
 msgid "position"
 msgstr "Posición"
 
-#: .\AIM_GAMES\models.py:221 .\templates\jobOfferDetail.html:20
+#: .\AIM_GAMES\models.py:224 .\templates\jobOfferDetail.html:20
 msgid "experienceRequired"
 msgstr "Experiencia requerida"
 
-#: .\AIM_GAMES\models.py:223 .\templates\jobOfferDetail.html:23
+#: .\AIM_GAMES\models.py:226 .\templates\jobOfferDetail.html:23
 #: .\templates\jobOfferList.html:22 .\templates\search.html:61
 msgid "schedule"
 msgstr "Horario"
 
-#: .\AIM_GAMES\models.py:224 .\templates\jobOfferDetail.html:26
+#: .\AIM_GAMES\models.py:227 .\templates\jobOfferDetail.html:26
 #: .\templates\jobOfferList.html:21 .\templates\search.html:60
 msgid "salary"
 msgstr "Sueldo"
 
-#: .\AIM_GAMES\models.py:226 .\templates\jobOfferDetail.html:29
+#: .\AIM_GAMES\models.py:229 .\templates\jobOfferDetail.html:29
 msgid "ubication"
 msgstr "Ubicación"
 
-#: .\AIM_GAMES\models.py:229
+#: .\AIM_GAMES\models.py:232
 msgid "images"
 msgstr "URLs de imágenes"
 
-#: .\AIM_GAMES\models.py:245 .\AIM_GAMES\models.py:342
+#: .\AIM_GAMES\models.py:248 .\AIM_GAMES\models.py:345
 #: .\templates\event\eventDetail.html:28
 msgid "tags"
 msgstr "Etiquetas"
 
-#: .\AIM_GAMES\models.py:247 .\AIM_GAMES\models.py:282
+#: .\AIM_GAMES\models.py:250 .\AIM_GAMES\models.py:285
 msgid "pics"
 msgstr "Imágenes"
 
-#: .\AIM_GAMES\models.py:249
+#: .\AIM_GAMES\models.py:252
 msgid "attachedFiles"
 msgstr "Archivos adjuntos"
 
-#: .\AIM_GAMES\models.py:263
+#: .\AIM_GAMES\models.py:266
 msgid "score"
 msgstr "Puntuación"
 
-#: .\AIM_GAMES\models.py:266 .\AIM_GAMES\models.py:278
+#: .\AIM_GAMES\models.py:269 .\AIM_GAMES\models.py:281
 msgid "thread"
 msgstr "Foro"
 
-#: .\AIM_GAMES\models.py:300
+#: .\AIM_GAMES\models.py:303
 msgid "objectives"
 msgstr "Objetivos"
 
-#: .\AIM_GAMES\models.py:302 .\AIM_GAMES\models.py:340
+#: .\AIM_GAMES\models.py:305 .\AIM_GAMES\models.py:343
 #: .\templates\event\eventDetail.html:38
 msgid "freelancers"
 msgstr "Detalles del freelancer"
 
-#: .\AIM_GAMES\models.py:314
+#: .\AIM_GAMES\models.py:317
 msgid "challenge"
 msgstr "Retos"
 
-#: .\AIM_GAMES\models.py:332
+#: .\AIM_GAMES\models.py:335
 msgid "manager"
 msgstr "Manager"
 
-#: .\AIM_GAMES\models.py:341 .\templates\event\eventDetail.html:48
+#: .\AIM_GAMES\models.py:344 .\templates\event\eventDetail.html:48
 msgid "companies"
 msgstr "Empresa"
 
-#: .\AIM_GAMES\models.py:348 .\templates\message\list.html:12
+#: .\AIM_GAMES\models.py:351 .\templates\message\list.html:12
 msgid "sender"
 msgstr "Enviar"
 
-#: .\AIM_GAMES\models.py:350
+#: .\AIM_GAMES\models.py:353
 msgid "recipient"
 msgstr "Destinatario"
 
-#: .\AIM_GAMES\views.py:714 .\AIM_GAMES\views.py:717
+#: .\AIM_GAMES\views.py:723 .\AIM_GAMES\views.py:726
 #: .\templates\freelancer\detail.html:86
 msgid "Add link"
 msgstr "Añadir enlace"
 
-#: .\AIM_GAMES\views.py:733 .\AIM_GAMES\views.py:736
+#: .\AIM_GAMES\views.py:742 .\AIM_GAMES\views.py:745
 msgid "Add aptitude"
 msgstr "Añadir aptitud"
 
-#: .\AIM_GAMES\views.py:752 .\AIM_GAMES\views.py:755
+#: .\AIM_GAMES\views.py:761 .\AIM_GAMES\views.py:764
 msgid "Add graphic engine experience"
 msgstr "Añadir experiencia con motores gráficos"
 
-#: .\AIM_GAMES\views.py:771 .\AIM_GAMES\views.py:774
+#: .\AIM_GAMES\views.py:780 .\AIM_GAMES\views.py:783
 msgid "Add professional experience"
 msgstr "Añadir experiencia profesional"
 
-#: .\AIM_GAMES\views.py:790 .\AIM_GAMES\views.py:793
+#: .\AIM_GAMES\views.py:799 .\AIM_GAMES\views.py:802
 msgid "Add formation"
 msgstr "Añadir formación"
 
-#: .\AIM_GAMES\views.py:813 .\AIM_GAMES\views.py:816
+#: .\AIM_GAMES\views.py:822 .\AIM_GAMES\views.py:825
 msgid "Add Job Offer"
 msgstr "Añadir oferta de trabajo"
 
-#: .\AIM_GAMES\views.py:833
+#: .\AIM_GAMES\views.py:842
 msgid "Edit Job Offer"
 msgstr "Modificar oferta de trabajo"
 
-#: .\AIM_GAMES\views.py:863
+#: .\AIM_GAMES\views.py:872
 msgid "Edit HTML5Showcase"
 msgstr "Modificar expositor de HTML5"
 
-#: .\AIM_GAMES\views.py:880
+#: .\AIM_GAMES\views.py:889
 msgid "Edit Formation"
 msgstr "Modificar formación"
 
-#: .\AIM_GAMES\views.py:897
+#: .\AIM_GAMES\views.py:906
 msgid "Edit ProfessionalExperience"
 msgstr "Modificar experiencia profesional"
 
-#: .\AIM_GAMES\views.py:914
+#: .\AIM_GAMES\views.py:923
 msgid "Edit Aptitude"
 msgstr "Modificar aptitud"
 
-#: .\AIM_GAMES\views.py:931
+#: .\AIM_GAMES\views.py:940
 msgid "Edit Graphic Engine Experience"
 msgstr "Modificar experiencia con motores gráficos"
 
-#: .\AIM_GAMES\views.py:948
+#: .\AIM_GAMES\views.py:957
 msgid "Edit Link"
 msgstr "Modificar enlaces"
 
-#: .\AIM_GAMES\views.py:1050 .\AIM_GAMES\views.py:1053
+#: .\AIM_GAMES\views.py:1059 .\AIM_GAMES\views.py:1062
 msgid "Add Challenge"
 msgstr "Añadir reto"
 
-#: .\AIM_GAMES\views.py:1325 .\AIM_GAMES\views.py:1328
+#: .\AIM_GAMES\views.py:1334 .\AIM_GAMES\views.py:1337
 msgid "Create Message"
 msgstr "Crear mensaje"
 
-#: .\AIM_GAMES\views.py:1466 .\AIM_GAMES\views.py:1469
+#: .\AIM_GAMES\views.py:1475 .\AIM_GAMES\views.py:1478
 msgid "Add broadcast"
 msgstr "Crear difusión"
 
@@ -747,21 +763,21 @@ msgstr ""
 msgid "freelancerDetails"
 msgstr "Detalles del freelancer"
 
-#: .\templates\freelancer\detail.html:42
-msgid "Your curriculum is now featured"
-msgstr "Tu curriculum está destacado"
-
-#: .\templates\freelancer\detail.html:49
+#: .\templates\freelancer\detail.html:41
 msgid "verify"
 msgstr "Verificar curriculum"
 
-#: .\templates\freelancer\detail.html:52
+#: .\templates\freelancer\detail.html:44
 msgid "unverify"
 msgstr "Quitar verificación curriculum"
 
-#: .\templates\freelancer\detail.html:58
+#: .\templates\freelancer\detail.html:50
 msgid "Verified curriculum"
 msgstr "Curriculum verificado"
+
+#: .\templates\freelancer\detail.html:59
+msgid "Your curriculum is now featured"
+msgstr "Tu curriculum está destacado"
 
 #: .\templates\freelancer\detail.html:67
 msgid "links"
@@ -991,12 +1007,12 @@ msgid "Current Coins"
 msgstr "Monedas actuales"
 
 #: .\templates\subscription\manage_subscription.html:30
-#: .\templates\subscription\subscription.html:23
+#: .\templates\subscription\subscription.html:41
 msgid "Max Coins"
 msgstr "Monedas Máximas"
 
 #: .\templates\subscription\manage_subscription.html:31
-#: .\templates\subscription\subscription.html:24
+#: .\templates\subscription\subscription.html:42
 msgid "Coins Gain per month"
 msgstr "Monedas Ganadas al mes"
 
@@ -1018,7 +1034,13 @@ msgstr "por moneda"
 msgid "Note that you can't use coins if you are not subscribed "
 msgstr "Tenga en cuenta que no podrá usar las monedas si no está suscrito"
 
-#: .\templates\subscription\subscription.html:10
+#: .\templates\subscription\subscription.html:8
+msgid ""
+"It´s seems like you´ve already started a transaction and we´re currently "
+"checking it, if you continue the subscription will be overwritten"
+msgstr "Parece que ya has empezado una transacción y aun estamos comprobándola, si continua, la transacción será sobreescrita"
+
+#: .\templates\subscription\subscription.html:18
 msgid "Choose a subs Type"
 msgstr "Elija un modelo de suscripción"
 

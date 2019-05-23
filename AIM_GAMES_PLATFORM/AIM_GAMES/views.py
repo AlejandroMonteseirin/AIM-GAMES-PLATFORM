@@ -44,8 +44,10 @@ def setlanguage(request, language):
 
 def subscriptionChoose(request):
     user = request.user.id
+    buss = findByPrincipal(request)
     subscriptionModels = SubscriptionModel.objects.all()
-    return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels})
+    return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels,
+                                                              'trans': buss.transactionStarted})
 
 
 def manage_subscription(request):
@@ -124,6 +126,9 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
+    business = findByPrincipal(request)
+    business.transactionStarted = True
+    business.save()
     return render(request, 'pagarPaypal.html', {'form': form})
 
 def pagarPaypal_Curriculum(request):
@@ -168,6 +173,8 @@ def paypal_subscription_ipn(request, businessId):
         if request.POST.get('payment_status') == 'Completed':
             print("Completed")
             subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
+            if business.transactionStarted:
+                business.transactionStarted = False
             if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
                 business.subscriptionModel = subscription
             business.coins = business.coins + subscription.coinsGain
@@ -178,6 +185,8 @@ def paypal_subscription_ipn(request, businessId):
     elif request.POST.get('txn_type') == 'subscr_cancel':
         print("Canceled")
         business.subscriptionModel = None
+        if business.transactionStarted:
+            business.transactionStarted = False
         business.save()
     elif request.POST.get('txn_type') == 'subscr_signup':
         print("Confirmed")
