@@ -209,12 +209,11 @@
         {% endif %}
 
       </div>
-
+        {% if HTML5Showcase.embedCode.length == 0 %}
         <div class="col s12 m12 l12">
           <b>{% trans "HTML5Showcase" %}:</b>
 
         </div>
-
         <div class="col s12  m4 l4">
           <a href="#!" onclick="toggle_showcase();" class="btn color1 waves-effect waves-red">
             {% trans "mostrar" %}</a>
@@ -226,6 +225,7 @@
             {% trans "Game not fully compatible? Try it out at " %}<a href="{{HTML5Showcase.embedCode}}">{{HTML5Showcase.embedCode}}</a>
           </blockquote>
         </div>
+        {% endif %}
         {% if request.session.currentUser == 'freelancer' %}
         <div class="col s12 m4 l4">
                       <a href="/freelancer/html5showcase/edit/{{HTML5Showcase.id}}" class="btn  color1 waves-effect waves-red vertical-margin4">{% trans "editHTML5Showcase" %}</a>

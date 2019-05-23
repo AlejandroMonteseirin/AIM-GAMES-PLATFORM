@@ -24,7 +24,8 @@
                 <div class="collection-item">
                     <div class="row">
                         {% if curriculums %}
-                        <div class="col s4">{% if curriculum.featured %} <i class="material-icons">star</i> {% endif %}{{curriculum.freelancer.profile.name }}</div>
+                        <div class="col s4">{% if curriculum.featured %} <i class="material-icons">star</i> {% endif %}{% if curriculum.verified %} <i class="material-icons">verified_user</i> {% endif %}{{curriculum.freelancer.profile.name }}</div>
+                        
                         <div class="col s4">
                             {% for key, value in aptitudes.items %}
                                 {% if curriculum.id == key %}
