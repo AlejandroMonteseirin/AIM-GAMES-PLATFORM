@@ -115,8 +115,7 @@ class Command(BaseCommand):
                                                            subscriptionModel=subscription_model, coins=50)
         business2,created = Business.objects.get_or_create(profile=profile5, lastPayment='2014-12-12 00:00',
                                                            subscriptionModel=subscription_model2, coins=300)
-        business3,created = Business.objects.get_or_create(profile=profile6, lastPayment='2014-12-12 00:00',
-                                                           coins=5)
+        business3,created = Business.objects.get_or_create(profile=profile6, coins=5)
 
         manager1, created = Manager.objects.get_or_create(profile=profile7)
         manager2, created = Manager.objects.get_or_create(profile=profile8)

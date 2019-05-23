@@ -22,6 +22,8 @@ from django.db.models import Avg, Count, Min, Sum, Value, CharField, Aggregate
 import random
 from urllib.parse import urlparse, quote
 from itertools import chain
+import pytz
+from django.utils import timezone
 
 from django.utils.translation import gettext as _
 from django.utils import translation
@@ -44,10 +46,18 @@ def setlanguage(request, language):
 
 def subscriptionChoose(request):
     user = request.user.id
-    buss = findByPrincipal(request)
+    business = findByPrincipal(request)
+    from_date = datetime.now() - timedelta(minutes=30)
+    utc = pytz.UTC
+    print(from_date.replace(tzinfo=utc))
+    print(business.lastPayment.replace(tzinfo=utc))
+    if business.lastPayment is not None and business.lastPayment.replace(tzinfo=utc) > from_date.replace(tzinfo=utc):
+        trans = True
+    else:
+        trans = False
     subscriptionModels = SubscriptionModel.objects.all()
     return render(request, 'subscription/subscription.html', {'businessId': user, 'subscriptions': subscriptionModels,
-                                                              'trans': buss.transactionStarted})
+                                                              'trans': trans})
 
 
 def manage_subscription(request):
@@ -127,7 +137,7 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     business = findByPrincipal(request)
-    business.transactionStarted = True
+    business.lastPayment = datetime.now()
     business.save()
     return render(request, 'pagarPaypal.html', {'form': form})
 
@@ -173,8 +183,7 @@ def paypal_subscription_ipn(request, businessId):
         if request.POST.get('payment_status') == 'Completed':
             print("Completed")
             subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
-            if business.transactionStarted:
-                business.transactionStarted = False
+            business.lastPayment = None
             if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
                 business.subscriptionModel = subscription
             business.coins = business.coins + subscription.coinsGain
@@ -185,8 +194,7 @@ def paypal_subscription_ipn(request, businessId):
     elif request.POST.get('txn_type') == 'subscr_cancel':
         print("Canceled")
         business.subscriptionModel = None
-        if business.transactionStarted:
-            business.transactionStarted = False
+        business.lastPayment = None
         business.save()
     elif request.POST.get('txn_type') == 'subscr_signup':
         print("Confirmed")
