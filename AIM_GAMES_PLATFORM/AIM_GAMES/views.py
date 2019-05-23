@@ -49,8 +49,6 @@ def subscriptionChoose(request):
     business = findByPrincipal(request)
     from_date = datetime.now() - timedelta(minutes=30)
     utc = pytz.UTC
-    print(from_date.replace(tzinfo=utc))
-    print(business.lastPayment.replace(tzinfo=utc))
     if business.lastPayment is not None and business.lastPayment.replace(tzinfo=utc) > from_date.replace(tzinfo=utc):
         trans = True
     else:
