@@ -59,6 +59,7 @@ def subscriptionChoose(request):
 
 
 def manage_subscription(request):
+
     if checkUser(request) != 'business':
         return handler500(request)
     business = findByPrincipal(request)
@@ -180,16 +181,15 @@ def paypal_subscription_ipn(request, businessId):
         print("Subcription Payment")
         if request.POST.get('payment_status') == 'Completed':
             print("Completed")
-            subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
-            print("Completed 2")
-            business.lastPayment = None
-            print(business.lastPayment)
-            if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
-                business.subscriptionModel = subscription
-            business.coins = business.coins + subscription.coinsGain
-            if business.coins > subscription.maxCoins:
-                business.coins = subscription.maxCoins
-            business.save()
+            # subscription = get_object_or_404(SubscriptionModel, name_eng=request.POST.get('item_name'))
+            # business.lastPayment = None
+            # print(business.lastPayment)
+            # if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
+            #     business.subscriptionModel = subscription
+            # business.coins = business.coins + subscription.coinsGain
+            # if business.coins > subscription.maxCoins:
+            #     business.coins = subscription.maxCoins
+            # business.save()
 
     elif request.POST.get('txn_type') == 'subscr_cancel':
         print("Canceled")
