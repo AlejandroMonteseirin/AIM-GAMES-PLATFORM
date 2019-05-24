@@ -1002,7 +1002,9 @@ msgstr ""
 msgid ""
 "It´s seems like you´ve already started a transaction and we´re currently "
 "checking it, if you continue the subscription will be overwritten"
-msgstr ""
+msgstr "It´s seems like you´ve already started a transaction and we´re currently "
+"checking it, if you continue the subscription will be overwritten and duplicated payments"
+" could be issued"
 
 #: .\templates\subscription\subscription.html:18
 msgid "Choose a subs Type"

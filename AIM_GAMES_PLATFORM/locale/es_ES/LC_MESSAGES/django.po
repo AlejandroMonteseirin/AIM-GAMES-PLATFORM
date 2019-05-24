@@ -1038,7 +1038,8 @@ msgstr "Tenga en cuenta que no podrá usar las monedas si no está suscrito"
 msgid ""
 "It´s seems like you´ve already started a transaction and we´re currently "
 "checking it, if you continue the subscription will be overwritten"
-msgstr "Parece que ya has empezado una transacción y aun estamos comprobándola, si continua, la transacción será sobreescrita"
+msgstr "Parece que ya has empezado una transacción y aun estamos comprobándola"
+", si continua, la transacción será sobreescrita y es posible que se emitan pagos duplicados"
 
 #: .\templates\subscription\subscription.html:18
 msgid "Choose a subs Type"
