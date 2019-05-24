@@ -50,7 +50,7 @@
           </div>
       {% endfor %}
       </div>
-
+      {% if not owner %}
         <div class="card color1b">
           <div class="card-body">
             <div class="row">
@@ -61,6 +61,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
     </div>
 </div>
 {% endblock %}
