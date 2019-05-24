@@ -181,7 +181,9 @@ def paypal_subscription_ipn(request, businessId):
         if request.POST.get('payment_status') == 'Completed':
             print("Completed")
             subscription = get_object_or_404(SubscriptionModel, name=request.POST.get('item_name'))
+            print("Completed 2")
             business.lastPayment = None
+            print(business.lastPayment)
             if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
                 business.subscriptionModel = subscription
             business.coins = business.coins + subscription.coinsGain
