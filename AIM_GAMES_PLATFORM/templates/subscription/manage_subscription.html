@@ -25,7 +25,11 @@
             <a href="subscription" onclick="alert('{% trans "Note that the subscription may take time to be updated" %}')">{% trans "You don't have any subscription, click here for see ours subscription models" %}</a><br>
             <span>{% trans "Note that the subscription may take time to be updated" %}</span>
           {% else %}
-            <h5>{{buss.subscriptionModel.name}}</h5>
+            <h5>{%if request.session.language == 'es-ES'%}
+              {{buss.subscriptionModel.name}}
+              {% else %}
+              {{buss.subscriptionModel.name_eng}}
+              {%endif%}</h5>
             <strong>{% trans 'Current Coins' %}:</strong> {{buss.coins}}<i class="tiny material-icons">blur_circular</i><br>
             <strong>{% trans 'Max Coins' %}:</strong> {{buss.subscriptionModel.maxCoins}}<i class="tiny material-icons">blur_circular</i><br>
             <strong>{% trans 'Coins Gain per month' %}:</strong> {{buss.subscriptionModel.coinsGain}}<i class="tiny material-icons">blur_circular</i><br>
