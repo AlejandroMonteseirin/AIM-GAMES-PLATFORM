@@ -33,7 +33,7 @@ urlpatterns = [
     path('payment_done', payment_done, name='payment_done'),
     path('payment_canceled', payment_canceled, name='payment_canceled'),
     path('paypal_ipn/<int:businessId>', paypal_ipn,name='paypal_ipn'),
-    path('paypal_subscription_ipn/<int:businessId>', paypal_subscription_ipn,name='paypal_subscription_ipn'),
+    path('paypal_subscription_ipn/<int:businessId>/<int:subscriptionId>', paypal_subscription_ipn,name='paypal_subscription_ipn'),
     path('paypal_curriculum_ipn/<int:curriculumId>', paypal_curriculum_ipn,name='paypal_curriculum_ipn'),
     path('paypal_coins_ipn/<int:business_id>/<int:quantity>', paypal_coins_ipn,name='paypal_coins_ipn'),
     path('login_redir',login_redir),

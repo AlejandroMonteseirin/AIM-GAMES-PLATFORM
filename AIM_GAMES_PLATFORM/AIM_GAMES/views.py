@@ -127,10 +127,11 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
         't3': 'M',                           # duration unit ("M for Month")
         'src': '1',  # make payments recur
         'sra': '1',  # reattempt payment on payment error
-        'item_name': str(subs.name),
+        'item_name': str(subs.name_eng),
         'currency_code': 'EUR',
         # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
-        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
+        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_subscription_ipn/' + str(businessId) + '/'
+                      + str(subscriptionId),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
     }
@@ -169,7 +170,7 @@ def paypal_ipn(request,businessId):
     return JsonResponse({'ok': 'hoooh!'})
 
 @csrf_exempt
-def paypal_subscription_ipn(request, businessId):
+def paypal_subscription_ipn(request, businessId, subscriptionId):
     print("ipn recieved")
     print(request.POST)
     print('Searching User '+str(businessId))
@@ -181,15 +182,15 @@ def paypal_subscription_ipn(request, businessId):
         print("Subcription Payment")
         if request.POST.get('payment_status') == 'Completed':
             print("Completed")
-            # subscription = get_object_or_404(SubscriptionModel, name_eng=request.POST.get('item_name'))
-            # business.lastPayment = None
-            # print(business.lastPayment)
-            # if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
-            #     business.subscriptionModel = subscription
-            # business.coins = business.coins + subscription.coinsGain
-            # if business.coins > subscription.maxCoins:
-            #     business.coins = subscription.maxCoins
-            # business.save()
+            subscription = get_object_or_404(SubscriptionModel, pk=subscriptionId)
+            business.lastPayment = None
+            print(business.lastPayment)
+            if business.subscriptionModel is None or business.subscriptionModel.name != subscription.name:
+                business.subscriptionModel = subscription
+            business.coins = business.coins + subscription.coinsGain
+            if business.coins > subscription.maxCoins:
+                business.coins = subscription.maxCoins
+            business.save()
 
     elif request.POST.get('txn_type') == 'subscr_cancel':
         print("Canceled")
