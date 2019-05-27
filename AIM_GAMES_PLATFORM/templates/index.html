@@ -10,95 +10,94 @@
         var elems = document.querySelectorAll('.carousel');
         var instances = M.Carousel.init(elems, options);
     });
+        
+    document.addEventListener('DOMContentLoaded', function() {
+        var options={responsiveThreshold:0}
+        var elems = document.querySelectorAll('.parallax');
+        var instances = M.Parallax.init(elems, options);
+    });
 
 
     </script>
 
 <div class="row center-align">
     <div class="col m12 l6 offset-l3 center">
-        <p><img src="{% static "images/logo_aim.png" %}" alt="My image"></p>
-        <ul class="collection center-align">
-            <li class="collection-item">{% trans "AIM Games is the reference platform for game-making resources, where you can find anything and anyone you need to make the videogame of your dreams." %}</li>
-
-        </ul>
+        <p><img src="{% static 'images/logo_aim.png' %}" ></p>
+      
     </div>
 </div>
-<div class="row">
-    <div class="col m12 l6 offset-l1 offset-m1">
+<div class="section white">
+    <div class="row container">
     <h3>{% trans "What is our association?" %}</h3>
+    <p>{% trans "AIM Games is the reference platform for game-making resources, where you can find anything and anyone you need to make the videogame of your dreams." %}</li>
+        </p>
     </div>
 </div>
-<div class="row">
-    <div class="col m5 l5 offset-l1 offset-m1">
-        <div class="card hoverable">
-            <div class="card-title">
-                {% trans "Finding the personnel to make your dreams happen" %}
-            </div>
-            <div class="card-content">
-                <p>
-                {% trans "Our members are all already members of the game making industry, and will help your company find the personnel it needs to shine. If you are, on the other hand, a person interested in finding a job in the games industry, we will help you find a company where you can put your skills to use." %}
-                </p>
-            </div>
-            <div class="card-image">
-                <img width="50px" src="https://farm6.staticflickr.com/5114/7053443577_0ee78715a8_b.jpg"/>
-            </div>
-        </div>
+<div class="parallax-container">
+    <div class="parallax"><img src="{% static 'images/imagen3.jpg' %}"></div>
+</div>
+<div class="section white">
+    <div class="row container">
+        <h2 class="header"> {% trans "Finding the personnel to make your dreams happen" %}</h2>
+        <p class="grey-text text-darken-3 lighten-3">
+        {% trans "Our members are all already members of the game making industry, and will help your company find the personnel it needs to shine. If you are, on the other hand, a person interested in finding a job in the games industry, we will help you find a company where you can put your skills to use." %}
+        </p>
+    </div>
+</div>
 
-        <div class="card hoverable">
-            <div class="card-title">
-                {% trans "Getting studios and developers close together" %}
-            </div>
-            <div class="card-content">
-                <p>
-                <p>{% trans "Participate in the meetup and development events we and our associates organize, and get to know personally the movers and shakers of the Spanish game-making scene." %}</p>
+<div class="parallax-container">
+    <div class="parallax"><img src="{% static 'images/imagen2.jpg' %}""></div>
+</div>
+
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">{% trans "Getting studios and developers close together" %}</h2>
+       <p>{% trans "Participate in the meetup and development events we and our associates organize, and get to know personally the movers and shakers of the Spanish game-making scene." %}</p>
                 <p>{% trans "We also organize game jams where our members make games with a theme in a short time. If you think your company could be interested in some talent, we can offer you privileged access to the jam's code repository so you can assess if the jammers fit the bill for your projects!" %}</p>
                 </p>
-            </div>
-            <div class="card-image">
-                <div class="carousel carousel-slider">
-                    <a class="carousel-item" ><img src="https://pbs.twimg.com/media/D3abKScX4AEL86I?format=jpg&name=4096x4096"></a>
-                    <a class="carousel-item" ><img src="https://pbs.twimg.com/media/D3abLV8WsAMv76F?format=jpg&name=4096x4096"></a>
-                    <a class="carousel-item" ><img src="https://pbs.twimg.com/media/DyUMYw2XQAABxiC?format=jpg&name=large"></a>
-                    <a class="carousel-item" ><img src="https://pbs.twimg.com/media/Dqn5PE7WkAAXifH?format=jpg&name=large"></a>
-                </div>
-            </div>
+                <!--
+        <div class="carousel carousel-slider">
+            <a class="carousel-item" ><img src="https://pbs.twimg.com/media/D3abKScX4AEL86I?format=jpg&name=4096x4096"></a>
+            <a class="carousel-item" ><img src="https://pbs.twimg.com/media/D3abLV8WsAMv76F?format=jpg&name=4096x4096"></a>
+            <a class="carousel-item" ><img src="https://pbs.twimg.com/media/DyUMYw2XQAABxiC?format=jpg&name=large"></a>
+            <a class="carousel-item" ><img src="https://pbs.twimg.com/media/Dqn5PE7WkAAXifH?format=jpg&name=large"></a>
         </div>
+        -->
     </div>
-    <div class="col m5 l5">
-        <div class="card hoverable">
-            <div class="card-image">
+</div>
 
-            </div>
-            <div class="card-title">
-                {% trans "Getting you the assets you need" %}
-            </div>
-            <div class="card-content">
-                <p>
-                {% trans "Many times, when developing, we struggle to find the resources we need to create our best work. For this purpose, AIM Games offers a great collection of 3D and 2D assets, code, animations, advice, tutorials and many more things to the companies that register onto our platform." %}
-                </p>
-            </div>
-            <div class="card-image">
-                <div class="carousel carousel-slider">
-                    <a class="carousel-item" ><img src="https://img1.cgtrader.com/items/140247/0209c508a1/debby-female-game-character-3d-model-low-poly-rigged-fbx.jpg"></a>
-                    <a class="carousel-item" ><img src="https://cdn.dribbble.com/users/31625/screenshots/1572560/sharkattack.gif"></a>
-                    <a class="carousel-item" ><img src="https://docs.unity3d.com/uploads/Main/ScriptingIntroPic.jpg"></a>
-                </div>
-            </div>
-        </div>
-        <div class="card hoverable">
-            <div class="card-title">
-                {% trans "Discerning talent, one step easier" %}
-            </div>
-            <div class="card-content">
-                <p>
-                {% trans "Besides the help our extensive associate base can offer your company, we give you the possibility to post challenges on our platform to check out the specific abilities of the candidates in the actual area you are interested in checking." %}
-                </p>
-            </div>
-            <div class="card-image">
-                <img width="50px" src="https://i.imgur.com/YtgzTaJ.jpg"/>
-            </div>
+<div class="parallax-container">
+    <div class="parallax"><img src="{% static 'images/imagen5.jpg' %}""></div>
+</div>
+
+
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">{% trans "Getting you the assets you need" %}</h2>
+        <p>          {% trans "Many times, when developing, we struggle to find the resources we need to create our best work. For this purpose, AIM Games offers a great collection of 3D and 2D assets, code, animations, advice, tutorials and many more things to the companies that register onto our platform." %}</p>
+        <div class="carousel carousel-slider">
+            <a class="carousel-item" ><img src="https://media.giphy.com/media/3o7TKnLTNSA8la7QyI/giphy.gif"></a>
+                    <a class="carousel-item" ><img src="https://media.giphy.com/media/ET3XVe9qveYzm/giphy.gif"></a>
+                    <a class="carousel-item" ><img src="https://media.giphy.com/media/3o6ZtfEvR8D6d2yk12/giphy.gif"></a>
         </div>
     </div>
 </div>
+
+<div class="parallax-container">
+    <div class="parallax"><img src="{% static 'images/imagen1.jpg' %}"></div>
+</div>
+
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">  {% trans "Discerning talent, one step easier" %}</h2>
+        <p class="grey-text text-darken-3 lighten-3">
+                {% trans "Besides the help our extensive associate base can offer your company, we give you the possibility to post challenges on our platform to check out the specific abilities of the candidates in the actual area you are interested in checking." %}
+        </p>
+    </div>
+</div>
+      
+<div class="parallax-container">
+      <div class="parallax"><img src="{% static 'images/imagen4.jpg' %}"></div>
+    </div>
 
 {% endblock %}

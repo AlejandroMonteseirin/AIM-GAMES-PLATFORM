@@ -127,3 +127,14 @@ main {
 .broadcastbtn{
     margin-top: 10px;
 }
+
+
+
+@media (min-width: 600px) {
+ 
+    .parallax > img{
+        object-fit: none;
+        max-width: none;
+        max-height: none;
+    }
+}
