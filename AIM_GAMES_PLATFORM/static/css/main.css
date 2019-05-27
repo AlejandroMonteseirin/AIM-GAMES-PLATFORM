@@ -138,3 +138,11 @@ main {
         max-height: none;
     }
 }
+
+.margin-top{
+    margin-top: 2%;
+}
+
+.margin-bottom{
+    margin-bottom: 2%;
+}
