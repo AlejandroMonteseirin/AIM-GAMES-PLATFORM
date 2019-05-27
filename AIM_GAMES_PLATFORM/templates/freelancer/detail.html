@@ -65,40 +65,14 @@
               <a href="/pagar_paypal_curriculum/" class="btn color1 waves-effect waves-red">{% trans "featured" %}</a>
           </div>
           {% endif %}
-          <div class="col s12 m10 l10 offset-l1 offset-m1">
-          <ul class="collapsible with-header">
-            <div class="collapsible-header"><h5 >{% trans "links" %}</h5></div>
-            {% for link in links %}
-            <li>
-              
-            <div class="collection-item collapsible-header">
-              <!-- <div class="col s10 m10 l10 offset-l2"> -->
-                <a href="{{link.url}}">{{link.url}}</a>
-              <!-- </div> -->
-            </div>
-            {% if request.session.currentUser == 'freelancer' %}
-            <div class="collapsible-body">
-              <p><a href="/freelancer/link/edit/{{link.id}}">{% trans "Edit" %}</a>
-              <a class="fix-secondary-content" href="/freelancer/link/delete/{{link.id}}">{% trans "Delete" %}</a></p>
-            </div>
-            
-            {% endif %}
-          </li>
-          {% endfor %}
-          </ul>
-        {% if request.session.currentUser == 'freelancer' %}
-        <div class="center margin-top">
-          <a href="/freelancer/link/create" class="btn color1 waves-effect waves-red">{% trans "Add link" %}</a></div>
-        {% endif %}
-        </div>
 
-        <div class="col s12 m12 l12 offset-m1 center margin-top">
+        <div class="col s12 m12 l12 offset-m1 center">
         <h5><b>{% trans "formation" %}</b></h5>
         </div>
         {% for formation in formations %}
         <div class="col s12 m10 l6 offset-m1">
           
-          <div class="card small blue-grey darken-1">
+          <div class="card small blue-grey darken-1 z-depth-5">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{formation.miniature}}">
             </div>
@@ -124,7 +98,7 @@
 
         {% if request.session.currentUser == 'freelancer' %}
           <div class="col s12 m12 l12 offset-m1 center">
-              <a href="/freelancer/formation/create" class="btn color1 waves-effect waves-red">{% trans "addFormation" %}</a>
+              <a href="/freelancer/formation/create" class="btn color1 waves-effect waves-red z-depth-3">{% trans "addFormation" %}</a>
           </div>
         {% endif %}
         
@@ -135,7 +109,7 @@
         {% for professionalExperience in professionalExperiences %}
         <div class="col s12 m10 l6 offset-m1">
           
-          <div class="card small grey darken-1">
+          <div class="card small grey darken-1 z-depth-5">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{professionalExperience.miniature}}">
             </div>
@@ -161,13 +135,13 @@
 
         {% if request.session.currentUser == 'freelancer' %}
           <div class="col s12 m12 l12 offset-m1 center margin-bottom">
-              <a href="/freelancer/professionalExperience/create" class="btn color1 waves-effect waves-red">{% trans "addProfessionalExperience" %}</a>
+              <a href="/freelancer/professionalExperience/create" class="btn color1 waves-effect waves-red z-depth-3">{% trans "addProfessionalExperience" %}</a>
           </div>
         {% endif %}
 
 
-        <div class="col s12 m12 l12">
-          <ul class="collapsible with-header">
+        <div class="col s12 m10 l10 offset-l1 offset-m1">
+          <ul class="collapsible with-header z-depth-3">
               <div class="collapsible-header"><h5>{% trans "aptitudes" %}</h5></div>
               {% for aptitude in aptitudes %}
             <li>
@@ -186,13 +160,13 @@
           </ul>
         {% if request.session.currentUser == 'freelancer' %}
         <div class="row center">
-          <a href="/freelancer/aptitude/create" class="btn color1 waves-effect waves-red">{% trans "addAptitude" %}</a>
+          <a href="/freelancer/aptitude/create" class="btn color1 waves-effect waves-red z-depth-3">{% trans "addAptitude" %}</a>
         </div>
         {% endif %}
         </div>
 
-        <div class="col s12 m12 l12">
-            <ul class="collapsible with-header">
+        <div class="col s12 m10 l10 offset-l1 offset-m1">
+            <ul class="collapsible with-header z-depth-3">
                 <div class="collapsible-header"><h5>{% trans "graphicEngineExperiences" %}</h5></div>
             {% for exp in graphicEngineExperiences %}
               <li>
@@ -216,11 +190,37 @@
         
         {% if request.session.currentUser == 'freelancer' %}
             <div class="center margin-bottom">
-              <a href="/freelancer/graphicEngineExperience/create" class="btn color1 waves-effect waves-red">{% trans "addGraphicEngineExperience" %}</a>
+              <a href="/freelancer/graphicEngineExperience/create" class="btn color1 waves-effect waves-red z-depth-3">{% trans "addGraphicEngineExperience" %}</a>
             </div>
         {% endif %}
 
       </div>
+      <div class="col s12 m10 l10 offset-l1 offset-m1">
+          <ul class="collapsible with-header z-depth-3">
+            <div class="collapsible-header"><h5 >{% trans "links" %}</h5></div>
+            {% for link in links %}
+            <li>
+              
+            <div class="collection-item collapsible-header">
+              <!-- <div class="col s10 m10 l10 offset-l2"> -->
+                <a href="{{link.url}}">{{link.url}}</a>
+              <!-- </div> -->
+            </div>
+            {% if request.session.currentUser == 'freelancer' %}
+            <div class="collapsible-body">
+              <p><a href="/freelancer/link/edit/{{link.id}}">{% trans "Edit" %}</a>
+              <a class="fix-secondary-content" href="/freelancer/link/delete/{{link.id}}">{% trans "Delete" %}</a></p>
+            </div>
+            
+            {% endif %}
+          </li>
+          {% endfor %}
+          </ul>
+        {% if request.session.currentUser == 'freelancer' %}
+        <div class="center margin-top margin-bottom">
+          <a href="/freelancer/link/create" class="btn color1 waves-effect waves-red z-depth-3">{% trans "Add link" %}</a></div>
+        {% endif %}
+        </div>
         {% if HTML5Showcase.embedCode.length == 0 %}
         <div class="col s12 m12 l12">
           <b>{% trans "HTML5Showcase" %}:</b>
