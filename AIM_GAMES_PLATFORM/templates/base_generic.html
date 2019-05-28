@@ -70,7 +70,9 @@
                             {% endif %}
                             </a></li>
                             {% if request.session.currentUser == 'business' %}
-                                <li><a class="headerenlace" href="/manage_subscription">{% trans "Manage Subs" %}</a></li>
+                                <li><a class="headerenlace" href="/manage_subscription">{% trans "Manage Subs" %}&emsp;
+                                <span class="valign-wrapper right ">{{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="small material-icons">blur_circular</i></span>
+                                </a></li>
                             {% endif %}
                             <li><a  class="headerenlace" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
                         {% else %}
@@ -119,7 +121,7 @@
             </ul>
     <div class="container">
         {% if request.session.currentUser == 'business' and wallet%}
-        <span class="valign-wrapper right">{{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="small material-icons">blur_circular</i></span>
+        <span style="margin-top: 10px;" class="valign-wrapper right hide-on-large-only">{{wallet.coins}}/{% if wallet.subscriptionModel %}{{wallet.subscriptionModel.maxCoins}}{% else %}{{maxCoins}}{% endif %}<i class="small material-icons">blur_circular</i></span>
         {% endif %}
     </div>
             <main>
