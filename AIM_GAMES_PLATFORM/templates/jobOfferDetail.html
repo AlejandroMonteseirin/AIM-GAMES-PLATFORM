@@ -9,28 +9,31 @@
   </div>
 
 
-      <div class="card color1b">
+    <div class="card color1b">
       <div class="card-body ">
         <div class="row">
         <div class="col l11 offset-l1 s12 ">
 
-          <h5 class="bold offset-l1 l11 ">{% trans "positioDisplay" %}</h5>
-          <p class="card-text col l11 offset-l1 s12 ">{{jobOffer.position}}</p>
-
-          <h5 class="bold">{% trans "experienceRequired"%}</h5>
+          <div class="card color1b2 targetaDentroDeTargetaxd center"> 
+            <h5 style="margin-top:-10px"><b>{% trans "positioDisplay" %}:</b></h5>
+            {{jobOffer.position}}
+          </div>
+          <div class="card color1b2 targetaDentroDeTargetaxd"> 
+          <h5 style="margin-top:-10px"><b>{% trans "experienceRequired"%}</b><i class="material-icons" style="margin-top:-10px">school</i></h5>
           <p class="card-text col l11 offset-l1 s12 ">{{jobOffer.experienceRequired}}</p>
 
-          <h5 class="bold">{% trans "schedule"%}</h5>
+          <h5><b>{% trans "schedule"%}</b> <i class="material-icons" style="margin-top:-10px">access_time</i></h5>
           <p class="card-text col l11 offset-l1 s12 ">   {{jobOffer.schedule}}</p>
 
-          <h5 class="bold">{% trans "salary"%}</h5>
-          <p class="card-text col l11 offset-l1 s12 ">{{jobOffer.salary}}</p>
+          <h5><b>{% trans "salary"%}</b> <i class="material-icons" style="margin-top:-10px">euro_symbol</i></h5>
+          <p class="card-text col l11 offset-l1 s12 m10 ">{{jobOffer.salary}} </p>
 
-          <h5 class="bold">{% trans "ubication"%}</h5>
+          <h5><b>{% trans "ubication"%}</b> <i class="material-icons" style="margin-top:-10px">location_city</i></h5>
           <p class="card-text col l11 offset-l1 s12 ">{{jobOffer.ubication}}</p>
 
-          <h5 class="bold">{% trans "description"%}</h5>
+          <h5><b>{% trans "description"%}</b><i class="material-icons" style="margin-top:-10px">info</i></h5>
           <p class="card-text col l11 offset-l1 s12 ">{{jobOffer.description}}</p>
+
           {% if owner %}
           <p class="card-text col l2 offset-l5 s12"><a href="/business/joboffer/edit/{{jobOffer.id}}" class="btn color1 waves-effect waves-red">{% trans "Edit" %}</a></p>
           <p class="card-text col l2 offset-l5 s12"><a href="/business/joboffer/delete/{{jobOffer.id}}" class="btn color1 waves-effect waves-red">{% trans "Delete" %}</a></p>
@@ -51,15 +54,15 @@
       {% endfor %}
       </div>
       {% if not owner %}
-        <div class="card color1b">
+      <div class="card color1b2">
           <div class="card-body">
             <div class="row">
-              <div class="col l11 offset-l1 s12 ">
-            <h5 class="bold">{% trans "Contact"%}</h5>
-            <p class="card-text col l11 offset-l1 s12  "><a class="colorEnlace" href="/chat/user/{{jobOffer.business.profile.user.id}}">{% trans "Contact" %}</a></p>
+              <div class="col l11 offset-l1 s12">
+                <h5><b>{% trans "Contact"%}</b><i class="material-icons" style="margin-top:-10px">mail</i></h5>
+                <a class="colorEnlace" href="/chat/user/{{jobOffer.business.profile.user.id}}">{% trans "Contact" %}</a>
               </div>
+            </div>
           </div>
-        </div>
       </div>
       {% endif %}
     </div>
