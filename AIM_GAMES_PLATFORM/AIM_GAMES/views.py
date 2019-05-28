@@ -1079,6 +1079,7 @@ def challengeDetail(request, challenge_id):
     alreadyResponse = False
     challenge = get_object_or_404(Challenge, pk=challenge_id)
     responsesChallenge = challenge.challengeresponse_set.all()
+    opened = False
     if checkUser(request) == 'freelancer':
         if request.method == "POST":
             form = ChallengeResponseForm(request.POST)
@@ -1090,6 +1091,8 @@ def challengeDetail(request, challenge_id):
                 obj.save()
                 saved = True
                 alreadyResponse = True
+            else:
+                opened=True
         else:
             for r in responsesChallenge:
                 if r.freelancer == findByPrincipal(request):
@@ -1104,7 +1107,7 @@ def challengeDetail(request, challenge_id):
             return handler500(request)
     return render(request, 'challenge/challengeDetail.html', {'form': form, 'saved':saved, 'challenge': challenge,
                                                 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses,
-                                                'alreadyResponse': alreadyResponse, 'saved':saved})
+                                                'alreadyResponse': alreadyResponse, 'saved':saved, 'opened':opened})
 
 def curriculumVerify(request, id):
     userString = checkUser(request)
