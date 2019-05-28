@@ -18,7 +18,7 @@
     <p><b>{% trans "Description" %}:</b> {{ challenge.description }}</p> 
     <p><b>{% trans "Objectives" %}:</b> {{ challenge.objectives }}</p>
 
-    {% if request.session.currentUser == 'freelancer' and alreadyResponse == False %}
+    {% if request.session.currentUser == 'freelancer' and not alreadyResponse %}
       <a class="btn waves-effect waves-red" href="/challengeResponse/create/{{challenge.id}}">{% trans "createAResponseForThisChallenge" %}<i class="material-icons right">send</i></a>
     {% endif %}
     {% if request.session.currentUser == 'freelancer' and alreadyResponse == True %}
