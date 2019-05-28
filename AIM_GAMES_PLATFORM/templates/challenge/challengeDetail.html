@@ -2,6 +2,12 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
 {% block content %}
+<script>
+  let saved = {% if saved%}true{%else%}false{%endif%};
+  if (saved){
+      M.toast({html: '{%trans '1305'%}'});
+  }
+</script>
 <div class="container">
   <div class="section">  
     <div class="row">

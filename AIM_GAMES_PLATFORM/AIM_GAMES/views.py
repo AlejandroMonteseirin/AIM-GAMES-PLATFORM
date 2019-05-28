@@ -1079,10 +1079,10 @@ def challengeResponse_create(request, challengeId):
             if form.is_valid():
                 obj = form.save(commit=False)
                 challenge = Challenge.objects.get(id=challengeId)
-                obj.freelancer= findByPrincipal(request)
-                print('todo bien')
+                obj.freelancer = findByPrincipal(request)
                 obj.challenge = challenge
                 obj.save()
+                request.session['saved'] = True
                 return redirect('/challenge/detail/' + str(challengeId))
         else:
             form = ChallengeResponseForm()
@@ -1094,6 +1094,12 @@ def challengeDetail(request, challenge_id):
         challenge = get_object_or_404(Challenge, pk=challenge_id)
         responsesChallenge = challenge.challengeresponse_set.all()
         alreadyResponse = False
+        saved = False
+        if('saved' in request.session and request.session['saved']):
+            request.session['saved'] = False
+            saved = True
+        print('saved:' + str(saved))
+
         for r in responsesChallenge:
             if r.freelancer == findByPrincipal(request):
                 alreadyResponse = True
@@ -1103,7 +1109,7 @@ def challengeDetail(request, challenge_id):
             lookResponses = False
         if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
             return handler500(request)
-        return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses, 'alreadyResponse': alreadyResponse})
+        return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses, 'alreadyResponse': alreadyResponse, 'saved':saved})
 
 def curriculumVerify(request, id):
     userString = checkUser(request)

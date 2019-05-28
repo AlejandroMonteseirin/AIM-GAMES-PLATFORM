@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-28 09:44+0200\n"
+"POT-Creation-Date: 2019-05-28 11:39+0200\n"
 "PO-Revision-Date: 2019-03-29 13:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -90,7 +90,7 @@ msgid "Title"
 msgstr "Título"
 
 #: .\AIM_GAMES\forms.py:166 .\AIM_GAMES\models.py:75
-#: .\templates\challenge\challengeDetail.html:18
+#: .\templates\challenge\challengeDetail.html:25
 #: .\templates\thread\threadDetail.html:30
 msgid "Description"
 msgstr "Descripción"
@@ -464,11 +464,11 @@ msgstr "Modificar enlaces"
 msgid "Add Challenge"
 msgstr "Añadir reto"
 
-#: .\AIM_GAMES\views.py:1347 .\AIM_GAMES\views.py:1350
+#: .\AIM_GAMES\views.py:1353 .\AIM_GAMES\views.py:1356
 msgid "Create Message"
 msgstr "Crear mensaje"
 
-#: .\AIM_GAMES\views.py:1488 .\AIM_GAMES\views.py:1491
+#: .\AIM_GAMES\views.py:1494 .\AIM_GAMES\views.py:1497
 msgid "Add broadcast"
 msgstr "Crear difusión"
 
@@ -484,7 +484,7 @@ msgstr ""
 "Error en el servidor, por favor relajese con estos gatos e inténtelo de nuevo"
 
 #: .\templates\accounts\login.html:20 .\templates\accounts\login.html:50
-#: .\templates\base_generic.html:77 .\templates\base_generic.html:117
+#: .\templates\base_generic.html:79 .\templates\base_generic.html:119
 msgid "Log In"
 msgstr "Iniciar Sesión"
 
@@ -496,8 +496,8 @@ msgstr "Sesión iniciada como"
 msgid ", please logout before login again"
 msgstr ", por favor cierra sesión antes de volver a iniciarla"
 
-#: .\templates\accounts\login.html:23 .\templates\base_generic.html:75
-#: .\templates\base_generic.html:115
+#: .\templates\accounts\login.html:23 .\templates\base_generic.html:77
+#: .\templates\base_generic.html:117
 msgid "Logout"
 msgstr "Cerrar sesión"
 
@@ -530,8 +530,8 @@ msgid "acceptTerms"
 msgstr "Acepto los "
 
 #: .\templates\accounts\signup.html:92 .\templates\accounts\signup.html:95
-#: .\templates\base_generic.html:87 .\templates\base_generic.html:145
-#: .\templates\base_generic.html:148
+#: .\templates\base_generic.html:89 .\templates\base_generic.html:147
+#: .\templates\base_generic.html:150
 msgid "terms-and-conditions"
 msgstr "Términos y Condiciones"
 
@@ -546,55 +546,55 @@ msgstr "Términos y Condiciones"
 msgid "Submit"
 msgstr "Enviar"
 
-#: .\templates\base_generic.html:45 .\templates\base_generic.html:86
+#: .\templates\base_generic.html:45 .\templates\base_generic.html:88
 msgid "mainpage"
 msgstr "Página principal"
 
-#: .\templates\base_generic.html:47 .\templates\base_generic.html:89
+#: .\templates\base_generic.html:47 .\templates\base_generic.html:91
 #: .\templates\search.html:89 .\templates\thread\threadList.html:9
 msgid "threads"
 msgstr "Foro"
 
 #: .\templates\base_generic.html:48 .\templates\base_generic.html:54
-#: .\templates\base_generic.html:90 .\templates\base_generic.html:100
+#: .\templates\base_generic.html:92 .\templates\base_generic.html:102
 #: .\templates\curriculumList.html:8 .\templates\search.html:18
 msgid "curriculums"
 msgstr "Curriculums"
 
-#: .\templates\base_generic.html:51 .\templates\base_generic.html:93
+#: .\templates\base_generic.html:51 .\templates\base_generic.html:95
 msgid "My curriculum"
 msgstr "Mi curriculum"
 
-#: .\templates\base_generic.html:57 .\templates\base_generic.html:96
+#: .\templates\base_generic.html:57 .\templates\base_generic.html:98
 #: .\templates\jobOfferList.html:7 .\templates\search.html:56
 msgid "joboffers"
 msgstr "Ofertas de trabajo"
 
-#: .\templates\base_generic.html:58 .\templates\base_generic.html:97
+#: .\templates\base_generic.html:58 .\templates\base_generic.html:99
 msgid "Challenges"
 msgstr "Retos"
 
-#: .\templates\base_generic.html:62 .\templates\base_generic.html:103
+#: .\templates\base_generic.html:62 .\templates\base_generic.html:105
 msgid "Admin Panel"
 msgstr "Panel de Administración"
 
-#: .\templates\base_generic.html:66 .\templates\base_generic.html:111
+#: .\templates\base_generic.html:66 .\templates\base_generic.html:113
 msgid "Events"
 msgstr "Eventos"
 
-#: .\templates\base_generic.html:67 .\templates\base_generic.html:106
+#: .\templates\base_generic.html:67 .\templates\base_generic.html:108
 msgid "Messages"
 msgstr "Mensajes"
 
-#: .\templates\base_generic.html:73 .\templates\base_generic.html:113
+#: .\templates\base_generic.html:73 .\templates\base_generic.html:115
 msgid "Manage Subs"
 msgstr "Administrar Suscripción"
 
-#: .\templates\base_generic.html:153
+#: .\templates\base_generic.html:155
 msgid "DownloadData"
 msgstr "Descargar todos tus datos"
 
-#: .\templates\base_generic.html:154
+#: .\templates\base_generic.html:156
 msgid ""
 "You´re about to delete all your data. This action is irreversible, are you "
 "sure?"
@@ -602,7 +602,7 @@ msgstr ""
 "Está a punto de borrar todos tus datos. Esta acción es irreversible, ¿está "
 "seguro?"
 
-#: .\templates\base_generic.html:154
+#: .\templates\base_generic.html:156
 msgid "DeleteAllyourData"
 msgstr "Borra tu cuenta para siempre"
 
@@ -611,31 +611,36 @@ msgid "You don't have enough coins to use this service"
 msgstr "No dispone de suficientes monedas para usar este servicio"
 
 #: .\templates\challenge\challengeDetail.html:8
+#: .\templates\challenge\challengeDetail.html:10
+msgid "1305"
+msgstr "¡Respuesta enviada!"
+
+#: .\templates\challenge\challengeDetail.html:15
 msgid "Challenge details"
 msgstr "Detalles del reto"
 
-#: .\templates\challenge\challengeDetail.html:13
+#: .\templates\challenge\challengeDetail.html:20
 #: .\templates\thread\threadDetail.html:26
 msgid "Business"
 msgstr "Empresa"
 
-#: .\templates\challenge\challengeDetail.html:19
+#: .\templates\challenge\challengeDetail.html:26
 msgid "Objectives"
 msgstr "Objetivos"
 
-#: .\templates\challenge\challengeDetail.html:22
+#: .\templates\challenge\challengeDetail.html:29
 msgid "createAResponseForThisChallenge"
 msgstr "Crear una respuesta para este reto"
 
-#: .\templates\challenge\challengeDetail.html:25
+#: .\templates\challenge\challengeDetail.html:32
 msgid "Responsed"
 msgstr "¡Ya tienes una respuesta para este reto!"
 
-#: .\templates\challenge\challengeDetail.html:32
+#: .\templates\challenge\challengeDetail.html:39
 msgid "responsesChallenge"
 msgstr "Respuestas a este reto"
 
-#: .\templates\challenge\challengeDetail.html:37
+#: .\templates\challenge\challengeDetail.html:44
 msgid "freelancerResponse"
 msgstr "Respuesta del freelancer"
 
