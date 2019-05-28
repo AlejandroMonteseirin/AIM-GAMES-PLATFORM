@@ -29,13 +29,12 @@
     <div class="card color1b2 targetaDentroDeTargetaxd"> 
       <span class="card-title">{% trans "Description" %}:</span>
       {{ thread.description }}
-    </div>  
-    
-    <ul class="collection"><b>{% trans "Tags" %}:</b>
+    </div>
+
+    <b>{% trans "Tags" %}:</b></br>
       {% for tag in thread.tags.all %}
-      <li class="collection-item color1b2">{{tag.title}}</li>
-      {% endfor %} 
-      </ul> 
+    <div class="chip color1b2">{{tag.title}}</div>
+      {% endfor %}
     <ul class="collection"><b >{% trans "Attached files" %}:</b>
       {% for file in thread.attachedFiles.all %}
       <li class="collection-item color1b2"><a class="colorEnlace" href="{{file.uri}}">{% trans "Attached file" %}</a></li>
