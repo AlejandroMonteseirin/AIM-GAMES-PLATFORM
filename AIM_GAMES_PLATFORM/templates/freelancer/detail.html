@@ -35,7 +35,7 @@
           
   </div>
     <div class="row">
-      <div class="col s12 m12 l8 offset-l2 color1b">
+      <div class="col s12 m12 l8 offset-l2 color1b2 curriculum">
         
           {% if request.session.currentUser == 'manager' and freelancer.curriculum.verified == False%}
             <a href="/freelancer/curriculum/verify/{{freelancer.curriculum.id}}" class="btn color1 waves-effect waves-red">{% trans "verify" %}</a>
@@ -140,7 +140,7 @@
         {% endif %}
 
 
-        <div class="col s12 m10 l10 offset-l1 offset-m1">
+        <div class="col s12 m10 l10 offset-l1 offset-m1 margin-top">
           <ul class="collapsible with-header z-depth-3">
               <div class="collapsible-header"><h5>{% trans "aptitudes" %}</h5></div>
               {% for aptitude in aptitudes %}
@@ -149,9 +149,9 @@
                 {{aptitude.aptitude}}
             </div>
             {% if request.session.currentUser == 'freelancer' %}
-            <div class="collapsible-body">
-              <p><a href="/freelancer/aptitude/edit/{{aptitude.id}}">{% trans "Edit" %}</a>
-              <a class="fix-secondary-content" href="/freelancer/aptitude/delete/{{aptitude.id}}">{% trans "Delete" %}</a></p>
+            <div class="collapsible-body color3b">
+              <p><a class="btn" href="/freelancer/aptitude/edit/{{aptitude.id}}">{% trans "Edit" %}</a>
+              <a class="btn fix-secondary-content" href="/freelancer/aptitude/delete/{{aptitude.id}}">{% trans "Delete" %}</a></p>
             </div>
             
             {% endif %}
@@ -179,9 +179,9 @@
                 </div>
               </div>
               {% if request.session.currentUser == 'freelancer' %}
-              <div class="collapsible-body">
-                <p><a href="/freelancer/graphicEngineExperience/edit/{{exp.id}}">{% trans "Edit" %}</a>
-                <a class="fix-secondary-content" href="/freelancer/graphicEngineExperience/delete/{{exp.id}}">{% trans "Delete" %}</a></p>
+              <div class="collapsible-body color3b">
+                <p><a class="btn" href="/freelancer/graphicEngineExperience/edit/{{exp.id}}">{% trans "Edit" %}</a>
+                <a class="btn fix-secondary-content" href="/freelancer/graphicEngineExperience/delete/{{exp.id}}">{% trans "Delete" %}</a></p>
               </div>
               {% endif %}
             </li>
@@ -207,9 +207,9 @@
               <!-- </div> -->
             </div>
             {% if request.session.currentUser == 'freelancer' %}
-            <div class="collapsible-body">
-              <p><a href="/freelancer/link/edit/{{link.id}}">{% trans "Edit" %}</a>
-              <a class="fix-secondary-content" href="/freelancer/link/delete/{{link.id}}">{% trans "Delete" %}</a></p>
+            <div class="collapsible-body color3b">
+              <p><a class="btn" href="/freelancer/link/edit/{{link.id}}">{% trans "Edit" %}</a>
+              <a class="btn fix-secondary-content" href="/freelancer/link/delete/{{link.id}}">{% trans "Delete" %}</a></p>
             </div>
             
             {% endif %}
