@@ -95,7 +95,6 @@ urlpatterns = [
     path('event/delete/<int:event_id>',eventDelete,name='eventDelete'),
     path('userDownloadData',downloadData),
     path('deleteUser',deleteUser),
-    path('challengeResponse/create/<int:challengeId>', challengeResponse_create, name="responseCreate"),
     path('message/list/',message_list),
     path('message/show/<int:id>',message_show),
     path('message/create/', message_create),
