@@ -27,7 +27,7 @@
           <div class="section">
               <h5>{% trans "tags" %}</h5>
               {% for tag in event.tags.all %}
-              <p >{{tag.title}}</p>
+            <div class="chip">{{tag.title}}</div>
               {% endfor %} 
           </div>
           <div class="divider"></div>
