@@ -320,7 +320,7 @@ class ChallengeForm(ModelForm):
 
 
 class ChallengeResponseForm(ModelForm):
-
+    title = CharField(widget=Textarea(attrs={'class': 'materialize-textarea col l6'}), label=_('title'), )
     class Meta:
         model = ChallengeResponse
         exclude = ('freelancer','challenge')
