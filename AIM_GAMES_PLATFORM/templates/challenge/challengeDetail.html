@@ -2,11 +2,23 @@
 {% extends "base_generic.html" %}
 {% load i18n %}
 {% block content %}
-<script>
-  let saved = {% if saved%}true{%else%}false{%endif%};
-  if (saved){
-      M.toast({html: '{%trans '1305'%}'});
+<script type="text/javascript">
+  window.onload = function() {
+    let saved = {% if saved%}true{%else%}false{%endif%};
+    if (saved){
+        M.toast({html: '{%trans '1305'%}'});
+    }
   }
+  function toggleVisible(){
+    if(document.getElementById('formulario').style.visibility=='visible'){
+      document.getElementById('formulario').style.visibility = 'hidden';
+    }else{
+      document.getElementById('formulario').style.visibility = 'visible';
+    }
+
+  }
+
+
 </script>
 <div class="container">
   <div class="section">  
@@ -25,7 +37,45 @@
     <p><b>{% trans "Objectives" %}:</b> {{ challenge.objectives }}</p>
 
     {% if request.session.currentUser == 'freelancer' and not alreadyResponse %}
-      <a class="btn waves-effect waves-red" href="/challengeResponse/create/{{challenge.id}}">{% trans "createAResponseForThisChallenge" %}<i class="material-icons right">send</i></a>
+      <a class="btn waves-effect waves-red" onclick="toggleVisible()">
+        {% trans "createAResponseForThisChallenge" %}</a>
+      <div class="formulario" id="formulario" style="visibility:hidden">
+        <div class="col s12 l6 m10 offset-m1 offset-l3">
+          <h3>{% trans "newResponse" %}</h3>
+          {% for error in form.non_field_errors %}
+          <div class="red-text">
+              <strong>{{ error|escape }}</strong>
+          </div>
+          {% endfor %}
+
+          <form method="POST">
+              {% csrf_token %}
+              <div class="card">
+                  <div class="card-content">
+                      <div class="row">
+                          {% for field in form.visible_fields %}
+                          <span class="red-text">{{ field.errors }}</span>
+                          <div class="input-field col s12">
+                              {% if 'moment' in field.html_name %}
+                                  <div class="labelxd">{{ field.label_tag }}</div>
+                                  <input id="{{ field.id_for_label }}" type="date" class="validate" name="{{ field.html_name }}">
+                              {% else %}
+                                  {{ field.label_tag }}
+                                  {{field}}
+                              {% endif %}
+
+                          </div>
+                          {% endfor %}
+                          <button class="btn waves-effect waves-light" type="submit" name="action">{% trans "Submit" %}
+                              <i class="material-icons right">send</i>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </form>
+
+      </div>
+    </div>
     {% endif %}
     {% if request.session.currentUser == 'freelancer' and alreadyResponse == True %}
       <b>{% trans "Responsed" %}</b>

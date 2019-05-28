@@ -1072,44 +1072,39 @@ def challengeCreate(request):
     else:
         return render(request, 'index.html')
 
-def challengeResponse_create(request, challengeId):
+def challengeDetail(request, challenge_id):
+    lookResponses = False
+    form = None
+    saved = False
+    alreadyResponse = False
+    challenge = get_object_or_404(Challenge, pk=challenge_id)
+    responsesChallenge = challenge.challengeresponse_set.all()
     if checkUser(request) == 'freelancer':
-        if request.method=="POST":
+        if request.method == "POST":
             form = ChallengeResponseForm(request.POST)
             if form.is_valid():
                 obj = form.save(commit=False)
-                challenge = Challenge.objects.get(id=challengeId)
+                challenge = Challenge.objects.get(id=challenge_id)
                 obj.freelancer = findByPrincipal(request)
                 obj.challenge = challenge
                 obj.save()
-                request.session['saved'] = True
-                return redirect('/challenge/detail/' + str(challengeId))
-        else:
-            form = ChallengeResponseForm()
-        return render(request,'challenge/responseCreate.html',{'form':form})
-    else:
-        return handler500(request)
-
-def challengeDetail(request, challenge_id):
-        challenge = get_object_or_404(Challenge, pk=challenge_id)
-        responsesChallenge = challenge.challengeresponse_set.all()
-        alreadyResponse = False
-        saved = False
-        if('saved' in request.session and request.session['saved']):
-            request.session['saved'] = False
-            saved = True
-        print('saved:' + str(saved))
-
-        for r in responsesChallenge:
-            if r.freelancer == findByPrincipal(request):
+                saved = True
                 alreadyResponse = True
+        else:
+            for r in responsesChallenge:
+                if r.freelancer == findByPrincipal(request):
+                    alreadyResponse = True
+
+            form = ChallengeResponseForm()
+    else:
         if challenge.business == findByPrincipal(request):
             lookResponses = True
-        else:
-            lookResponses = False
-        if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
+
+        if findByPrincipal(request).subscriptionModel is None:
             return handler500(request)
-        return render(request, 'challenge/challengeDetail.html', {'challenge': challenge, 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses, 'alreadyResponse': alreadyResponse, 'saved':saved})
+    return render(request, 'challenge/challengeDetail.html', {'form': form, 'saved':saved, 'challenge': challenge,
+                                                'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses,
+                                                'alreadyResponse': alreadyResponse, 'saved':saved})
 
 def curriculumVerify(request, id):
     userString = checkUser(request)
