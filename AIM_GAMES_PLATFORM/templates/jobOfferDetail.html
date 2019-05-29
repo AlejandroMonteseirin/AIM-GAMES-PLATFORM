@@ -12,7 +12,7 @@
     <div class="card color1b">
       <div class="card-body ">
         <div class="row">
-        <div class="col l11 offset-l1 s12 ">
+        <div class="col l10 offset-l1 s12 ">
 
           <div class="card color1b2 targetaDentroDeTargetaxd center"> 
             <h5 style="margin-top:-10px"><b>{% trans "positioDisplay" %}:</b></h5>
@@ -39,6 +39,18 @@
           <p class="card-text col l2 offset-l5 s12"><a href="/business/joboffer/delete/{{jobOffer.id}}" class="btn color1 waves-effect waves-red">{% trans "Delete" %}</a></p>
           {% endif %}
         </div>
+        {% if not owner %}
+      <div class="card color1b2 targetaDentroDeTargetaxd">
+          <div class="card-body">
+            <div class="row">
+              <div class="col l10 offset-l1 s12">
+                <h5><b>{% trans "Contact"%}</b><i class="material-icons" style="margin-top:-10px">mail</i></h5>
+                <a class="btn colorEnlace" href="/chat/user/{{jobOffer.business.profile.user.id}}">{% trans "Contact" %}</a>
+              </div>
+            </div>
+          </div>
+      </div>
+      {% endif %}
       </div>
     </div>
 
@@ -53,18 +65,7 @@
           </div>
       {% endfor %}
       </div>
-      {% if not owner %}
-      <div class="card color1b2">
-          <div class="card-body">
-            <div class="row">
-              <div class="col l11 offset-l1 s12">
-                <h5><b>{% trans "Contact"%}</b><i class="material-icons" style="margin-top:-10px">mail</i></h5>
-                <a class="colorEnlace" href="/chat/user/{{jobOffer.business.profile.user.id}}">{% trans "Contact" %}</a>
-              </div>
-            </div>
-          </div>
-      </div>
-      {% endif %}
+      
     </div>
 </div>
 {% endblock %}
