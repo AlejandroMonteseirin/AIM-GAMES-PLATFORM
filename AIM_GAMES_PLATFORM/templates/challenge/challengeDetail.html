@@ -31,11 +31,22 @@
   <div class="section">  
     <div class="row">
       <h3>{% trans "Challenge details" %}:</h3>
+      <div class="divider"></div>
+      <div class="section"></div>
       <div class="col m6 s12">  
-        <h5>{{challenge.title}}</h5>
+        <h4>{{challenge.title}}</h4>
       </div>
       <div class="col m6 s12">
-        <h5>{% trans "Business" %}: {{ challenge.business }}</h5>
+        <div class="row valign-wrapper">
+          <div class="col s3">
+            <img src="{{challenge.business.profile.photo}}" alt="" class="circle responsive-img">
+          </div>
+          <div class="col s9">
+            <h5>
+              {{challenge.business.profile.name}}
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
     <div>
@@ -89,11 +100,12 @@
     <h4 class ="col m1.5"  >{% trans "responsesChallenge" %}:</h4>
     </div>
     {% for response in responsesChallenge %}
-    <div>
-        <b>{{ response.title }}</b><p>{{response.description}}</p>
-        <p>{% trans "freelancerResponse" %}: {{response.freelancer}} </p>
-        <br>
-    </div>
+      <div class="col s12 m6">
+        <div class="card-panel">
+          <b>{{ response.title }}</b><p>{{response.description}}</p>
+          <p>{% trans "freelancerResponse" %}: {{response.freelancer}} </p>
+        </div>
+      </div>
     <div class="divider"></div>
     {% endfor %}
   {% endif %}
