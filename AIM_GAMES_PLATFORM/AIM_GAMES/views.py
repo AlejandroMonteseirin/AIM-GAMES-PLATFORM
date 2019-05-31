@@ -1162,9 +1162,9 @@ def eventSearch(request):
         return handler500(request)
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
-        q=Event.objects.filter( Q(location__icontains=search)|
+        q=Event.objects.annotate(str_tags=GroupConcat('tags__title', ' ')).filter( Q(location__icontains=search)|
             Q(title__icontains=search)|
-            Q(description__icontains=search)).select_related('tags')
+            Q(tags__title__icontains=search))
     else:
         q=Event.objects.all()
     events= q
