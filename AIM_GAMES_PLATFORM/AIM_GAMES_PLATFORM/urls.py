@@ -75,6 +75,7 @@ urlpatterns = [
     path('freelancer/formation/delete/<int:id>',formationDelete),
     path('jobOffer/detail/<int:id>',jobOfferDetail),
     path('challenge/list/', challengeList, name='challengeList'),
+    path('challenge/business/list/', challengeBusinessList, name='challengeBusinessList'),
     path('business/challenge/create',challengeCreate),
     path('challenge/detail/<int:challenge_id>',challengeDetail),
     path('freelancer/curriculum/verify/<int:id>',curriculumVerify),

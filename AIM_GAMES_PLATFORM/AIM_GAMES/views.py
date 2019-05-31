@@ -1058,16 +1058,25 @@ def linkDelete(request, id):
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 
-def challengeSearch(request):
+
+def challengeSearch(request, is_business):
+    if is_business:
+        print("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+        principal = findByPrincipal(request)
+        q = Challenge.objects.filter(business=principal)
+    else:
+        q = Challenge.objects.all()
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
         try:
-            q=Challenge.objects.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search))
+
+            q=q.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search)|Q(business=principal))
+            
             challenges = get_list_or_404(q)
+
         except:
             challenges=()
-    else:
-        q=Challenge.objects.all()
+   
     challenges= q
     if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
         sub = False
@@ -1075,10 +1084,22 @@ def challengeSearch(request):
         sub = True
 
     return challenges, sub
+
+
+def challengeBusinessSearch(request):
+
+    return challengeSearch(request, True)
+
+
 def challengeList(request):
-    challenges, sub = challengeSearch(request)
+    challenges, sub = challengeSearch(request, False)
     alreadyResponse = request.session.pop('alreadyResponse', None)
     return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub, 'alreadyResponse':alreadyResponse})
+
+def challengeBusinessList(request):
+    challenges, sub = challengeBusinessSearch(request)
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub, 'alreadyResponse':alreadyResponse, 'businessList':True})
 
 def challengeCreate(request):
     if checkUser(request)=='business':
@@ -1508,7 +1529,7 @@ def global_search(request):
         if request.user.is_authenticated:
             events, sub_events = eventSearch(request)
             values = {**values, **{'events': events, 'sub_events':sub_events}}
-        challenges, sub_challenges = challengeSearch(request)
+        challenges, sub_challenges = challengeSearch(request, False)
         values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
     except:
         result = values

@@ -45,8 +45,10 @@
     
         <nav class="color1">
             <div class="nav-wrapper" id="idParaFuente">
-                    <a href="/" class="brand-logo "  ><span class="letrasHeader">AIM Games</a>
-                    <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
+                    
+                        <a href="#" class="sidenav-trigger" data-target="slide_out"><i class="material-icons">menu</i></a>
+                        <a href="/" class="brand-logo" ><span class="letrasHeader">AIM Games</a>
+                   
                     <ul class="hide-on-med-and-down right">
                         <li><a href="/search"><i class="large material-icons">search</i></a></li>
                         <li><a href="/">{% trans "mainpage" %}</a></li>
@@ -63,7 +65,8 @@
                         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
                             <li><a  class="headerenlace" href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
                             <li><a class="headerenlace" href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
-                            
+                            <li><a class="headerenlace" href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
+
                         {% endif %}
                         {% if request.user.is_staff %}
                         	<li><a class="headerenlace" href="/admin">{% trans "Admin Panel" %}</a></li>
@@ -104,6 +107,7 @@
                 {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
                     <li><a href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
                     <li><a href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
+                    <li><a href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
                 {% endif %}
                 {% if request.session.currentUser == 'manager' %}
                     <li><a href="/curriculum/manager/list" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
