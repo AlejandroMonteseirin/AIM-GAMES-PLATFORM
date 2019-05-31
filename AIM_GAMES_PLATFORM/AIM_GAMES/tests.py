@@ -140,7 +140,7 @@ class AIM_GAMES_TestCase(TestCase):
         data = {'profession': freelancer1.profession, 'terms': True, 'username': 'userNuevoDeVerdad', 'password1': user1.password,
         'password2': user1.password, 'name': profile1.name, 'surname': profile1.surname, 'email': 'estoesemailprueba@gmail.com',
         'city': profile1.city, 'postalCode': profile1.postalCode, 'idCardNumber': profile1.idCardNumber, 'dateOfBirth': profile1.dateOfBirth, 
-        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri,}
+        'phoneNumber': profile1.phoneNumber, 'photo': url1.uri, 'imAdult': True,}
         form = FreelancerForm(data=data)
         self.assertTrue(form.is_valid())
 

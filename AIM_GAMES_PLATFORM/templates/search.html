@@ -56,9 +56,9 @@
         <h3>{% trans "joboffers" %}</h3>
         <div class="col s12">
             <div class="row collection">
-                <div class="col s4 center"><h5>{% trans "company" %}</h5></div>
-                <div class="col s4 center"><h5>{% trans "salary" %}</h5></div>
-                <div class="col s4 center"><h5>{% trans "schedule" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "company" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "salary" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "schedule" %}</h5></div>
             </div>
             <div class="collection ">
                 {% for jobOffer in jobOffers %}
@@ -113,7 +113,13 @@
                 {% for event in events %}
                 <div class="collection-item">
                     <div class="row">
-                        <div class="col s3">{{ event.title }}</div><div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div><div class="col s2 offset-s1">
+                        <div class="col s3">
+                            {% for tag in event.tags.all %}
+                            <div class="chip">{{tag.title}}</div>
+                            {% endfor %}
+                            {{ event.title }}
+                        </div>
+                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div><div class="col s2 offset-s1">
                         {% if sub_events %}
                         <a href="/event/detail/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
                         {% else %}
