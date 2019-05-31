@@ -906,7 +906,7 @@ def professionalExperienceEdit(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
 
-    form = ProfessionalExperienceForm(request.POST or None, instance=instance)
+    form = ProfessionalExperienceForm(request.POST or None, instance=instance,initial={'startDate': instance.startDate.strftime("%Y-%m-%d"),'endDate': instance.endDate.strftime("%Y-%m-%d")})
     if form.is_valid():
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
