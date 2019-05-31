@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 05:13+0200\n"
+"POT-Creation-Date: 2019-05-31 15:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -402,70 +402,70 @@ msgstr "Send"
 msgid "recipient"
 msgstr "Recipient"
 
-#: .\AIM_GAMES\views.py:732 .\AIM_GAMES\views.py:735
+#: .\AIM_GAMES\views.py:743 .\AIM_GAMES\views.py:746
 #: .\templates\freelancer\detail.html:221
 msgid "Add link"
 msgstr "Add link"
 
-#: .\AIM_GAMES\views.py:751 .\AIM_GAMES\views.py:754
+#: .\AIM_GAMES\views.py:763 .\AIM_GAMES\views.py:766
 #, fuzzy
 #| msgid "aptitude"
 msgid "Add aptitude"
 msgstr "Aptitudes"
 
-#: .\AIM_GAMES\views.py:770 .\AIM_GAMES\views.py:773
+#: .\AIM_GAMES\views.py:783 .\AIM_GAMES\views.py:786
 msgid "Add graphic engine experience"
 msgstr "Add graphic engine experience"
 
-#: .\AIM_GAMES\views.py:789 .\AIM_GAMES\views.py:792
+#: .\AIM_GAMES\views.py:803 .\AIM_GAMES\views.py:806
 msgid "Add professional experience"
 msgstr "Add professional experience"
 
-#: .\AIM_GAMES\views.py:808 .\AIM_GAMES\views.py:811
+#: .\AIM_GAMES\views.py:823 .\AIM_GAMES\views.py:826
 msgid "Add formation"
 msgstr "Add formation"
 
-#: .\AIM_GAMES\views.py:831 .\AIM_GAMES\views.py:834
+#: .\AIM_GAMES\views.py:847 .\AIM_GAMES\views.py:850
 msgid "Add Job Offer"
 msgstr "Add job offer"
 
-#: .\AIM_GAMES\views.py:851
+#: .\AIM_GAMES\views.py:868
 msgid "Edit Job Offer"
 msgstr "Edit job offer"
 
-#: .\AIM_GAMES\views.py:881
+#: .\AIM_GAMES\views.py:900
 msgid "Edit HTML5Showcase"
 msgstr "Edit HTML5 Showcase"
 
-#: .\AIM_GAMES\views.py:898
+#: .\AIM_GAMES\views.py:918
 msgid "Edit Formation"
 msgstr "Edit formation"
 
-#: .\AIM_GAMES\views.py:915
+#: .\AIM_GAMES\views.py:936
 msgid "Edit ProfessionalExperience"
 msgstr "Edit professional experience"
 
-#: .\AIM_GAMES\views.py:932
+#: .\AIM_GAMES\views.py:954
 msgid "Edit Aptitude"
 msgstr "Edit aptitude"
 
-#: .\AIM_GAMES\views.py:949
+#: .\AIM_GAMES\views.py:972
 msgid "Edit Graphic Engine Experience"
 msgstr "Edit graphic engine experience"
 
-#: .\AIM_GAMES\views.py:966
+#: .\AIM_GAMES\views.py:990
 msgid "Edit Link"
 msgstr "Edit link"
 
-#: .\AIM_GAMES\views.py:1068 .\AIM_GAMES\views.py:1071
+#: .\AIM_GAMES\views.py:1100 .\AIM_GAMES\views.py:1103
 msgid "Add Challenge"
 msgstr "Add challenge"
 
-#: .\AIM_GAMES\views.py:1351 .\AIM_GAMES\views.py:1354
+#: .\AIM_GAMES\views.py:1393 .\AIM_GAMES\views.py:1396
 msgid "Create Message"
 msgstr "Create message"
 
-#: .\AIM_GAMES\views.py:1492 .\AIM_GAMES\views.py:1495
+#: .\AIM_GAMES\views.py:1535 .\AIM_GAMES\views.py:1538
 msgid "Add broadcast"
 msgstr "Create broadcast"
 
@@ -480,7 +480,7 @@ msgid "error500"
 msgstr "Error in the server, relax by looking at this cats and try again"
 
 #: .\templates\accounts\login.html:20 .\templates\accounts\login.html:50
-#: .\templates\base_generic.html:79 .\templates\base_generic.html:119
+#: .\templates\base_generic.html:86 .\templates\base_generic.html:126
 msgid "Log In"
 msgstr "Log In"
 
@@ -492,8 +492,8 @@ msgstr "Loged as"
 msgid ", please logout before login again"
 msgstr ", please logout befor login again"
 
-#: .\templates\accounts\login.html:23 .\templates\base_generic.html:77
-#: .\templates\base_generic.html:117
+#: .\templates\accounts\login.html:23 .\templates\base_generic.html:84
+#: .\templates\base_generic.html:124
 msgid "Logout"
 msgstr "Logout"
 
@@ -526,8 +526,8 @@ msgid "acceptTerms"
 msgstr "I accept "
 
 #: .\templates\accounts\signup.html:92 .\templates\accounts\signup.html:95
-#: .\templates\base_generic.html:89 .\templates\base_generic.html:147
-#: .\templates\base_generic.html:150
+#: .\templates\base_generic.html:96 .\templates\base_generic.html:154
+#: .\templates\base_generic.html:157
 msgid "terms-and-conditions"
 msgstr "Terms and Conditions"
 
@@ -537,7 +537,7 @@ msgstr "I confirm that I am of legal age"
 
 #: .\templates\accounts\signup.html:109
 #: .\templates\business\standardForm.html:44
-#: .\templates\challenge\challengeDetail.html:81
+#: .\templates\challenge\challengeDetail.html:82
 #: .\templates\challenge\responseCreate.html:32
 #: .\templates\event\standardForm.html:31
 #: .\templates\freelancer\standardForm.html:34 .\templates\message\chat.html:77
@@ -547,61 +547,65 @@ msgstr "I confirm that I am of legal age"
 msgid "Submit"
 msgstr "Submit"
 
-#: .\templates\base_generic.html:45 .\templates\base_generic.html:88
+#: .\templates\base_generic.html:37
+msgid "7777"
+msgstr "Registered successfully!"
+
+#: .\templates\base_generic.html:52 .\templates\base_generic.html:95
 msgid "mainpage"
 msgstr "Main page"
 
-#: .\templates\base_generic.html:47 .\templates\base_generic.html:91
+#: .\templates\base_generic.html:54 .\templates\base_generic.html:98
 #: .\templates\search.html:89 .\templates\thread\threadList.html:9
 msgid "threads"
 msgstr "Forum"
 
-#: .\templates\base_generic.html:48 .\templates\base_generic.html:54
-#: .\templates\base_generic.html:92 .\templates\base_generic.html:102
+#: .\templates\base_generic.html:55 .\templates\base_generic.html:61
+#: .\templates\base_generic.html:99 .\templates\base_generic.html:109
 #: .\templates\curriculumList.html:8 .\templates\search.html:18
 msgid "curriculums"
 msgstr "Curriculums"
 
-#: .\templates\base_generic.html:51 .\templates\base_generic.html:95
+#: .\templates\base_generic.html:58 .\templates\base_generic.html:102
 msgid "My curriculum"
 msgstr "Curriculums"
 
-#: .\templates\base_generic.html:57 .\templates\base_generic.html:98
+#: .\templates\base_generic.html:64 .\templates\base_generic.html:105
 #: .\templates\jobOfferList.html:7 .\templates\search.html:56
 msgid "joboffers"
 msgstr "Job offers"
 
-#: .\templates\base_generic.html:58 .\templates\base_generic.html:99
+#: .\templates\base_generic.html:65 .\templates\base_generic.html:106
 msgid "Challenges"
 msgstr "Challenges"
 
-#: .\templates\base_generic.html:62 .\templates\base_generic.html:105
+#: .\templates\base_generic.html:69 .\templates\base_generic.html:112
 msgid "Admin Panel"
 msgstr "Admin Panel"
 
-#: .\templates\base_generic.html:66 .\templates\base_generic.html:113
+#: .\templates\base_generic.html:73 .\templates\base_generic.html:120
 msgid "Events"
 msgstr "Events"
 
-#: .\templates\base_generic.html:67 .\templates\base_generic.html:108
+#: .\templates\base_generic.html:74 .\templates\base_generic.html:115
 msgid "Messages"
 msgstr "Messages"
 
-#: .\templates\base_generic.html:73 .\templates\base_generic.html:115
+#: .\templates\base_generic.html:80 .\templates\base_generic.html:122
 msgid "Manage Subs"
 msgstr "Manage Subscription"
 
-#: .\templates\base_generic.html:155
+#: .\templates\base_generic.html:162
 msgid "DownloadData"
 msgstr "Download all your data"
 
-#: .\templates\base_generic.html:156
+#: .\templates\base_generic.html:163
 msgid ""
 "You´re about to delete all your data. This action is irreversible, are you "
 "sure?"
 msgstr ""
 
-#: .\templates\base_generic.html:156
+#: .\templates\base_generic.html:163
 msgid "DeleteAllyourData"
 msgstr "Delete your account forever"
 
@@ -625,21 +629,21 @@ msgstr "Objectives"
 msgid "createAResponseForThisChallenge"
 msgstr "Create a response for this challenge"
 
-#: .\templates\challenge\challengeDetail.html:62
+#: .\templates\challenge\challengeDetail.html:63
 #: .\templates\challenge\responseCreate.html:7
 #: .\templates\thread\responseCreate.html:5
 msgid "newResponse"
 msgstr "New response"
 
-#: .\templates\challenge\challengeDetail.html:93
+#: .\templates\challenge\challengeDetail.html:94
 msgid "Responsed"
 msgstr "You already have a response for this challenge!"
 
-#: .\templates\challenge\challengeDetail.html:100
+#: .\templates\challenge\challengeDetail.html:101
 msgid "responsesChallenge"
 msgstr "Responses fot his challenge"
 
-#: .\templates\challenge\challengeDetail.html:106
+#: .\templates\challenge\challengeDetail.html:107
 msgid "freelancerResponse"
 msgstr "Response from freelancer"
 
