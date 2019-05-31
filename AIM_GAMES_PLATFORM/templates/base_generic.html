@@ -30,6 +30,13 @@
     $('#modal').modal();
     $('#modal').modal('open');
  });
+
+  window.onload = function() {
+    let saved = {% if alreadyResponse%}true{%else%}false{%endif%};
+    if (saved){
+        M.toast({html: '{%trans '7777'%}'});
+    }
+  }
 </script>
 
        
