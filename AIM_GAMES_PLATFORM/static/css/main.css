@@ -146,3 +146,18 @@ main {
 .margin-bottom{
     margin-bottom: 2%;
 }
+.margintop{
+    margin-top: 1em;
+}
+@media (max-width: 600px) {
+.carouseldethreaddetail  {
+    
+        height: 200px  !important;
+
+    }
+    .carousel-item img{
+        height: 100%;
+        width: 100%;
+        }
+        
+}
