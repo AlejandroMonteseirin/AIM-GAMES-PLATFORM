@@ -350,7 +350,7 @@ class ThreadUpdate(UpdateView):
         prof = Profile.objects.filter(user__pk=self.request.user.id)
         buss = Business.objects.filter(profile__pk=prof[0].id)
         thread = form.save(buss)
-
+        self.request.session['alreadyResponse'] = True
         return threadDetail(self.request, thread.id)
 
     def get_context_data(self, **kwargs):
@@ -388,6 +388,7 @@ class ThreadCreate(CreateView):
             thread = form.save(buss)
             busi.coins -= price
             busi.save()
+            self.request.session['alreadyResponse'] = True
             return threadDetail(self.request, thread.id)
         else:
             return handler500(self.request)
@@ -417,13 +418,16 @@ def threadDetail(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id)
     responses = thread.response_set.all()
     pics = thread.pics
+    owner =False
+    alreadyResponse = request.session.pop('alreadyResponse', None)
     if checkUser(request)=='business':
         business = findByPrincipal(request)
         if business.id == thread.business.id:
-            return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics,'owner':True})
+            owner = True
         if business.subscriptionModel == None:
             return handler500(request)
-    return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics})
+    return render(request, 'thread/threadDetail.html', {'thread': thread, 'responses': responses,'pics':pics,
+                                                        'owner':owner, 'alreadyResponse':alreadyResponse})
 
 
 def jobOfferDetail(request, id):
@@ -431,14 +435,15 @@ def jobOfferDetail(request, id):
         pics = jobOffer.images.split(",")
         for pic in pics:
             pic.strip()
-        
+        owner = False
+        alreadyResponse = request.session.pop('alreadyResponse', None)
         if checkUser(request)=='business':
             business = findByPrincipal(request)
             if business.id == jobOffer.business.id:
-                return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':True})
+                owner = True
             if business.subscriptionModel is None:
                 return handler500(request)
-        return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics})
+        return render(request, 'jobOfferDetail.html', {'jobOffer': jobOffer, 'pics' : pics,'owner':owner, 'alreadyResponse': alreadyResponse})
 
 
 def findByPrincipal(request):
@@ -500,7 +505,10 @@ def freelancerDetail(request, id):
     if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
         return handler500(request)
 
-    return render(request, 'freelancer/detail.html', {'freelancer': freelancer,'links':links,'formations':formation,'professionalExperiences':professionalExperience,'HTML5Showcase':HTML5Showcase,'graphicEngineExperiences':graphicEngineExperience,'aptitudes':aptitude})
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'freelancer/detail.html', {'freelancer': freelancer,'links':links,'formations':formation,
+                          'professionalExperiences':professionalExperience,'HTML5Showcase':HTML5Showcase,
+                          'graphicEngineExperiences':graphicEngineExperience,'aptitudes':aptitude, 'alreadyResponse':alreadyResponse})
 
 class GroupConcat(Aggregate):
     function = 'GROUP_CONCAT'
@@ -543,8 +551,8 @@ def threadSearch(request):
 
 def threadList(request):
     threads, businessThread = threadSearch(request)
-   
-    return render(request, 'thread/threadList.html',{'threads':threads,'businessThread':businessThread})
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'thread/threadList.html',{'threads':threads,'businessThread':businessThread, 'alreadyResponse': alreadyResponse})
 
 def is_number(s):
     try:
@@ -606,8 +614,8 @@ def jobOfferSearch(request):
     return q, sub
 def jobOfferList(request):
     jobOffers, sub = jobOfferSearch(request)
-
-    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers, 'sub': sub})
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'jobOfferList.html',{'jobOffers':jobOffers, 'sub': sub, 'alreadyResponse':alreadyResponse})
 
 def curriculumSearch(request):
     if checkUser(request)!='business':
@@ -653,7 +661,8 @@ def curriculumSearch(request):
 
 def curriculumList(request):
     curriculums, aptitudes, sub = curriculumSearch(request)
-    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes, 'sub': sub})
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'curriculumList.html',{'curriculums':curriculums,'aptitudes':aptitudes, 'sub': sub, 'alreadyResponse':alreadyResponse})
 
 def checkUser(request):
     freelancer = None
@@ -710,6 +719,7 @@ def response_create(request, threadId):
                 thread = Thread.objects.get(id=threadId)
                 response.thread = thread
                 response.save()
+                request.session['alreadyResponse'] = True
                 return redirect('/thread/detail/' + str(threadId))
         else:
             form = ResponseForm()
@@ -727,6 +737,7 @@ def linkCreate(request):
                 link.curriculum = freelancer.curriculum
                 link.save()
                 print('link saved')
+                request.session['alreadyResponse'] = True
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
                 return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add link')})
@@ -746,6 +757,7 @@ def aptitudeCreate(request):
                 obj.curriculum = freelancer.curriculum
                 obj.save()
                 print('Aptitude saved')
+                request.session['alreadyResponse'] = True
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
                 return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add aptitude')})
@@ -765,6 +777,7 @@ def graphicEngineExperienceCreate(request):
                 obj.curriculum = freelancer.curriculum
                 obj.save()
                 print('Graphic engine experience saved')
+                request.session['alreadyResponse'] = True
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
                 return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add graphic engine experience')})
@@ -784,6 +797,7 @@ def professionalExperienceCreate(request):
                 obj.curriculum = freelancer.curriculum
                 obj.save()
                 print('Professional Experience saved')
+                request.session['alreadyResponse'] = True
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
                 return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add professional experience')})
@@ -803,6 +817,7 @@ def formationCreate(request):
                 obj.curriculum = freelancer.curriculum
                 obj.save()
                 print('formation saved')
+                request.session['alreadyResponse'] = True
                 return redirect('/freelancer/detail/'+str(freelancer.id))
             else:
                 return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Add formation')})
@@ -826,6 +841,7 @@ def jobOfferCreate(request):
                     print('job offer saved')
                     business.coins = business.coins - price
                     business.save()
+                    request.session['alreadyResponse'] = True
                 return redirect('/joboffer/user/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Job Offer')})
@@ -846,6 +862,7 @@ def jobOfferEdit(request,id):
             obj = form.save(commit=False)
             obj.business = business
             obj.save()
+            request.session['alreadyResponse'] = True
             return redirect('/jobOffer/detail/'+ str(id))
         else:
             return render(request,'business/standardForm.html',{'form':form,'title':_('Edit Job Offer'), 'edit':'edit'})
@@ -859,6 +876,7 @@ def jobOfferDelete(request,id):
         if instance.business.id != business.id:
             return handler500(request)
         instance.delete()
+        request.session['alreadyResponse'] = True
         return redirect('/joboffer/user/list/')
     else:
         return handler500(request)
@@ -877,6 +895,7 @@ def html5Edit(request, id):
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit HTML5Showcase')})
 
@@ -894,6 +913,7 @@ def formationEdit(request, id):
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Formation')})
 
@@ -906,11 +926,12 @@ def professionalExperienceEdit(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
 
-    form = ProfessionalExperienceForm(request.POST or None, instance=instance)
+    form = ProfessionalExperienceForm(request.POST or None, instance=instance,initial={'startDate': instance.startDate.strftime("%Y-%m-%d"),'endDate': instance.endDate.strftime("%Y-%m-%d")})
     if form.is_valid():
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit ProfessionalExperience')})
 
@@ -928,6 +949,7 @@ def aptitudeEdit(request, id):
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Aptitude')})
 
@@ -945,6 +967,7 @@ def graphicEngineExperienceEdit(request, id):
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Graphic Engine Experience')})
 
@@ -962,6 +985,7 @@ def linkEdit(request, id):
         obj = form.save(commit=False)
         obj.curriculum = freelancer.curriculum
         obj.save()
+        request.session['alreadyResponse'] = True
         return redirect('/freelancer/detail/'+str(freelancer.id))
     return render(request,'freelancer/standardForm.html',{'form':form,'title':_('Edit Link')})
 
@@ -975,6 +999,7 @@ def html5Delete(request, id):
         return render(request, 'index.html')
     instance.embedCode=""
     instance.save()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 def formationDelete(request, id): 
@@ -985,6 +1010,7 @@ def formationDelete(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 def professionalExperienceDelete(request, id): 
@@ -995,6 +1021,7 @@ def professionalExperienceDelete(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 def aptitudeDelete(request, id): 
@@ -1005,6 +1032,7 @@ def aptitudeDelete(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 def graphicEngineExperienceDelete(request, id): 
@@ -1015,6 +1043,7 @@ def graphicEngineExperienceDelete(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 def linkDelete(request, id): 
@@ -1025,19 +1054,29 @@ def linkDelete(request, id):
     if instance.curriculum.id != freelancer.curriculum.id:
         return render(request, 'index.html')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/'+str(freelancer.id))
 
 
-def challengeSearch(request):
+
+def challengeSearch(request, is_business):
+    if is_business:
+        print("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN")
+        principal = findByPrincipal(request)
+        q = Challenge.objects.filter(business=principal)
+    else:
+        q = Challenge.objects.all()
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
         try:
-            q=Challenge.objects.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search))
+
+            q=q.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search)|Q(business=principal))
+            
             challenges = get_list_or_404(q)
+
         except:
             challenges=()
-    else:
-        q=Challenge.objects.all()
+   
     challenges= q
     if checkUser(request) == 'business' and get_object_or_404(Business,profile=request.user.profile).subscriptionModel is None:
         sub = False
@@ -1045,9 +1084,22 @@ def challengeSearch(request):
         sub = True
 
     return challenges, sub
+
+
+def challengeBusinessSearch(request):
+
+    return challengeSearch(request, True)
+
+
 def challengeList(request):
-    challenges, sub = challengeSearch(request)
-    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub})
+    challenges, sub = challengeSearch(request, False)
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub, 'alreadyResponse':alreadyResponse})
+
+def challengeBusinessList(request):
+    challenges, sub = challengeBusinessSearch(request)
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'challenge/challengeList.html',{'challenges':challenges, 'sub': sub, 'alreadyResponse':alreadyResponse, 'businessList':True})
 
 def challengeCreate(request):
     if checkUser(request)=='business':
@@ -1063,6 +1115,7 @@ def challengeCreate(request):
                     print('Challenge saved')
                     business.coins = business.coins - price
                     business.save()
+                    request.session['alreadyResponse'] = True
                 return redirect('/challenge/list/')
             else:
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
@@ -1079,6 +1132,7 @@ def challengeDetail(request, challenge_id):
     alreadyResponse = False
     challenge = get_object_or_404(Challenge, pk=challenge_id)
     responsesChallenge = challenge.challengeresponse_set.all()
+    opened = False
     if checkUser(request) == 'freelancer':
         if request.method == "POST":
             form = ChallengeResponseForm(request.POST)
@@ -1090,6 +1144,8 @@ def challengeDetail(request, challenge_id):
                 obj.save()
                 saved = True
                 alreadyResponse = True
+            else:
+                opened=True
         else:
             for r in responsesChallenge:
                 if r.freelancer == findByPrincipal(request):
@@ -1099,12 +1155,12 @@ def challengeDetail(request, challenge_id):
     else:
         if challenge.business == findByPrincipal(request):
             lookResponses = True
-
-        if findByPrincipal(request).subscriptionModel is None:
-            return handler500(request)
+        if findByPrincipal(request) is not None:
+            if findByPrincipal(request).subscriptionModel is None:
+                return handler500(request)
     return render(request, 'challenge/challengeDetail.html', {'form': form, 'saved':saved, 'challenge': challenge,
                                                 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses,
-                                                'alreadyResponse': alreadyResponse, 'saved':saved})
+                                                'alreadyResponse': alreadyResponse, 'saved':saved, 'opened':opened})
 
 def curriculumVerify(request, id):
     userString = checkUser(request)
@@ -1113,6 +1169,7 @@ def curriculumVerify(request, id):
     curriculum = get_object_or_404(Curriculum, pk=id)
     curriculum.verified = True
     curriculum.save()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/' + str(curriculum.freelancer.id))
 
 def curriculumUnverify(request, id):
@@ -1122,6 +1179,7 @@ def curriculumUnverify(request, id):
     curriculum = get_object_or_404(Curriculum, pk=id)
     curriculum.verified = False
     curriculum.save()
+    request.session['alreadyResponse'] = True
     return redirect('/freelancer/detail/' + str(curriculum.freelancer.id))
 
 
@@ -1159,9 +1217,9 @@ def eventSearch(request):
         return handler500(request)
     if(request.GET.__contains__('search')):
         search=request.GET.get('search')
-        q=Event.objects.filter( Q(location__icontains=search)|
+        q=Event.objects.annotate(str_tags=GroupConcat('tags__title', ' ')).filter( Q(location__icontains=search)|
             Q(title__icontains=search)|
-            Q(description__icontains=search)).select_related('tags')
+            Q(tags__title__icontains=search))
     else:
         q=Event.objects.all()
     events= q
@@ -1174,8 +1232,8 @@ def eventSearch(request):
 
 def eventList(request):
     events, sub = eventSearch(request)
-
-    return render(request, 'event/eventList.html', {'events':events, 'sub': sub})
+    alreadyResponse = request.session.pop('alreadyResponse', None)
+    return render(request, 'event/eventList.html', {'events':events, 'sub': sub, 'alreadyResponse': alreadyResponse})
 
 def eventCreate(request):
     if checkUser(request)=='manager':
@@ -1191,6 +1249,7 @@ def eventCreate(request):
                 for tag in tags:
                     obj.tags.add(tag)
                 print('Event saved')
+                request.session["alreadyResponse"] = True
                 return redirect('/event/list/')
             else:
                 return render(request,'event/standardForm.html',{'form':form})
@@ -1205,6 +1264,7 @@ def eventDetail(request, event_id):
     freelancers= event.freelancers.all()
     companies= event.companies.all()
     manager = findByPrincipal(request)
+    alreadyResponse = False
     if checkUser(request)!='manager':
         user = findByPrincipal(request)
         if(user in freelancers or user in companies):
@@ -1215,7 +1275,9 @@ def eventDetail(request, event_id):
         joining=False
     if checkUser(request) == 'business' and findByPrincipal(request).subscriptionModel is None:
         return handler500(request)
-    return render(request, 'event/eventDetail.html', {'event': event,'freelancers':freelancers,'companies':companies, 'joining':joining})
+
+    alreadyResponse = request.session.pop('alreadyResponse',None)
+    return render(request, 'event/eventDetail.html', {'event': event,'freelancers':freelancers,'companies':companies, 'joining':joining, 'alreadyResponse': alreadyResponse})
 
 def eventEdit(request, event_id): 
     if checkUser(request)!='manager':
@@ -1232,6 +1294,7 @@ def eventEdit(request, event_id):
         obj.tags.set(())
         for tag in tags:
             obj.tags.add(tag)
+        request.session["alreadyResponse"] = True
         return redirect('/event/detail/'+str(event_id))
     return render(request,'event/standardForm.html',{'form':form})
 
@@ -1260,6 +1323,7 @@ def eventJoin(request, event_id):
     else:
         obj.companies.add(user)
     obj.save()
+    request.session['alreadyResponse'] = True
     return redirect('/event/detail/'+str(event_id))
 
 def eventDisjoin(request, event_id): 
@@ -1276,6 +1340,7 @@ def eventDisjoin(request, event_id):
     else:
         obj.companies.remove(user)
     obj.save()
+    request.session['alreadyResponse'] = True
     return redirect('/event/detail/'+str(event_id))
 
 def eventDelete(request, event_id):
@@ -1284,6 +1349,7 @@ def eventDelete(request, event_id):
     instance = get_object_or_404(Event, id=event_id)
     manager = findByPrincipal(request)
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/event/list/')
 
 def downloadData(request):
@@ -1380,6 +1446,7 @@ def threadDelete(request, id):
     if instance.business.id != business.id:
         return redirect('/thread/business/list/')
     instance.delete()
+    request.session['alreadyResponse'] = True
     return redirect('/thread/business/list/')
 
 def chat(request,userId):
@@ -1462,7 +1529,7 @@ def global_search(request):
         if request.user.is_authenticated:
             events, sub_events = eventSearch(request)
             values = {**values, **{'events': events, 'sub_events':sub_events}}
-        challenges, sub_challenges = challengeSearch(request)
+        challenges, sub_challenges = challengeSearch(request, False)
         values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
     except:
         result = values

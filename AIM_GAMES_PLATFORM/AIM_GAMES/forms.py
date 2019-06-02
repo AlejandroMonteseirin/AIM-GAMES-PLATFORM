@@ -11,7 +11,8 @@ import re
 
 class BusinessForm(ModelForm):
     terms = BooleanField(required = True,label = 'terms')
-    
+    imAdult = BooleanField(required = True,label = 'imAdult')
+
     class Meta:
         model = Business
         exclude = ('lastPayment', 'subscriptionModel', 'coins')
@@ -34,6 +35,7 @@ class BusinessForm(ModelForm):
         obj.profile = self.profile_form.save()
         group = Group.objects.get(name='Business')
         obj.profile.user.groups.add(group)
+        #obj.profile.dateOfBirth = datetime.date(year=today.year, month=today.month, day=today.day)  
         obj.save()
         return obj
 
@@ -41,7 +43,7 @@ class BusinessForm(ModelForm):
 class FreelancerForm(ModelForm):
     profession = CharField(widget=TextInput(), label=_("profession"))
     terms = BooleanField(required = True,label = 'terms')
-
+    imAdult = BooleanField(required = True,label = 'imAdult')
     class Meta:
         model = Freelancer
         exclude = ()
@@ -67,7 +69,7 @@ class FreelancerForm(ModelForm):
         obj = super(FreelancerForm, self).save(commit=commit)
         obj.profile = self.profile_form.save()
         group = Group.objects.get(name='Freelancer')
-        obj.profile.user.groups.add(group)        
+        obj.profile.user.groups.add(group)      
         obj.save()
         cur,cre = Curriculum.objects.get_or_create(freelancer= obj,verified=False)
         HTML5Showcase.objects.get_or_create(curriculum= cur,embedCode="")
@@ -81,13 +83,12 @@ class ProfileForm(ModelForm):
     city = CharField(widget=TextInput(), label=_("City"))
     postalCode = CharField(widget=NumberInput(), label=_("Postal Code"))
     idCardNumber = CharField(widget=TextInput(), label=_("IDCard Number"))
-    dateOfBirth = DateField(widget=DateInput(), label=_("Date of birth"))
     phoneNumber = CharField(widget=NumberInput(), label=_("Phone Number"))
     photo = URLField(widget=URLInput(), label=_("Photo URL:"), required=False)
 
     class Meta:
         model = Profile
-        exclude = ()
+        exclude = ('dateOfBirth',)
 
     def __init__(self, *args, **kwargs):
         print('__init__ ProfileForm')
@@ -132,15 +133,17 @@ class ProfileForm(ModelForm):
             raise ValidationError(_("ID Card Number not valid"))
         return data
 
-    def clean_dateOfBirth(self):
-        print('clean: ProfileForm: dateOfBityh')
-        data = self.cleaned_data['dateOfBirth']
-        from_date = datetime.now() - timedelta(days=18*365)
-        print(str(from_date))
-        print(str(data))
-        if data > datetime.date(from_date):
-            raise ValidationError(_("You must be over 18 to sign up"))
-        return data
+    """ def clean_dateOfBirth(self):
+        #print('clean: ProfileForm: dateOfBityh')
+        #data = self.cleaned_data['dateOfBirth']
+        #from_date = datetime.now() - timedelta(days=18*365)
+        #print(str(from_date))
+        #print(str(data))
+        #if data > datetime.date(from_date):
+        #    raise ValidationError(_("You must be over 18 to sign up"))
+
+        data = datetime.date(year=today.year, month=today.month, day=today.day)
+        return data """
 
     def clean(self):
         print('clean: ProfileForm')
@@ -151,6 +154,8 @@ class ProfileForm(ModelForm):
         print('save: ProfileForm')
         obj = super(ProfileForm, self).save(commit=commit)
         obj.user = self.user_form.save()
+        #datetime.date(year=today.year, month=today.month, day=today.day)
+        obj.dateOfBirth = datetime.now()
         obj.save()
         return obj
 
@@ -320,7 +325,7 @@ class ChallengeForm(ModelForm):
 
 
 class ChallengeResponseForm(ModelForm):
-
+    title = CharField(widget=Textarea(attrs={'class': 'materialize-textarea col l6'}), label=_('title'), )
     class Meta:
         model = ChallengeResponse
         exclude = ('freelancer','challenge')

@@ -5,7 +5,8 @@
 <body>
     <div class="container">
         <div class="col s12">  
-            <h3>{% trans "challengesList" %}</h3>      
+            <h3>{% trans "challengesList" %}</h3>  
+            {% if not businessList %}    
             <form action="/challenge/list/">
                 <div class="input-field">
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -13,6 +14,7 @@
                 <i class="material-icons">close</i>
                 </div>
             </form>
+            {% endif %}
         </div>
         <div class="col s12">
             <div class="row collection">

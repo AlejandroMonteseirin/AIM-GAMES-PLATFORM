@@ -10,7 +10,6 @@
     padding: 0px 20px 0px;
 }
 
-
 img{
     object-fit: contain;
     max-width: 100%;
@@ -102,5 +101,5 @@ main {
 }
 }
 .targetaDentroDeTargetaxd{
-   padding:3em;
+   padding-top: 1em;
 }

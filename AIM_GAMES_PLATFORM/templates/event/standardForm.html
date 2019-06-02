@@ -21,12 +21,13 @@
                         <div class="input-field col s12">
                             {% if 'moment' in field.html_name %}
                                 <div class="labelxd">{{ field.label_tag }}</div>
-                                <input id="{{ field.id_for_label }}" type="date" class="validate" name="{{ field.html_name }}">
+                                <input id="{{ field.id_for_label }}" value="{{ field.value|date:'Y-m-d'}}" type="date" class="validate" name="{{ field.html_name }}">
+                            {% elif 'tags' in field.html_name %}
+                                {{field}}
                             {% else %}
                                 {{ field.label_tag }}
                                 {{field}}
                             {% endif %}
-                            
                         </div>
                         {% endfor %}
                         <button class="btn waves-effect waves-light" type="submit" name="action">{% trans "Submit" %}
