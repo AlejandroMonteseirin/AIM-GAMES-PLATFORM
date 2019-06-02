@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block content %}
         <script>
-       document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.carousel');
     var options={
       numVisible:5,
@@ -17,13 +17,13 @@
 <div class="card  lighten-2 color1b">  
     <div class="row ">
         <div class="col m6 s12 ">
-            <h1>{% trans "Thread details" %}:</h1>
+            <h3>{% trans "Thread details" %}:</h3>
         </div>
       <div class="col m6 s12">
-        <h4>{{thread.title}}</h4>
+        <h5>{{thread.title}}</h5>
       </div>
       <div class="col m6 s12">
-        <h4>{% trans "Business" %}: {{ thread.business }}</h4>
+        <h5>{% trans "Business" %}: {{ thread.business }}</h5>
       </div>
     </div>
     <div class="card color1b2 targetaDentroDeTargetaxd"> 
@@ -42,18 +42,18 @@
     </ul>
      {% if owner %}
         <div>
-          <div class="col s12 m6 center" ><a href="/business/thread/edit/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Edit" %}</a></div>
-          <div class="col s12 m6 center" ><a href="/business/thread/delete/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Delete" %}</a></div>
-                  </div> 
+          <div class="col s12 m6 center margintop" ><a href="/business/thread/edit/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Edit" %}</a></div>
+          <div class="col s12 m6 center margintop" ><a href="/business/thread/delete/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Delete" %}</a></div>
+        </div> 
 
           {% endif %}   
             {% comment %}<ul class="collection">
                 <li><b>{% trans "valoration" %}:</b> {{ thread.valoration.score }}</li>
             </ul> {% endcomment %}
             <b>{% trans "pictures" %}:</b>
-                  <div class="carousel carousel-slider">
+                  <div class="carousel carousel-slider carouseldethreaddetail">
                     {% for pic in thread.pics.all %}
-                      <a class="carousel-item" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
+                      <a class="carousel-item carouseldethreaddetail" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
                     {% endfor %}  
                   </div>
       
@@ -71,10 +71,10 @@
                 <h3>{{ response.title }}</h3><p>{{response.description}}</p>
                 <p>{% trans "business" %}: {{response.business}} </p>
                 <b>{% trans "pictures" %}:</b>
-                <div class="carousel carousel-slider">
+                <div class="carousel carousel-slider carouseldethreaddetail">
                 {% if response.pics.count > 0 %}
                     {% for pic in response.pics.all %}
-                      <a class="carousel-item" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
+                      <a class="carousel-item carouseldethreaddetail" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
                     {% endfor %}
                 {% endif %}
                 </div>
