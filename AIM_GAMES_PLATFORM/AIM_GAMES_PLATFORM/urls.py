@@ -107,5 +107,6 @@ urlpatterns = [
     path('chats', chats,name='chats'),
     path('search', global_search),
     path('broadcast/create', broadcastCreate,name='broadcast'),
+    path('favicon.ico', lambda x: HttpResponseRedirect(settings.STATIC_URL+'icons/logo.ico')), #google chrome favicon fix
 
 ]
