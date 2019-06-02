@@ -1034,7 +1034,7 @@ msgstr "Thread detail"
 
 #: .\templates\thread\threadDetail.html:26
 msgid "Business"
-msgstr "Sign up as company"
+msgstr "Company"
 
 #: .\templates\thread\threadDetail.html:38
 msgid "Attached files"
