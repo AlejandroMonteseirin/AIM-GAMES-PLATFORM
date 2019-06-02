@@ -7,9 +7,9 @@ from AIM_GAMES.models import *
 
 class GetLanguage(MiddlewareMixin):
     def process_request(self, request):
-        if not request.session.has_key('language'):
-            request.session['language'] = 'es-ES'
-        language = request.session['language']
+        if not request.session.has_key('_language'):
+            request.session['_language'] = 'es-ES'
+        language = request.session['_language']
         translation.activate(language)
 
 

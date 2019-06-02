@@ -40,7 +40,7 @@ def index(request):
 
 
 def setlanguage(request, language):
-    request.session['language'] = language
+    request.session['_language'] = language
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
