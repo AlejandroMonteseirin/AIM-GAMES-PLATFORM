@@ -41,7 +41,15 @@
 
        
     </head>
-
+        {% if request.session.currentUser == 'business' %}
+            <ul id="dropdownBusiness" class="dropdown-content">
+                <li><a class="headerenlace"  href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
+                <li><a  class="headerenlace" href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
+                <li class="divider"></li>
+                <li><a class="headerenlace" href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
+                <li><a class="headerenlace" href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
+            </ul>
+        {% endif %} 
     
         <nav class="color1">
             <div class="nav-wrapper" id="idParaFuente">
@@ -53,21 +61,25 @@
                         <li><a href="/search"><i class="large material-icons">search</i></a></li>
                         <li><a href="/">{% trans "mainpage" %}</a></li>
                         {% if request.session.currentUser == 'business' %}
-                            <li><a class="headerenlace" href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
-                            <li><a class="headerenlace"  href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
+                            
                         {% endif %} 
                         {% if request.session.currentUser == 'freelancer' %}
                             <li><a  class="headerenlace" href="/freelancer/mycurriculum/-" target="_self" class="collection-item">{% trans "My curriculum" %}</a></li>
+                            <li><a  class="headerenlace" href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
+                            <li><a class="headerenlace" href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
                         {% endif %}
                         {% if request.session.currentUser == 'manager' %}
                             <li><a class="headerenlace" href="/curriculum/manager/list" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
                         {% endif %}
                         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
-                            <li><a  class="headerenlace" href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
-                            <li><a class="headerenlace" href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
-                            <li><a class="headerenlace" href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
-
+                            
                         {% endif %}
+                        {% if request.session.currentUser == 'business' %}
+                            <li><a class="headerenlace" href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
+
+                            <li><a class="dropdown-trigger headerenlace" href="#!" data-target="dropdownBusiness">{% trans "jobNavBar" %}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        {% endif %}
+
                         {% if request.user.is_staff %}
                         	<li><a class="headerenlace" href="/admin">{% trans "Admin Panel" %}</a></li>
                         {% endif %}

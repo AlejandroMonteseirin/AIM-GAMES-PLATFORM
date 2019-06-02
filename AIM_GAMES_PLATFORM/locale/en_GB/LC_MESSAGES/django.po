@@ -1105,3 +1105,6 @@ msgstr "New thread"
 
 #~ msgid "aboutus"
 #~ msgstr "About us"
+
+msgid "jobNavBar"
+msgstr "Job related"
