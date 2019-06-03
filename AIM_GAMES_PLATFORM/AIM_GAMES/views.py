@@ -753,13 +753,10 @@ def response_create(request, threadId):
                 images = form.cleaned_data['images']
                 pics = []
                 for image in images:
-                    url = URL.objects.filter(uri=image)
-                    if not url:
-                        url = URL()
-                        url.uri = image
-                        url.save()
-                    else:
-                        url = url[0]
+                    url = URL()
+                    url.uri = image
+                    url.save()
+                    print(url)
                     pics.append(url)
 
                 userprofile = Profile.objects.get(user=request.user)
@@ -769,6 +766,7 @@ def response_create(request, threadId):
                 response.thread = thread
                 response.save()
                 response.pics.set(pics)
+
                 request.session['alreadyResponse'] = True
                 return redirect('/thread/detail/' + str(threadId))
         else:

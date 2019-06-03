@@ -320,12 +320,6 @@ msgstr "Aptitudes"
 msgid "url"
 msgstr "URL"
 
-#: .\AIM_GAMES\models.py:219 .\AIM_GAMES\models.py:243
-#: .\AIM_GAMES\models.py:270 .\AIM_GAMES\models.py:278
-#: .\AIM_GAMES\models.py:298 .\templates\thread\threadDetail.html:73
-msgid "business"
-msgstr "Sign up as company"
-
 #: .\AIM_GAMES\models.py:221
 msgid "position"
 msgstr "Position"
@@ -1033,6 +1027,9 @@ msgid "Thread details"
 msgstr "Thread detail"
 
 #: .\templates\thread\threadDetail.html:26
+msgid "business"
+msgstr "Company"
+
 msgid "Business"
 msgstr "Company"
 
