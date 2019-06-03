@@ -70,14 +70,16 @@
             <div class="card color1b">
                 <h3>{{ response.title }}</h3><p>{{response.description}}</p>
                 <p>{% trans "business" %}: {{response.business}} </p>
+                {% if response.pics.count > 0 %}
                 <b>{% trans "pictures" %}:</b>
                 <div class="carousel carousel-slider carouseldethreaddetail">
-                {% if response.pics.count > 0 %}
+                
                     {% for pic in response.pics.all %}
                       <a class="carousel-item carouseldethreaddetail" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
                     {% endfor %}
-                {% endif %}
                 </div>
+                {% endif %}
+                
                 <br>
             </div>
         </div>
