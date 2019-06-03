@@ -167,10 +167,10 @@
                 <div class="col s12 m3 color1c">
                 © 2019 AIM-GAMES-PLATFORM<br/>
                 V3.0<br/>  
-                {% if request.session.language == 'en-GB' %}
+                {% if LANGUAGE_CODE == 'en-gb' %}
                     <a href="/terms-and-conditions" class="color1c ">{% trans "terms-and-conditions" %}</a>
                 {% endif %}
-                {% if request.session.language == 'es-ES' %}
+                {% if LANGUAGE_CODE == 'es-es' %}
                     <a href="/terminos-y-condiciones" class="colorEnlace ">{% trans "terms-and-conditions" %}</a>
                 {% endif %}
                 </div>
