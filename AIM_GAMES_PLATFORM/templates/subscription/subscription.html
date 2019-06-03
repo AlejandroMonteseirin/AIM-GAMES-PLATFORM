@@ -21,7 +21,7 @@
           <ul class="tabs tabs-fixed-width  tabs-transparent">
             {% for subs in subscriptions %}
               <li class="tab"><a href="#{{subs.id}}">
-                {%if request.session.language == 'es-ES'%}
+                {%if LANGUAGE_CODE == 'es-es'%}
               {{subs.name}}
               {% else %}
               {{subs.name_eng}}
@@ -32,7 +32,7 @@
         <div class="card-content grey lighten-4">
           {% for subs in subscriptions %}
             <div id="{{subs.id}}">
-              {%if request.session.language == 'es-ES'%}
+              {%if LANGUAGE_CODE == 'es-es'%}
               {{subs.description}}
               {% else %}
               {{subs.description_eng}}
@@ -42,14 +42,16 @@
               <strong>{% trans 'Coins Gain per month' %}:</strong> {{subs.coinsGain}}<i class='tiny material-icons'>blur_circular</i><br>
               <strong>{% trans 'Price' %}:</strong> {{subs.price}}€<br><br>
               <a href="/pagar_paypal_subscripcion/{{subs.id}}/{{businessId}}" onclick=
-                      "return pagando();"> {%if request.session.language == 'es-ES'%}
+                      "return pagando();"> {%if LANGUAGE_CODE == 'es-es'%}
               {{subs.name}}
               {% else %}
               {{subs.name_eng}}
               {%endif%}</a>
+
             </div>
           {% endfor %}
         </div>
+
       </div>
     </div>
   </div>
