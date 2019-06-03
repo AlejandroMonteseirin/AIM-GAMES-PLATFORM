@@ -411,6 +411,42 @@ class ThreadCreate(CreateView):
         else:
             return handler500(request)
 
+class ResponseCreate(CreateView):
+    form_class = ResponseForm
+    template_name = 'thread/responseCreate.html'
+    success_url = '/thread/business/list'
+
+    def form_valid(self, form, threadId):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        print(threadId)
+        if checkUser(self.request) != 'business':
+            return handler500(self.request)
+        print('ResponseCreate: form_valid')
+
+        prof = Profile.objects.filter(user__pk=self.request.user.id)
+        buss = Business.objects.filter(profile__pk=prof[0].id)
+        busi = buss[0]
+        
+        response = form.save(buss)
+        self.request.session['alreadyResponse'] = True
+        return threadDetail(self.request, thread.id)
+    
+
+    def get_context_data(self, **kwargs):
+        # This method is called before the view es generate and add the context
+        # It should return the context
+        context = super(ResponseCreate, self).get_context_data(**kwargs)
+        context['buss'] = findByPrincipal(self.request)
+
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if checkUser(self.request) == 'business':
+            return super(ResponseCreate, self).dispatch(request, *args, **kwargs)
+        else:
+            return handler500(request)
+
 
 def threadDetail(request, thread_id):
     if checkUser(request)!='business' and checkUser(request)!='manager':
@@ -712,13 +748,25 @@ def response_create(request, threadId):
         if request.method=="POST":
             form = ResponseForm(request.POST)
             if form.is_valid():
-                response = form.save(commit=False)
+                response = form.save(commit=False) 
+                print('hola')
+                images = form.cleaned_data['images']
+                pics = []
+                for image in images:
+                    url = URL()
+                    url.uri = image
+                    url.save()
+                    print(url)
+                    pics.append(url)
+
                 userprofile = Profile.objects.get(user=request.user)
                 businessPrincipal = Business.objects.get(profile=userprofile)
                 response.business=businessPrincipal
                 thread = Thread.objects.get(id=threadId)
                 response.thread = thread
                 response.save()
+                response.pics.set(pics)
+
                 request.session['alreadyResponse'] = True
                 return redirect('/thread/detail/' + str(threadId))
         else:
@@ -726,7 +774,7 @@ def response_create(request, threadId):
         return render(request,'thread/responseCreate.html',{'form':form})
     else:
         return handler500(request)
-
+ 
 def linkCreate(request):
     if checkUser(request)=='freelancer':
         freelancer = findByPrincipal(request)
