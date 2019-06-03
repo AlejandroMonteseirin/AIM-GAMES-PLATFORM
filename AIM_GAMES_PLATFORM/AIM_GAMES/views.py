@@ -1121,7 +1121,7 @@ def challengeCreate(request):
                 return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge')})
         else:
             form = ChallengeForm()
-            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business, 'price': price})
+            return render(request,'business/standardForm.html',{'form':form,'title':_('Add Challenge'), 'buss': business, 'price': price, 'type':'challenge'})
     else:
         return render(request, 'index.html')
 
