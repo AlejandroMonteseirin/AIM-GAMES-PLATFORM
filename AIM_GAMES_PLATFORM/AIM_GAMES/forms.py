@@ -241,11 +241,46 @@ class ThreadForm(ModelForm):
 
 
 class ResponseForm(ModelForm):
+    title = CharField(widget=TextInput(), label=_('Title'))
+    description = CharField(widget=Textarea(), label=_('Description'),)
+    images = CharField(widget=Textarea(), required=False, label=_('Image URLs'),)
 
     class Meta:
         model = Response
-        exclude = ('business','thread')
+        exclude = ('business','thread', 'pics')
 
+    def __init__(self, *args, **kwargs):
+        print('__init__ ResponseForm')
+        super(ResponseForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'validate'
+
+
+    def clean_images(self):
+        """Split the tags string on whitespace and return a list"""
+        print('clean: ResponseForm: Images')
+        return self.cleaned_data['images'].strip().split()
+
+    def clean(self):
+        print('clean: ResponseForm')
+        val = URLValidator()
+        urls = self.cleaned_data['images']
+        try:
+            for url in urls:
+                val(url)
+        except ValidationError:
+            raise ValidationError(_("Please, enter valid URLS separated by comas in the images and files field"))
+        return self.cleaned_data
+
+    """ def save(self,business):
+       print('save: ResponseForm')
+       
+       obj.business = business[0]
+       obj.save()
+       self.save_m2m()
+       obj.pics.set(pics)
+       return obj
+ """
 
 class LinkForm(ModelForm):
     
