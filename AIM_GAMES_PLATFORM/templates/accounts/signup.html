@@ -88,10 +88,10 @@
                                 <p><label>
                                     <input id="{{ field.id_for_label }}" required name="{{ field.html_name }}" type="checkbox" class="filled-in"/>
                                     <span>{% trans "acceptTerms" %} 
-                                        {% if request.session.language == 'en-GB' %}
+                                        {% if LANGUAGE_CODE == 'en-gb' %}
                                             <a href="/terms-and-conditions" class="blue-text ">{% trans "terms-and-conditions" %}</a>
                                         {% endif %}
-                                        {% if request.session.language == 'es-ES' %}
+                                        {% if LANGUAGE_CODE == 'es-es' %}
                                             <a href="/terminos-y-condiciones" class="blue-text ">{% trans "terms-and-conditions" %}</a>
                                         {% endif %}
                                     </span>
