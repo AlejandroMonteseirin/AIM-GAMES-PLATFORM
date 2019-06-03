@@ -14,7 +14,7 @@
         </script>
 <div class="row">
 <div class="col s12 m8 offset-m2">
-<div class="card  lighten-2 color1b">  
+<div class="card  lighten-2 color1b">
     <div class="row ">
         <div class="col m6 s12 ">
             <h3>{% trans "Thread details" %}:</h3>
@@ -31,39 +31,46 @@
       {{ thread.description }}
     </div>
 
+    {% if thread.tags.all|length > 0 %}
     <b>{% trans "Tags" %}:</b></br>
       {% for tag in thread.tags.all %}
     <div class="chip color1b2">{{tag.title}}</div>
       {% endfor %}
+    {% endif %}
+    {% if thread.attachedFiles.all|length > 0 %}
     <ul class="collection"><b >{% trans "Attached files" %}:</b>
       {% for file in thread.attachedFiles.all %}
       <li class="collection-item color1b2"><a class="colorEnlace" href="{{file.uri}}">{% trans "Attached file" %}</a></li>
       {% endfor %}  
     </ul>
+    {% endif %}
      {% if owner %}
-        <div>
-          <div class="col s12 m6 center margintop" ><a href="/business/thread/edit/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Edit" %}</a></div>
-          <div class="col s12 m6 center margintop" ><a href="/business/thread/delete/{{thread.id}}" class="btn waves-effect color1 waves-red">{% trans "Delete" %}</a></div>
-        </div> 
+
+    <div class="center">
+          <a href="/business/thread/edit/{{thread.id}}" class=" btn waves-effect color1 waves-red">{% trans "Edit" %}</a>
+          <a href="/business/thread/delete/{{thread.id}}" class=" btn waves-effect color1 waves-red">{% trans "Delete" %}</a>
+    </div>
 
           {% endif %}   
             {% comment %}<ul class="collection">
                 <li><b>{% trans "valoration" %}:</b> {{ thread.valoration.score }}</li>
             </ul> {% endcomment %}
+    {% if thread.pics.all|length > 0 %}
             <b>{% trans "pictures" %}:</b>
                   <div class="carousel carousel-slider carouseldethreaddetail">
                     {% for pic in thread.pics.all %}
                       <a class="carousel-item carouseldethreaddetail" href="{{pic.uri}}"><img src="{{pic.uri}}" class="img-responsive"></a>
                     {% endfor %}  
                   </div>
+    {% endif %}
       
         </div>    
     <a class="waves-effect waves-teal btn-flat" href="/response/create/{{thread.id}}">{% trans "createAResponseForThisThread" %}     <i class="material-icons right">send</i>
     </a>
 </div></div>
-<div class="card color1b">
-<h4 class ="center   "  >{% trans "responses" %}:</h4>
-</div>
+<!--<div class="card color1b">-->
+<!--<h4 class ="center   "  >{% trans "responses" %}:</h4>-->
+<!--</div>-->
 {% for response in responses %}
     <div class="row">
         <div class="col s12 m8 offset-m2">
