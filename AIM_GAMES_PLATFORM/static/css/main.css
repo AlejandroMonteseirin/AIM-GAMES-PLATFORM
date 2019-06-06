@@ -165,3 +165,16 @@ main {
         }
         
 }
+
+.listItem{
+    color: rgba(0, 0, 0, 0.87);
+}
+.listItem:hover{
+    background-color:rgb(224, 224, 224);
+}
+
+.listItem:hover:not(.active){
+    transition-duration: 0.5s;
+    transition-property: all;
+    transition-timing-function: ease;
+}

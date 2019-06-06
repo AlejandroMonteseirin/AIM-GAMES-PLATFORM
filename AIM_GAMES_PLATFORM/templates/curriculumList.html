@@ -21,7 +21,16 @@
             </div>
             <div class="collection">
                 {% for curriculum in curriculums %}
-                <div class="collection-item">
+                
+                {% if sub and request.session.currentUser == 'business' %}
+                <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="color1c listItem">
+                {% elif request.session.currentUser == 'business' %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% else %}
+                <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
+                
                     <div class="row">
                         {% if curriculums %}
                         <div class="col s4">{% if curriculum.featured %} <i class="material-icons">star</i> {% endif %}{% if curriculum.verified %} <i class="material-icons">verified_user</i> {% endif %}{{curriculum.freelancer.profile.name }}</div>
@@ -34,18 +43,10 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
-                        </div><div class="col s4 ">
-                        {% if sub and request.session.currentUser == 'business' %}
-                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% elif request.session.currentUser == 'business' %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% else %}
-                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% endif %}
                         </div>
                         {% endif %}
                     </div>
-                </div>
+                </div></a>
                 {% endfor %}
             </div>
         </div>

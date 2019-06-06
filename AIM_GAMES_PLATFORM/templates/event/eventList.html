@@ -22,20 +22,19 @@
             </div>
             <div class="collection">
                 {% for event in events %}
-                <div class="collection-item">
+                {% if sub %}
+                <a href="/event/detail/{{event.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s3">
                             {% for tag in event.tags.all %}
                             <div class="chip">{{tag.title}}</div>
                             {% endfor %}
                             {{ event.title }}</div>
-                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div><div class="col s2 offset-s1">
-                        {% if sub %}
-                        <a href="/event/detail/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
-                        {% else %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
-                        {% endif %}
-                    </div>
+                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div>
                     </div>
                 </div>
                 {% endfor %}
