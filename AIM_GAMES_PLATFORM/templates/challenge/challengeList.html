@@ -23,12 +23,7 @@
             </div>
             <div class="collection">
                 {% for challenge in challenges %}
-                
-                {% if sub %}
                 <a href="/challenge/detail/{{challenge.id}}" class="color1c listItem">
-                {% else %}
-                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
-                {% endif %}
                 <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s4 ">{{ challenge.business.profile.name }}</div><div class="col s4">{{ challenge.title}}</div><div class="col s3 offset-s1">
