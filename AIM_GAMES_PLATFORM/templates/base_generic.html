@@ -109,7 +109,7 @@
         </div>
             <ul class="sidenav" id="slide_out">
                 <li><a href="/">{% trans "mainpage" %}</a></li>
-                <li><a href="/terms-and-conditions" target="_self" class="collection-item">{% trans "terms-and-conditions" %}</a></li>
+                <li><a href="/search">{% trans 'Search'%}</a></li>
 				{% if request.session.currentUser == 'business' %}
                 	<li><a href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
                     <li><a href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
