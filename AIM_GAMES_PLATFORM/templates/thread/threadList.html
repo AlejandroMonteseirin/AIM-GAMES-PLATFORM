@@ -17,22 +17,50 @@
             </form>
         </div>
         <div class="col s12">
-            <div class="collection">
+            <div class="row collection">
+                <div class="col s3 center"><h5>{% trans "title" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "company" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "tags" %}</h5></div>
+            </div>
+
+            <div class="collection ">
                 {% for thread in threads %}
-                    {% if businessThread.subscriptionModel != None %}
-                    <a href="/thread/detail/{{thread.id}}" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
-                    {% else %}
-                    <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
-                    {% endif %}
+                {% if businessThread.subscriptionModel != None %}
+                <a href="/thread/detail/{{thread.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
+                    <div class="row">
+                        <div class="col s3 center">{{ thread.title }}</div>
+                        <div class="col s3 center">{{ thread.business.profile.name }}</div>
+                        {% if thread.tags.all|length >= 2 %}
+                        <div class="chip" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.first.title}}</div>
+                        <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.all.1.title}}</div>
+                        <div class="chip hide-on-med-and-up">+{{thread.tags.all|length|add:"-1"}}</div>
+                        {% if thread.tags.all|length > 3 %}
+                            <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.all.2.title}}</div>
+                            <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">+{{thread.tags.all|length|add:"-3"}}</div>
+                        {% endif %}
+                        {% else %}
+                            {% for tag in thread.tags.all %}
+                            <div class="chip" title="{{tag.title}}">{{tag.title}}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div></a>
                 {% endfor %}
             </div>
-            <div class="right">
-                {% if businessThread.subscriptionModel != None %}
-                <a href="/thread/create/" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
-                {% else %}
-                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
-                {% endif %}
-            </div>
+
+            {% if request.session.currentUser == 'business' and sub%}
+                <div class="right">
+                    <a href="/thread/create/" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
+                </div>
+            {% elif request.session.currentUser == 'business' %}
+                <div class="right">
+                     <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="btn waves-effect waves-red color1">{% trans "New thread" %}</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </body>
