@@ -1579,9 +1579,15 @@ def global_search(request):
             values = {**values, **{'events': events, 'sub_events':sub_events}}
         challenges, sub_challenges = challengeSearch(request, False)
         values = {**values, **{'challenges': challenges, 'sub_challenges':sub_challenges}}
+        if checkUser(request) == 'business' and get_object_or_404(Business,
+                                                                  profile=request.user.profile).subscriptionModel is None:
+            sub = False
+        else:
+            sub = True
+        values = {**values, **{'sub': sub}}
     except:
         result = values
-    result = render(request, 'search.html', values) 
+    result = render(request, 'search.html', values)
     return result
 
 def broadcastCreate(request):
