@@ -1203,9 +1203,6 @@ def challengeDetail(request, challenge_id):
     else:
         if challenge.business == findByPrincipal(request):
             lookResponses = True
-        if findByPrincipal(request) is not None:
-            if findByPrincipal(request).subscriptionModel is None:
-                return handler500(request)
     return render(request, 'challenge/challengeDetail.html', {'form': form, 'saved':saved, 'challenge': challenge,
                                                 'responsesChallenge': responsesChallenge, 'lookResponses':lookResponses,
                                                 'alreadyResponse': alreadyResponse, 'saved':saved, 'opened':opened})

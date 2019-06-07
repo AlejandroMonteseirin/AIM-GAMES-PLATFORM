@@ -13,8 +13,8 @@
                 </div>
             </form>
         </div>
-
-        {% if request.session.currentUser == 'business' %}
+{% if curriculums or jobOffer or threads or events or challenges %}
+        {% if request.session.currentUser == 'business' and curriculums %}
         <h3>{% trans "curriculums" %}</h3>
         <div class="col s12">
             <div class="row">
@@ -53,7 +53,8 @@
             </div>
         </div>
         {% endif %}
-        
+
+        {% if jobOffer %}
         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' or request.session.currentUser == 'manager' %}
         <h3>{% trans "joboffers" %}</h3>
         <div class="col s12">
@@ -81,11 +82,13 @@
             </div>
         </div>
         {% endif %}
+        {% endif %}
 
 
 
 
-        {% if request.session.currentUser == 'business' or request.session.currentUser == 'manager' %}
+        {% if threads %}
+        {% if request.session.currentUser == 'business' or request.session.currentUser == 'manager'%}
         <h3>{% trans "threads" %}</h3>
         <div class="col s12">
             <div class="row collection">
@@ -123,10 +126,10 @@
             </div>
         </div>
         {% endif %}
+        {% endif %}
 
 
-
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated and events%}
         <h3>{% trans "events" %}</h3>
         <div class="col s12">
             <div class="row collection">
@@ -159,11 +162,13 @@
                     </div>
                 </div>
                 {% endfor %}
+                </div>
             </div>
             
         {% endif %}
 
 
+            {% if challenges %}
         <h3>{% trans "challengesList" %}</h3>
         <div class="col s12">
             <div class="row collection">
@@ -172,12 +177,7 @@
             </div>
             <div class="collection">
                 {% for challenge in challenges %}
-
-                {% if sub %}
                 <a href="/challenge/detail/{{challenge.id}}" class="color1c listItem">
-                {% else %}
-                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
-                {% endif %}
                 <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s4 ">{{ challenge.business.profile.name }}</div><div class="col s4">{{ challenge.title}}</div><div class="col s3 offset-s1">
@@ -188,9 +188,11 @@
                 {% endfor %}
             </div>
         </div>
-        </div>
+            {% endif %}
+{%else%}
+        {%trans 'Nothing'%}
+        {%endif%}
     </div>
-
     
 </body>
 {% endblock %}
