@@ -84,7 +84,7 @@ def pagar_paypal_coins(request, quantity):
         'amount': amount,
         'item_name': 'AIM-GAMES Coins',
         'currency_code': 'EUR',
-        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_coins_ipn/' + str(business.id) + '/' + str(quantity),
+        'notify_url': 'https://aim-games-5.herokuapp.com/paypal_coins_ipn/' + str(business.id) + '/' + str(quantity),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
     }
@@ -104,7 +104,7 @@ def pagarPaypal(request):
         'amount': '71',
         'item_name': 'Subscripcion AIM-GAMES',
         'currency_code': 'EUR',
-        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_ipn/'+str(businessId),
+        'notify_url': 'https://aim-games-5.herokuapp.com/paypal_ipn/'+str(businessId),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
         }
@@ -130,7 +130,7 @@ def pagar_paypal_subscripcion(request, subscriptionId, businessId):
         'item_name': str(subs.name_eng),
         'currency_code': 'EUR',
         # 'notify_url': 'https://aim-games-3.herokuapp.com/paypal_subscription_ipn/' + str(businessId),
-        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_subscription_ipn/' + str(businessId) + '/'
+        'notify_url': 'https://aim-games-5.herokuapp.com/paypal_subscription_ipn/' + str(businessId) + '/'
                       + str(subscriptionId),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
@@ -153,7 +153,7 @@ def pagarPaypal_Curriculum(request):
         'amount': '10',
         'item_name': 'Curriculum destacado en AIM-GAMES',
         'currency_code': 'EUR',
-        'notify_url': 'https://aim-games-4.herokuapp.com/paypal_curriculum_ipn/'+str(curriculum.id),
+        'notify_url': 'https://aim-games-5.herokuapp.com/paypal_curriculum_ipn/'+str(curriculum.id),
         'return_url': 'http://{}{}'.format(host, reverse('payment_done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment_canceled')),
         }
