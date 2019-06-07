@@ -676,7 +676,7 @@ def curriculumSearch(request):
         for g in gee:
             lista.add(g.curriculum.id)
 
-        q=Curriculum.objects.filter(id__in=lista).order_by('-featured')
+        q=Curriculum.objects.filter(Q(id__in=lista)|(Q(freelancer__profile__name__icontains=search))|(Q(freelancer__profile__surname__icontains=search))).order_by('-featured')
     else:
         q=Curriculum.objects.all()
         q = q.order_by('-featured')
@@ -1118,7 +1118,7 @@ def challengeSearch(request, is_business):
         search=request.GET.get('search')
         try:
 
-            q=q.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search)|Q(business=principal))
+            q=q.filter(Q(business__profile__name__icontains=search)|Q(title__icontains=search))
             
             challenges = get_list_or_404(q)
 
