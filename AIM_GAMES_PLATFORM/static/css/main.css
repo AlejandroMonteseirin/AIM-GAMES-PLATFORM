@@ -127,6 +127,10 @@ main {
 .broadcastbtn{
     margin-top: 10px;
 }
+.mecagoenivan{
+    height: 100px;
+    line-height: 1px;
+}
 
 
 
@@ -160,4 +164,17 @@ main {
         width: 100%;
         }
         
+}
+
+.listItem{
+    color: rgba(0, 0, 0, 0.87);
+}
+.listItem:hover{
+    background-color:rgb(224, 224, 224);
+}
+
+.listItem:hover:not(.active){
+    transition-duration: 0.5s;
+    transition-property: all;
+    transition-timing-function: ease;
 }

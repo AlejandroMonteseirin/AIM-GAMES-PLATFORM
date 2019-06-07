@@ -22,20 +22,26 @@
             </div>
             <div class="collection">
                 {% for event in events %}
-                <div class="collection-item">
+                {% if sub %}
+                <a href="/event/detail/{{event.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s3">
-                            {% for tag in event.tags.all %}
-                            <div class="chip">{{tag.title}}</div>
-                            {% endfor %}
                             {{ event.title }}</div>
-                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div><div class="col s2 offset-s1">
-                        {% if sub %}
-                        <a href="/event/detail/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
+                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div>
+                        {% if event.tags.all|length > 2 %}
+                        <div class="chip" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.first.title}}</div>
+                        <div class="chip hide-on-small-only" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.all.1.title}}</div>
+                        <div class="chip hide-on-med-and-up">+{{event.tags.all|length|add:"-2"}}</div>
+                        <div class="chip hide-on-small-only">+{{event.tags.all|length|add:"-1"}}</div>
                         {% else %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
+                            {% for tag in event.tags.all %}
+                            <div class="chip" title="{{tag.title}}">{{tag.title}}</div>
+                            {% endfor %}
                         {% endif %}
-                    </div>
                     </div>
                 </div>
                 {% endfor %}
