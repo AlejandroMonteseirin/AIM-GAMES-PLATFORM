@@ -17,16 +17,26 @@
         {% if request.session.currentUser == 'business' %}
         <h3>{% trans "curriculums" %}</h3>
         <div class="col s12">
-            <div class="row collection">
+            <div class="row">
                 <div class="col s4"><h5>{% trans "name" %}</h5></div>
                 <div class="col s4"><h5>{% trans "aptitudes" %}</h5></div>
             </div>
             <div class="collection">
                 {% for curriculum in curriculums %}
-                <div class="collection-item">
+
+                {% if sub and request.session.currentUser == 'business' %}
+                <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="color1c listItem">
+                {% elif request.session.currentUser == 'business' %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% else %}
+                <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
+
                     <div class="row">
                         {% if curriculums %}
                         <div class="col s4">{% if curriculum.featured %} <i class="material-icons">star</i> {% endif %}{% if curriculum.verified %} <i class="material-icons">verified_user</i> {% endif %}{{curriculum.freelancer.profile.name }}</div>
+
                         <div class="col s4">
                             {% for key, value in aptitudes.items %}
                                 {% if curriculum.id == key %}
@@ -35,21 +45,13 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
-                        </div><div class="col s4 ">
-                        {% if curriculum_sub and request.session.currentUser == 'business' %}
-                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% elif request.session.currentUser == 'business' %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% else %}
-                        <a href="/freelancer/detail/{{curriculum.freelancer.id}}" class="btn waves-effect waves-red color1 right">{% trans "view" %}</a>
-                        {% endif %}
                         </div>
                         {% endif %}
                     </div>
-                </div>
+                </div></a>
                 {% endfor %}
             </div>
-            </div>
+        </div>
         {% endif %}
         
         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' or request.session.currentUser == 'manager' %}
@@ -60,22 +62,21 @@
                 <div class="col s3 center"><h5>{% trans "salary" %}</h5></div>
                 <div class="col s3 center"><h5>{% trans "schedule" %}</h5></div>
             </div>
+
             <div class="collection ">
                 {% for jobOffer in jobOffers %}
-                <div class="collection-item ">
+                {% if sub %}
+                <a href="/jobOffer/detail/{{jobOffer.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s3 center">{{ jobOffer.business.profile.name }}</div>
                         <div class="col s3 center">{{ jobOffer.salary}}</div>
                         <div class="col s3 center">{{ jobOffer.schedule}}</div>
-                        <div class="col s3 center">
-                            {% if joboffer_sub %}
-                            <a href="/jobOffer/detail/{{jobOffer.id}}" class="btn waves-effect waves-red right color1">{% trans "view" %}</a>
-                            {% else %}
-                            <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect waves-red right color1">{% trans "view" %}</a>
-                            {% endif %}
-                        </div>
                     </div>
-                </div>
+                </div></a>
                 {% endfor %}
             </div>
         </div>
@@ -85,15 +86,39 @@
 
 
         {% if request.session.currentUser == 'business' or request.session.currentUser == 'manager' %}
+        <h3>{% trans "threads" %}</h3>
         <div class="col s12">
-            <h3>{% trans "threads" %}</h3>
             <div class="row collection">
+                <div class="col s3 center"><h5>{% trans "title" %}</h5></div>
+                <div class="col s3 center"><h5>{% trans "company" %}</h5></div>
+            </div>
+
+            <div class="collection ">
                 {% for thread in threads %}
-                    {% if businessThread.subscriptionModel != None or request.session.currentUser == 'manager'%}
-                    <a href="/thread/detail/{{thread.id}}" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
-                    {% else %}
-                    <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" class="collection-item color1c">{{ thread.title }}   &nbsp;&nbsp;&nbsp;&nbsp;{% trans "company" %}: {{ thread.business.profile.name }}</a>
-                    {% endif %}
+                {% if businessThread.subscriptionModel != None %}
+                <a href="/thread/detail/{{thread.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
+                    <div class="row">
+                        <div class="col s3 center">{{ thread.title }}</div>
+                        <div class="col s3 center">{{ thread.business.profile.name }}</div>
+                        {% if thread.tags.all|length >= 2 %}
+                        <div class="chip" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.first.title}}</div>
+                        <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.all.1.title}}</div>
+                        <div class="chip hide-on-med-and-up">+{{thread.tags.all|length|add:"-1"}}</div>
+                        {% if thread.tags.all|length > 3 %}
+                            <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">{{thread.tags.all.2.title}}</div>
+                            <div class="chip hide-on-small-only" title="{% for tag in thread.tags.all %}{{tag.title}}, {% endfor %}">+{{thread.tags.all|length|add:"-3"}}</div>
+                        {% endif %}
+                        {% else %}
+                            {% for tag in thread.tags.all %}
+                            <div class="chip" title="{{tag.title}}">{{tag.title}}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div></a>
                 {% endfor %}
             </div>
         </div>
@@ -111,26 +136,31 @@
             </div>
             <div class="collection">
                 {% for event in events %}
-                <div class="collection-item">
+                {% if sub %}
+                <a href="/event/detail/{{event.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s3">
-                            {% for tag in event.tags.all %}
-                            <div class="chip">{{tag.title}}</div>
-                            {% endfor %}
-                            {{ event.title }}
-                        </div>
-                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div><div class="col s2 offset-s1">
-                        {% if sub_events %}
-                        <a href="/event/detail/{{event.id}}" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
+                            {{ event.title }}</div>
+                        <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div>
+                        {% if event.tags.all|length > 2 %}
+                        <div class="chip" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.first.title}}</div>
+                        <div class="chip hide-on-small-only" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.all.1.title}}</div>
+                        <div class="chip hide-on-med-and-up">+{{event.tags.all|length|add:"-2"}}</div>
+                        <div class="chip hide-on-small-only">+{{event.tags.all|length|add:"-1"}}</div>
                         {% else %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn color1 waves-effect waves-red">{% trans "view" %}</a>
+                            {% for tag in event.tags.all %}
+                            <div class="chip" title="{{tag.title}}">{{tag.title}}</div>
+                            {% endfor %}
                         {% endif %}
-                    </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
+            
         {% endif %}
 
 
@@ -142,30 +172,22 @@
             </div>
             <div class="collection">
                 {% for challenge in challenges %}
-                <div class="collection-item">
+
+                {% if sub %}
+                <a href="/challenge/detail/{{challenge.id}}" class="color1c listItem">
+                {% else %}
+                <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="#" class="color1c listItem">
+                {% endif %}
+                <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s4 ">{{ challenge.business.profile.name }}</div><div class="col s4">{{ challenge.title}}</div><div class="col s3 offset-s1">
-                        {% if sub_challenges %}
-                        <a href="/challenge/detail/{{challenge.id}}" class="btn waves-effect color1 waves-red">{% trans "view" %}</a>
-                        {% else %}
-                        <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="btn waves-effect color1 waves-red">{% trans "view" %}</a>
-                        {% endif %}
                     </div>
                     </div>
                 </div>
+                </a>
                 {% endfor %}
             </div>
-            {% if request.session.currentUser == 'business' and sub_challenges%}
-            {% elif request.session.currentUser == 'business' %}
-                <div class="right">
-                    <a onclick="alert('{% trans "Please, buy a subscription to access this functionality" %}')" href="" class="color1 btn waves-effect waves-red">{% trans "newChallenge" %}</a>
-                </div>
-            {% endif %}
         </div>
-
-
-
-
         </div>
     </div>
 

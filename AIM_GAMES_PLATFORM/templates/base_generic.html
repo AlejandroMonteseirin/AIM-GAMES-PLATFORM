@@ -109,7 +109,7 @@
         </div>
             <ul class="sidenav" id="slide_out">
                 <li><a href="/">{% trans "mainpage" %}</a></li>
-                <li><a href="/terms-and-conditions" target="_self" class="collection-item">{% trans "terms-and-conditions" %}</a></li>
+                <li><a href="/search">{% trans 'Search'%}</a></li>
 				{% if request.session.currentUser == 'business' %}
                 	<li><a href="/thread/business/list/" target="_self" class="collection-item">{% trans "threads" %}</a></li>
                     <li><a href="/curriculum/business/list/" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>
@@ -120,7 +120,9 @@
                 {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' %}
                     <li><a href="/joboffer/user/list/" target="_self" class="collection-item">{% trans "joboffers" %}</a></li>
                     <li><a href="/challenge/list/" target="_self" class="collection-item">{% trans "Challenges" %}</a></li>
-                    <li><a href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
+                {% endif %}
+                {% if request.session.currentUser == 'business' %}
+                	<li><a href="/challenge/business/list/" target="_self" class="collection-item">{% trans "My challenges" %}</a></li>
                 {% endif %}
                 {% if request.session.currentUser == 'manager' %}
                     <li><a href="/curriculum/manager/list" target="_self" class="collection-item">{% trans "curriculums" %}</a></li>

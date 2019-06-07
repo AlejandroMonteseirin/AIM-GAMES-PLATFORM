@@ -30,11 +30,18 @@
                 <div class="collection-item listItem">
                     <div class="row">
                         <div class="col s3">
-                            {% for tag in event.tags.all %}
-                            <div class="chip">{{tag.title}}</div>
-                            {% endfor %}
                             {{ event.title }}</div>
                         <div class="col s3">{{ event.location}}</div><div class="col s3">{{ event.moment}}</div>
+                        {% if event.tags.all|length > 2 %}
+                        <div class="chip" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.first.title}}</div>
+                        <div class="chip hide-on-small-only" title="{% for tag in event.tags.all %}{{tag.title}}, {% endfor %}">{{event.tags.all.1.title}}</div>
+                        <div class="chip hide-on-med-and-up">+{{event.tags.all|length|add:"-2"}}</div>
+                        <div class="chip hide-on-small-only">+{{event.tags.all|length|add:"-1"}}</div>
+                        {% else %}
+                            {% for tag in event.tags.all %}
+                            <div class="chip" title="{{tag.title}}">{{tag.title}}</div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
