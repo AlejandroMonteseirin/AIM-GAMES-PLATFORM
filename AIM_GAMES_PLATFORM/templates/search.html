@@ -54,7 +54,7 @@
         </div>
         {% endif %}
 
-        {% if jobOffer %}
+        {% if jobOffers %}
         {% if request.session.currentUser == 'business' or request.session.currentUser == 'freelancer' or request.session.currentUser == 'manager' %}
         <h3>{% trans "joboffers" %}</h3>
         <div class="col s12">
