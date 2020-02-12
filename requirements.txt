@@ -1,7 +1,7 @@
 psycopg2
 gunicorn 
 django-heroku
-Django==2.1.7
+Django==2.2.10
 django-paypal
 pyparsing
 pydot
